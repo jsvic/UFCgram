@@ -5,11 +5,81 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.Label?>
 
+<?import atlantafx.base.controls.Card?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Hyperlink?>
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerLogin">
     <BorderPane>
         <top>
-            <Label styleClass="title-1" text="UFCgram"/>
+            <fx:include source="parcials/header.fxml"/>
         </top>
+
+        <center>
+            <Card styleClass="form">
+                <header>
+                    <VBox>
+                        <Label styleClass="title-3" text="Login"/>
+                        <Separator/>
+                    </VBox>
+                </header>
+
+
+                <body>
+                    <GridPane styleClass="gridForm">
+                        <columnConstraints>
+                            <ColumnConstraints fillWidth="false" halignment="CENTER"/>
+                        </columnConstraints>
+
+                        <VBox
+                            GridPane.rowIndex="0"
+                            GridPane.columnIndex="0"
+                        >
+                                <Label style="text-normal" text="Matrícula"/>
+                                <TextField
+                                    fx:id="inMatr"
+                                    styleClass="large"
+                                    promptText="Matrícula"/>
+                        </VBox>
+                            <VBox
+                                GridPane.columnIndex="0"
+                                GridPane.rowIndex="1"
+                            >
+                                <Label style="text-normal" text="Senha"/>
+                                <PasswordField
+                                        fx:id="inSenha"
+                                        styleClass="large"
+                                        promptText="Senha"/>
+                            </VBox>
+
+                        <HBox
+                                styleClass="buttonGroup"
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="0"
+                        >
+                            <Button text="Login" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                        </HBox>
+
+
+                    </GridPane>
+                </body>
+                <footer>
+                    <VBox alignment="CENTER">
+                        <Separator/>
+                        <HBox alignment="CENTER">
+                            <Label styleClass="text-bolder" text="Não possui uma conta? "/>
+                            <Hyperlink styleClass="text-bolder" onAction="#abrirViewCadastro" text="Clique aqui para criar uma."/>
+                        </HBox>
+                    </VBox>
+                </footer>
+            </Card>
+        </center>
     </BorderPane>
 
 </StackPane>

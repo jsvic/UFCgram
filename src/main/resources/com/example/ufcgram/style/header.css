@@ -1,0 +1,6 @@
+.header {
+    -fx-background-color: -color-accent-fg;
+    -fx-padding: 2em 5em;
+    -fx-border-width: .25em;
+    -fx-border-color: black;
+}

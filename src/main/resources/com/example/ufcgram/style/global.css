@@ -14,7 +14,7 @@ Classes do AtlantaFX e quando usar:
 
 - text-lighter: Deixa o texto com uma fonte baixa
 - text-normal: Deixa o texto com uma fonte padrão
-- text-bolder: Deixa o texto com uma fonte grande
+- text-bold: Deixa o texto com uma fonte grande
 - text-bolder: Deixa o texto com uma fonte mais grande ainda
 
 2. color-bg
@@ -87,12 +87,8 @@ Classes do AtlantaFX e quando usar:
    ============================================================ */
 
 /* Header */
-#header {
-    -fx-background-color: -color-accent-fg;
-    -fx-padding: 2em 5em;
-    -fx-border-width: .25em;
-    -fx-border-color: black;
-
+.header .label {
+    -fx-text-fill: -color-fg-default;
 }
 
 /* Main */
@@ -107,6 +103,8 @@ Classes do AtlantaFX e quando usar:
 
     -fx-padding: 2em;
 
+    -fx-alignment: center;
+
     -fx-border-color: -color-border-default;
     -fx-border-radius: 1.25em;
     -fx-background-radius: 1.25em;
@@ -120,6 +118,8 @@ Classes do AtlantaFX e quando usar:
 
 .form > .container > .body {
     -fx-padding: 0;
+    -fx-alignment: CENTER;
+    -fx-spacing: 3em;
 }
 
 
@@ -127,6 +127,12 @@ Classes do AtlantaFX e quando usar:
 .gridForm {
     -fx-hgap: 1em;
     -fx-vgap: 2em;
+    -fx-alignment: CENTER;
+
+}
+
+.gridForm  .VBox {
+    -fx-spacing: 50em;
 }
 
 /* ============================================================
