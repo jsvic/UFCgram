@@ -1,0 +1,417 @@
+
+
+/*
+Classes do AtlantaFX e quando usar:
+1. tipografia:
+- title-x : x sendo um número de 1 a 4, quando maior o x, menos "importante" o label será
+- title-caption: Legendas e informações segundárias
+- text-small: Para textos pequenos
+
+- text-bold: Deixa o texto em negrito
+- text-italic: Deixa o texto em itálico
+- text-underline: Deixa o texto sublinhado
+- text-strikethrough: Deixa o texto rasurado
+
+- text-lighter: Deixa o texto com uma fonte baixa
+- text-normal: Deixa o texto com uma fonte padrão
+- text-bolder: Deixa o texto com uma fonte grande
+- text-bolder: Deixa o texto com uma fonte mais grande ainda
+
+2. color-bg
+- color-bg-x: Cores de fundo de elementos
+- color-bg-default: Fundo pricipal
+- color-bg-subtle: Superfície sucundária
+- color-bg-overlay: Elementos sobrepostos, muito usado em pop-ups
+- color-bg-inset: Elementos "recuados"
+
+3. color-fg
+- color-fg-x: Cores de elementos
+- color-fg-defaut: Textos principais
+- color-fg-muted: Textos secundários
+- color-fg-subtle: Placeholders
+- color-fg-emphasis: Textos em destaque
+
+4. color-border
+- color-border-x: Cor de bordas e outros estilos mais sutis
+- -color-border-default: Bordas de cartões e painéis
+- color-border-muted: Divisórias entre seções
+- color-border-subtle: Bordas discretas
+- color-shadow-default: Sombra
+
+5. color-accent
+- color-accent-x: Cores para chamar atenção
+- color-accent-fg: Textos e ícones destacados
+- color-accent-emphasis: Fundo de ações destacados
+- color-accent-muted: Fundo destacado secundário
+- color-accente-subtle: Fundo destacado suave
+
+6. Cores de botão
+- accent: Botão Principal
+- success: Botão de confirmação
+- danger: Botão de ação destrutiva
+*/
+
+
+/* ============================================================
+   1. GLOBAL
+   ============================================================ */
+
+.root {
+    -fx-font-family: "Inter";
+    -fx-font-size: 14px;
+
+    -color-bg-default: #151922;
+    -color-bg-subtle: #2F2132;
+    -color-bg-overlay: #0e0b0e;
+    -color-bg-inset: #10151E;
+
+
+    -color-fg-default: #F2F4F8;
+    -color-fg-muted: #CCB6CC;
+    -color-fg-subtle: #A389A3;
+    -color-fg-emphasis: #FFFFFF;
+
+    -color-border-default: #230227;
+    -color-border-muted: #390340;
+    -color-border-subtle: #401C4A;
+
+
+    -color-accent-fg: #724E91;
+    -color-accent-emphasis: #F8C630;
+    -color-accent-muted: #451F55;
+    -color-accent-subtle: #22162B;
+}
+
+/* ============================================================
+   2. LAYOUTS
+   ============================================================ */
+
+/* Header */
+#header {
+    -fx-background-color: -color-accent-fg;
+    -fx-padding: 2em 5em;
+    -fx-border-width: .25em;
+    -fx-border-color: black;
+
+}
+
+/* Main */
+#main {
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 3em;
+}
+
+/* Formulários e Cards */
+.form > .container, .card > .container {
+    -fx-background-color: -color-bg-overlay;
+
+    -fx-padding: 2em;
+
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 1.25em;
+    -fx-background-radius: 1.25em;
+
+    -fx-max-width: 50em;
+
+    -fx-spacing: 3em;
+
+    -fx-max-height: 15em;
+}
+
+.form > .container > .body {
+    -fx-padding: 0;
+}
+
+
+/* Grid */
+.gridForm {
+    -fx-hgap: 1em;
+    -fx-vgap: 2em;
+}
+
+/* ============================================================
+   3. TYPOGRAPHY
+   ============================================================ */
+
+/* Texto principal */
+.label {
+    -fx-text-fill: -color-fg-default;
+}
+
+/* Títulos */
+.page-title {
+    -fx-text-fill: -color-fg-default;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-text-fill: -color-fg-default;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.25em;
+}
+
+/* Texto secundário */
+.text-muted {
+    -fx-text-fill: -color-fg-muted;
+}
+
+.text-subtle {
+    -fx-text-fill: -color-fg-subtle;
+}
+
+
+/* ============================================================
+   4. INPUTS
+   ============================================================ */
+
+/* TextField, PasswordField e TextArea */
+.text-input {
+    -color-input-bg: -color-bg-subtle;
+    -color-input-fg: -color-fg-default;
+    -color-input-border: -color-border-default;
+
+    -color-input-bg-highlight: -color-accent-emphasis;
+    -color-input-fg-highlight: -color-fg-emphasis;
+
+    -fx-font-size: 1em;
+    -fx-max-width: 20em;
+}
+
+/* Input focado */
+.text-input:focused {
+    -color-input-bg-focused: -color-bg-subtle;
+    -color-input-border-focused: -color-accent-emphasis;
+}
+
+/* Validação positiva */
+.text-input:success {
+    -color-input-border: -color-success-emphasis;
+}
+
+/* Validação negativa */
+.text-input:danger {
+    -color-input-border: -color-danger-emphasis;
+}
+
+/* TextArea */
+.text-area {
+    -fx-wrap-text: true;
+    -fx-min-height: 8em;
+    -fx-min-width: 40em;
+}
+
+/* Spinner */
+.spinner {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-min-width: 20em;
+}
+
+/* Campo interno do Spinner */
+.spinner > .text-field {
+    -fx-background-color: transparent;
+}
+
+/* Botões internos do Spinner */
+.spinner > .increment-arrow-button,
+.spinner > .decrement-arrow-button {
+    -fx-background-color: -color-bg-subtle;
+}
+
+/* Setas do Spinner */
+.spinner .increment-arrow,
+.spinner .decrement-arrow {
+    -fx-background-color: -color-fg-muted;
+}
+
+
+/* ============================================================
+   5. BUTTONS
+   ============================================================ */
+
+/* Todos os botões */
+.button {
+    -fx-cursor: hand;
+    -fx-font-size: 1em;
+}
+
+.buttonGroup {
+    /* Adicionar gap nos botoes*/
+    -fx-spacing: 2em;
+}
+
+/* Botão principal AtlantaFX */
+.button.accent {
+    -color-button-bg: #724E91;
+    -color-button-fg: -color-fg-emphasis;
+    -color-button-border: #622A7A;
+
+    -color-button-bg-hover: #453149;
+    -color-button-fg-hover: white;
+    -color-button-border-hover: #390340;
+
+    -color-button-bg-focused: -color-accent-emphasis;
+    -color-button-fg-focused: -color-fg-emphasis;
+    -color-button-border-focused: -color-accent-fg;
+
+    -color-button-bg-pressed: #622A7A;
+    -color-button-fg-pressed: black;
+    -color-button-border-pressed: #622A7A;
+}
+
+/* Botão de sucesso */
+.button.success {
+    -color-button-bg: -color-success-emphasis;
+    -color-button-fg: -color-fg-emphasis;
+    -color-button-border: -color-success-emphasis;
+}
+
+/* Botão de perigo */
+.button.danger {
+    -color-button-bg: -color-danger-emphasis;
+    -color-button-fg: -color-fg-emphasis;
+    -color-button-border: -color-danger-emphasis;
+}
+
+/* Botão desabilitado */
+.button:disabled {
+    -fx-opacity: 0.5;
+}
+
+
+/* ============================================================
+   6. SELECTION CONTROLS
+   ============================================================ */
+
+/* ComboBox e ChoiceBox */
+.combo-box,
+.choice-box {
+    -fx-background-color: -color-bg-subtle;
+    -fx-text-fill: -color-fg-subtle;
+    -fx-border-color: -color-border-default;
+    -fx-font-size: 1em;
+    -fx-max-width: 20em;
+    -fx-predf-width: 20em;
+}
+
+/* CheckBox */
+.check-box {
+    -fx-text-fill: -color-fg-default;
+}
+
+/* RadioButton */
+.radio-button {
+    -fx-text-fill: -color-fg-default;
+}
+
+/* ToggleButton */
+.toggle-button {
+    -fx-cursor: hand;
+}
+
+/* Toggle selecionado */
+.toggle-button:selected {
+    -fx-font-weight: bold;
+}
+
+
+/* ============================================================
+   7. FEEDBACK
+   ============================================================ */
+
+/* Hyperlink */
+.hyperlink {
+    -fx-text-fill: -color-link-fg;
+}
+
+.hyperlink:visited {
+    -fx-text-fill: -color-link-fg-visited;
+}
+
+/* Tooltip */
+.tooltip {
+    -fx-font-size: 0.9em;
+}
+
+/* ProgressBar */
+.progress-bar > .bar {
+    -fx-background-color: -color-progress-bar-fill;
+}
+
+/* Separator */
+.separator .line {
+    -fx-border-color: -color-separator;
+}
+
+
+/* ============================================================
+   8. ESTADOS INTERATIVOS
+   ============================================================ */
+
+/* Hover em campos de texto */
+.text-input:hover {
+    -color-input-border: -color-accent-emphasis;
+}
+
+/* Estado focused em botões */
+.button:focused {
+    -fx-effect: dropshadow(
+            gaussian,
+            -color-accent-muted,
+            5, 0.2, 0, 0
+    );
+}
+
+/* Estado pressed */
+.button:pressed {
+    -fx-opacity: 0.9;
+}
+
+/* Estado disabled global */
+.text-input:disabled,
+.check-box:disabled,
+.radio-button:disabled,
+.combo-box:disabled {
+    -fx-opacity: 0.5;
+}
+
+/* Labels com estados semânticos */
+.label:success {
+    -fx-text-fill: -color-success-fg;
+}
+
+.label:warning {
+    -fx-text-fill: -color-warning-fg;
+}
+
+.label:danger {
+    -fx-text-fill: -color-danger-fg;
+}
+
+.label:accent {
+    -fx-text-fill: -color-accent-fg;
+}
+
+/* Tabela: seleção */
+.table-row-cell:selected {
+    -fx-background-color: -color-cell-bg-selected;
+}
+
+/* Linhas alternadas */
+.table-view.striped {
+    /* A classe striped é fornecida pelo AtlantaFX */
+}
+
+/* ============================================================
+   9. Mensagens
+   ============================================================ */
+
+.message-container {
+    -fx-padding: 2em;
+    -fx-max-width: 24em;
+    -fx-max-height: 24em;
+    -fx-translate-y: 12em;
+    -fx-translate-x: 2em;
+}

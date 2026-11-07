@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+
+<StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerLogin">
+    <BorderPane>
+        <top>
+            <Label styleClass="title-1" text="UFCgram"/>
+        </top>
+    </BorderPane>
+
+</StackPane>
