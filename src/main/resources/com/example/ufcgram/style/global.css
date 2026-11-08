@@ -111,7 +111,7 @@ Classes do AtlantaFX e quando usar:
 
     -fx-max-width: 50em;
 
-    -fx-spacing: 3em;
+    -fx-spacing: 1.5em;
 
     -fx-max-height: 15em;
 }
@@ -121,7 +121,6 @@ Classes do AtlantaFX e quando usar:
     -fx-alignment: CENTER;
     -fx-spacing: 3em;
 }
-
 
 /* Grid */
 .gridForm {

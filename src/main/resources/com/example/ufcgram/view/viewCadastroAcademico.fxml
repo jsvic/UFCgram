@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import atlantafx.base.controls.Card?>
+<StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerCadastroAcademico">
+    <BorderPane>
+        <top>
+            <fx:include source="parcials/header.fxml"/>
+        </top>
+
+        <center>
+            <Card styleClass="form">
+                <header>
+                    <VBox>
+                        <Label styleClass="title-3" text="Criando sua Conta"/>
+                        <Separator/>
+                    </VBox>
+                </header>
+
+                <subHeader>
+                    <Label styleClass="text-lighter" text="Insira as tuas informações acadêmicas"/>
+                </subHeader>
+
+                <body>
+                    <GridPane styleClass="gridForm">
+                        <columnConstraints>
+                            <ColumnConstraints fillWidth="false" halignment="CENTER"/>
+                        </columnConstraints>
+
+                        <VBox
+                            GridPane.rowIndex="0"
+                            GridPane.columnIndex="0"
+                        >
+
+                            <Label styleClass="text-normal" text="Curso" />
+
+                            <ComboBox
+                                    fx:id="inCurso"
+                                    promptText="Selecione seu curso"
+                                    styleClass="large"
+                            />
+                            <Label
+                                    fx:id="cursoErrorLabel"
+                                    styleClass="danger"
+                                    wrapText="true"/>
+                        </VBox>
+
+                        <VBox
+                            GridPane.rowIndex="1"
+                            GridPane.columnIndex="0"
+                        >
+                            <Label styleClass="text-normal" text="Semestre que Entrou" />
+                            <ComboBox
+                                    fx:id="inSemestre"
+                                    promptText="Selecione seu Semestre que Entrou"
+                                    styleClass="large"
+                            />
+                            <Label
+                                    fx:id="semestreErrorLabel"
+                                    styleClass="danger"
+                                    wrapText="true"/>
+                        </VBox>
+
+                        <VBox
+                            GridPane.rowIndex="2"
+                            GridPane.columnIndex="0"
+                        >
+                            <Label styleClass="text-normal" text="Campus" />
+                            <ComboBox
+                                    fx:id="inCampus"
+                                    promptText="Selecione seu Campus"
+                                    styleClass="large"
+                            />
+                            <Label
+                                    fx:id="campusErrorLabel"
+                                    styleClass="danger"
+                                    wrapText="true"/>
+                        </VBox>
+
+                        <HBox
+                                GridPane.rowIndex="3"
+                                GridPane.columnIndex="0"
+                                styleClass="buttonGroup"
+                                alignment="BOTTOM_RIGHT"
+                        >
+                            <Button text="Avançar" onAction="#continuarCadastro" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                        </HBox>
+                    </GridPane>
+                </body>
+            </Card>
+        </center>
+    </BorderPane>
+</StackPane>

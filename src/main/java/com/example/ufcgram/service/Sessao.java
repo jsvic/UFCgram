@@ -1,5 +1,7 @@
 package com.example.ufcgram.service;
 
+import com.example.ufcgram.model.Conta;
+
 public class Sessao {
 
     private static Conta contaSessao = new Conta();

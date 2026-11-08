@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import atlantafx.base.controls.Card?>
+<StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerCadastroPessoais">
+    <BorderPane>
+        <top>
+            <fx:include source="parcials/header.fxml"/>
+        </top>
+
+        <center>
+            <Card styleClass="form">
+                <header>
+                    <VBox>
+                        <Label styleClass="title-3" text="Criando sua Conta"/>
+                        <Separator/>
+                    </VBox>
+                </header>
+                <subHeader>
+                    <VBox>
+                        <Label styleClass="text-lighter" text="Preencha os campos com as tuas informções"/>
+                    </VBox>
+                </subHeader>
+
+                <body>
+                    <GridPane styleClass="gridForm">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+
+                        <VBox
+                            GridPane.columnIndex="0"
+                            GridPane.rowIndex="0"
+                        >
+                           <Label styleClass="text-normal" text="Nome"/>
+                            <TextField
+                                fx:id="inNome"
+                                styleClass="large"
+                                promptText="Nome"/>
+                            <Label
+                                fx:id="nomeErrorLabel"
+                                styleClass="danger"
+                                wrapText="true"/>
+                        </VBox>
+
+                        <VBox
+                            GridPane.columnIndex="1"
+                            GridPane.rowIndex="0"
+                        >
+                            <Label styleClass="text-normal" text="Email"/>
+                            <TextField
+                                    fx:id="inEmail"
+                                    styleClass="large"
+                                    promptText="Email"/>
+                            <Label
+                                    fx:id="emailErrorLabel"
+                                    styleClass="danger"
+                                    wrapText="true"/>
+                        </VBox>
+
+                        <VBox
+                                GridPane.columnIndex="0"
+                                GridPane.rowIndex="1"
+                        >
+                            <Label styleClass="text-normal" text="Gênero"/>
+                            <ChoiceBox
+                                    fx:id="inGenero"
+                                    styleClass="large"
+                                    />
+                            <Label
+                                    fx:id="generoErrorLabel"
+                                    styleClass="danger"
+                                    wrapText="true"/>
+                        </VBox>
+
+                        <VBox
+                                GridPane.columnIndex="1"
+                                GridPane.rowIndex="1"
+                        >
+                            <Label styleClass="text-normal" text="Idade"/>
+                            <Spinner
+                                    fx:id="inIdade"
+                                    styleClass="large"
+                                    editable="true"
+                            />
+                            <Label
+                                    fx:id="idadeErrorLabel"
+                                    styleClass="danger"
+                                    wrapText="true"/>
+                        </VBox>
+                        <HBox
+                                styleClass="buttonGroup"
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="1"
+                                alignment="BOTTOM_RIGHT"
+                        >
+                            <Button text="Avançar" onAction="#continuarCadastro" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                        </HBox>
+                    </GridPane>
+                </body>
+            </Card>
+        </center>
+    </BorderPane>
+</StackPane>
