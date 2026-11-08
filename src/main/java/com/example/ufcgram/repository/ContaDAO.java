@@ -6,6 +6,7 @@ import org.postgresql.core.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -17,24 +18,27 @@ public class ContaDAO {
         try(Connection conn = ConnectionBD.getConnnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, matr);
-
-            ResultSet rs= stmt.executeQuery();
-            Conta conta = new Conta();
-            while(rs.next()) {
-                conta.setMatr(rs.getInt("matr"));
-                conta.setNome(rs.getString("nome"));
-                conta.setSenha(rs.getString("senha"));
-                conta.setEmail(rs.getString("email"));
-                conta.setIdade(rs.getInt("idade"));
-                conta.setCurso(rs.getString("curso"));
-                conta.setCampus(rs.getString("campus"));
-                conta.setBio(rs.getString("bio"));
-                conta.setSemestreInicial(rs.getString("semestreInicial"));
-                conta.setGenero(rs.getString("genero"));
+            try(ResultSet rs = stmt.executeQuery()) {
+                if(!rs.next()) {
+                    throw new RuntimeException("Usuário não encontrado");
+                }
+                Conta conta = new Conta();
+                while(rs.next()) {
+                    conta.setMatr(rs.getInt("matr"));
+                    conta.setNome(rs.getString("nome"));
+                    conta.setSenha(rs.getString("senha"));
+                    conta.setEmail(rs.getString("email"));
+                    conta.setIdade(rs.getInt("idade"));
+                    conta.setCurso(rs.getString("curso"));
+                    conta.setCampus(rs.getString("campus"));
+                    conta.setBio(rs.getString("bio"));
+                    conta.setSemestreInicial(rs.getString("semestreInicial"));
+                    conta.setGenero(rs.getString("genero"));
+                }
+                return conta;
             }
-            return conta;
-        } catch(Exception e) {
-            return null;
+        } catch(SQLException e) {
+            throw new RuntimeException("Erro ao conectar com o banco de dados: ", e);
         }
     }
 
