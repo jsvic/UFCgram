@@ -1,5 +1,6 @@
 package com.example.ufcgram.controller;
 
+import com.example.ufcgram.model.Conta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ControllerCadastroAcademico {
+
+    private Conta conta;
 
     @FXML private ComboBox<String> inCurso;
     @FXML private ComboBox<String> inSemestre;
@@ -162,15 +165,19 @@ public class ControllerCadastroAcademico {
 
     @FXML
     public void abrirCadastroFinal(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(
-                getClass().getResource(
-                        "/com/example/ufcgram/view/viewCadastroFinais.fxml"
-                )
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewCadastroFinais.fxml"
+        )
         );
+
+        Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
                 .getWindow();
+
+        ControllerCadastroFinais controller = loader.getController();
+        controller.setConta(conta);
 
         stage.getScene().setRoot(root);
     }
@@ -183,9 +190,13 @@ public class ControllerCadastroAcademico {
         semestre = inSemestre.getValue();
         campus = inCampus.getValue();
 
+        if (conta != null){
+            conta.setCurso(curso);
+            conta.setSemestreInicial(semestre);
+            conta.setCampus(campus);
+        }
+
         System.out.printf("\nInformações:\ncurso: %s\nsemestre: %s\ncampus: %s\n", curso, semestre, campus);
         abrirCadastroFinal(event);
-
-
     }
 }

@@ -6,6 +6,7 @@ module com.example.ufcgram {
     requires atlantafx.validation;
     requires java.prefs;
     requires password4j;
+    requires org.postgresql.jdbc;
 
     exports com.example.ufcgram;
 
