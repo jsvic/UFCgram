@@ -11,12 +11,13 @@ public class Cadastro {
                                String campus, String bio, String semestreInicial, String genero){
     //instanciar para popular os dados
     ContaCadastro contaService = new ContaCadastro();
+
     //Instanciar para se comunicar com o banco de dados
     ContaDAO dao = new ContaDAO();
-    //preencher dados
-    contaService.popularDados(matr, nome, senha, email, idade, curso, campus, bio, semestreInicial, genero);
-    //pega o objeto pronto
-    Conta contaCadastrada = contaService.getContaCadastro();
+
+    //preencher dados e pegar objeto pronto
+    Conta contaCadastrada = contaService.popularDados(matr, nome, senha, email, idade, curso, campus, bio, semestreInicial, genero);
+
     //tentativa de salvar no banco de dados
     try {
         dao.create(contaCadastrada);

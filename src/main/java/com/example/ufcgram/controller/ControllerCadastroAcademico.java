@@ -17,6 +17,10 @@ public class ControllerCadastroAcademico {
 
     private Conta conta;
 
+    public void setConta(Conta conta){
+        this.conta = conta;
+    }
+
     @FXML private Spinner<Integer> inMatr;
     @FXML private ComboBox<String> inCurso;
     @FXML private ComboBox<String> inSemestre;
@@ -196,6 +200,9 @@ public class ControllerCadastroAcademico {
 
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
+        if (conta == null) {
+            throw new IllegalStateException("Conta não foi repassada para ControllerCadastroAcademico");
+        }
         String curso, semestre, campus;
         int matr;
 
@@ -205,15 +212,13 @@ public class ControllerCadastroAcademico {
         campus = inCampus.getValue();
 
         if (conta != null){
+            conta.setMatr(matr);
             conta.setCurso(curso);
             conta.setSemestreInicial(semestre);
             conta.setCampus(campus);
         }
 
-        System.out.printf("\nInformações:\ncurso: %s\nsemestre: %s\ncampus: %s\n", curso, semestre, campus);
         System.out.printf("\nInformações:\nMatr: %d\ncurso: %s\nsemestre: %s\ncampus: %s\n", matr, curso, semestre, campus);
         abrirCadastroFinal(event);
-
-
     }
 }

@@ -1,5 +1,6 @@
 package com.example.ufcgram.controller;
 
+import com.example.ufcgram.model.Conta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,12 +40,15 @@ public class ControllerCadastroPessoais {
     }
 
     @FXML
-    public void abrirCadastroAcademico(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(
-                getClass().getResource(
-                        "/com/example/ufcgram/view/viewCadastroAcademico.fxml"
+    public void abrirCadastroAcademico(ActionEvent event, Conta conta) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewCadastroAcademico.fxml"
                 )
         );
+        Parent root = loader.load();
+
+        ControllerCadastroAcademico controller = loader.getController();
+        controller.setConta(conta);
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
@@ -63,8 +67,14 @@ public class ControllerCadastroPessoais {
         genero = inGenero.getValue();
         idade = inIdade.getValue();
 
+        Conta conta = new Conta();
+        conta.setNome(nome);
+        conta.setEmail(email);
+        conta.setGenero(genero);
+        conta.setIdade(idade);
+
         System.out.printf("\nInformações:\nnome: %s\nemail: %s\ngenero: %s\nidade: %d\n", nome, email, genero, idade);
-        abrirCadastroAcademico(event);
+        abrirCadastroAcademico(event, conta);
 
     }
 }
