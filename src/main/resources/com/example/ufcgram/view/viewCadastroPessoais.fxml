@@ -16,10 +16,7 @@
         <center>
             <Card styleClass="form">
                 <header>
-                    <VBox>
-                        <Label styleClass="title-3" text="Criando sua Conta"/>
-                        <Separator/>
-                    </VBox>
+                    <fx:include source="parcials/headerCadastro.fxml"/>
                 </header>
                 <subHeader>
                     <VBox>

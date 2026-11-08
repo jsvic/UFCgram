@@ -6,18 +6,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ControllerCadastroAcademico {
 
+    @FXML private Spinner<Integer> inMatr;
     @FXML private ComboBox<String> inCurso;
     @FXML private ComboBox<String> inSemestre;
     @FXML private ComboBox<String> inCampus;
 
     @FXML
     public void initialize() {
+        inMatr.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                        100000,       // Mínimo
+                        999999, // Máximo
+                        100000 // Valor padrão
+
+                )
+        );
+
         inCurso.getItems().addAll(
                 "Administração – Diurno – Fortaleza",
                 "Administração – Noturno – Fortaleza",
@@ -178,12 +190,14 @@ public class ControllerCadastroAcademico {
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
         String curso, semestre, campus;
+        int matr;
 
+        matr = inMatr.getValue();
         curso = inCurso.getValue();
         semestre = inSemestre.getValue();
         campus = inCampus.getValue();
 
-        System.out.printf("\nInformações:\ncurso: %s\nsemestre: %s\ncampus: %s\n", curso, semestre, campus);
+        System.out.printf("\nInformações:\nMatr: %d\ncurso: %s\nsemestre: %s\ncampus: %s\n", matr, curso, semestre, campus);
         abrirCadastroFinal(event);
 
 
