@@ -64,10 +64,11 @@ public class ControllerLogin {
         matr = inMatr.getValue(); // Valor do campo matricula
         senha = inSenha.getText(); // Valor do campo senha
 
-        if(contaSessao.login(matr, senha)) {
+        try{
+            contaSessao.login(matr, senha);
             System.out.print("\nLOGIN OK\n"); // print temporário
-         } else {
-            System.out.print("\nLOGIN ERROR \n"); // print temporário
+         } catch(Exception e) {
+            System.out.printf("\nErro no login: %s\n",e.getMessage()); // print temporário
         }
 
     }

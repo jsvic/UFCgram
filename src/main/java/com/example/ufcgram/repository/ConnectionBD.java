@@ -29,7 +29,6 @@ public class ConnectionBD {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-            System.out.print("\nErro na conexão\n");
             throw new RuntimeException("Erro ao conectar com o banco de dados " + e);
         }
     }
