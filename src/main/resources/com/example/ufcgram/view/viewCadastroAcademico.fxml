@@ -29,12 +29,33 @@
                 <body>
                     <GridPane styleClass="gridForm">
                         <columnConstraints>
-                            <ColumnConstraints fillWidth="false" halignment="CENTER"/>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
                         </columnConstraints>
 
                         <VBox
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="0"
+                        >
+
+                            <Label styleClass="text-normal" text="matrícula" />
+
+                            <Spinner
+                                    fx:id="inMatr"
+                                    styleClass="large"
+                                    promptText="Matrícula"
+                                    editable="true"
+                            />
+                            <Label
+                                    fx:id="matrErrorLabel"
+                                    styleClass="danger"
+                                    wrapText="true"/>
+                        </VBox>
+
+
+                        <VBox
                             GridPane.rowIndex="0"
-                            GridPane.columnIndex="0"
+                            GridPane.columnIndex="1"
                         >
 
                             <Label styleClass="text-normal" text="Curso" />
@@ -67,8 +88,8 @@
                         </VBox>
 
                         <VBox
-                            GridPane.rowIndex="2"
-                            GridPane.columnIndex="0"
+                            GridPane.rowIndex="1"
+                            GridPane.columnIndex="1"
                         >
                             <Label styleClass="text-normal" text="Campus" />
                             <ComboBox
@@ -83,8 +104,9 @@
                         </VBox>
 
                         <HBox
-                                GridPane.rowIndex="3"
+                                GridPane.rowIndex="2"
                                 GridPane.columnIndex="0"
+                                GridPane.columnSpan="2"
                                 styleClass="buttonGroup"
                                 alignment="BOTTOM_RIGHT"
                         >
