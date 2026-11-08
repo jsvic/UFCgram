@@ -12,23 +12,26 @@ public class Login {
     Sessao sessao = new Sessao();
     SecuritySenha security = new SecuritySenha();
 
-    public boolean login(int matr, String senha) {
+    public void login(int matr, String senha) {
         Conta conta;
 
-        conta = contaDAO.getContabyMatr(matr);
+        //if(security.checar(senha, conta.getSenha())) {
 
-        if(conta != null) {
-            //if(security.checar(senha, conta.getSenha())) {
-
-              if(Objects.equals(senha, conta.getSenha())){
-                sessao.adicionarConta(conta);
-                return true;
+        try {
+            conta = contaDAO.getContabyMatr(matr);
+            if(Objects.equals(senha, conta.getSenha())){
+                try {
+                    sessao.adicionarConta(conta);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             } else {
-                return false;
+                throw new RuntimeException("Senha incorreta");
             }
-        } else {
-            return false;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
     }
 
 }
