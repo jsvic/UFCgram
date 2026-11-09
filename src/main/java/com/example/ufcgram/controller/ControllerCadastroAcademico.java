@@ -1,5 +1,6 @@
 package com.example.ufcgram.controller;
 
+import com.example.ufcgram.model.Conta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ControllerCadastroAcademico {
+
+    private Conta conta;
+
+    public void setConta(Conta conta){
+        this.conta = conta;
+    }
 
     @FXML private Spinner<Integer> inMatr;
     @FXML private ComboBox<String> inCurso;
@@ -174,21 +181,28 @@ public class ControllerCadastroAcademico {
 
     @FXML
     public void abrirCadastroFinal(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(
-                getClass().getResource(
-                        "/com/example/ufcgram/view/viewCadastroFinais.fxml"
-                )
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewCadastroFinais.fxml"
+        )
         );
+
+        Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
                 .getWindow();
+
+        ControllerCadastroFinais controller = loader.getController();
+        controller.setConta(conta);
 
         stage.getScene().setRoot(root);
     }
 
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
+        if (conta == null) {
+            throw new IllegalStateException("Conta não foi repassada para ControllerCadastroAcademico");
+        }
         String curso, semestre, campus;
         int matr;
 
@@ -197,9 +211,14 @@ public class ControllerCadastroAcademico {
         semestre = inSemestre.getValue();
         campus = inCampus.getValue();
 
+        if (conta != null){
+            conta.setMatr(matr);
+            conta.setCurso(curso);
+            conta.setSemestreInicial(semestre);
+            conta.setCampus(campus);
+        }
+
         System.out.printf("\nInformações:\nMatr: %d\ncurso: %s\nsemestre: %s\ncampus: %s\n", matr, curso, semestre, campus);
         abrirCadastroFinal(event);
-
-
     }
 }
