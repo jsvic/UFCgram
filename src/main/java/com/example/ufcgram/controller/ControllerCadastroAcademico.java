@@ -14,13 +14,15 @@ import java.io.IOException;
 
 public class ControllerCadastroAcademico {
 
-    @FXML private Spinner<Integer> inMatr;
-    @FXML private ComboBox<String> inCurso;
-    @FXML private ComboBox<String> inSemestre;
-    @FXML private ComboBox<String> inCampus;
+    @FXML private Spinner<Integer> inMatr; // Atributo que referencia o campo Matricula
+    @FXML private ComboBox<String> inCurso; // Atributo que referencia o campo Curso
+    @FXML private ComboBox<String> inSemestre; // Atributo que referencia o campo Semestre
+    @FXML private ComboBox<String> inCampus; // Atributo que referencia o campo Campus
 
     @FXML
     public void initialize() {
+        // Metodo chamado automaticamente ao abrir o FXML
+
         inMatr.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(
                         100000,       // Mínimo
@@ -28,7 +30,7 @@ public class ControllerCadastroAcademico {
                         100000 // Valor padrão
 
                 )
-        );
+        ); // Configura o campo Matricula
 
         inCurso.getItems().addAll(
                 "Administração – Diurno – Fortaleza",
@@ -121,7 +123,7 @@ public class ControllerCadastroAcademico {
                 "Sistemas e Mídias Digitais – Fortaleza",
                 "Teatrologia / Artes Cênicas – Fortaleza",
                 "Zootecnia – Fortaleza"
-        );
+        ); // Configura o valor no campo Curso
 
         inSemestre.getItems().addAll (
                 "2026.2",
@@ -158,7 +160,7 @@ public class ControllerCadastroAcademico {
                 "2011.1",
                 "2010.2",
                 "2010.1"
-        );
+        ); // Configura o valor do campo de Semestre
 
         inCampus.getItems().addAll(
                 "Campus do Pici",
@@ -169,36 +171,40 @@ public class ControllerCadastroAcademico {
                 "Campus de Quixadá",
                 "Campus de Russas",
                 "Campus de Sobral"
-        );
+        ); // Configura o valor do campo de Campus
     }
 
     @FXML
     public void abrirCadastroFinal(ActionEvent event) throws IOException {
+        // Redireciona para a tela de cadastro dos dados finais
+
         Parent root = FXMLLoader.load(
                 getClass().getResource(
                         "/com/example/ufcgram/view/viewCadastroFinais.fxml"
                 )
-        );
+        ); // Carrega o arquivo FXML
 
-        Stage stage = (Stage) ((Node) event.getSource())
+        Stage stage = (Stage) ((Node) event.getSource()) // Carrega a janela
                 .getScene()
                 .getWindow();
 
-        stage.getScene().setRoot(root);
+        stage.getScene().setRoot(root);  // Insere a pagina na janela
     }
 
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
+        // Metodo chamado ao clicar no botao "Avançar"
+
         String curso, semestre, campus;
         int matr;
 
-        matr = inMatr.getValue();
-        curso = inCurso.getValue();
-        semestre = inSemestre.getValue();
-        campus = inCampus.getValue();
+        matr = inMatr.getValue(); // Pega o valor do campo Matricula
+        curso = inCurso.getValue(); // Pega o valor  do campo Curso
+        semestre = inSemestre.getValue(); // Pega o valor do campo Semestre
+        campus = inCampus.getValue(); // Pega o valor do Campus
 
         System.out.printf("\nInformações:\nMatr: %d\ncurso: %s\nsemestre: %s\ncampus: %s\n", matr, curso, semestre, campus);
-        abrirCadastroFinal(event);
+        abrirCadastroFinal(event); // Chama o metodo para redirecionar a tela
 
 
     }
