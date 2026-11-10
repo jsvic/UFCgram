@@ -14,7 +14,7 @@ public class ConnectionBD {
 
     static {
         try (InputStream input = Files.newInputStream(Path.of("database.properties"))) {
-            properties.load(input); // Abre o arquivo e pega os dados para o Banco de Dados
+            properties.load(input);
         } catch (IOException e) {
             throw new RuntimeException("Erro ao acessar as informações para conexão do banco de dados: ", e);
         }
@@ -27,7 +27,7 @@ public class ConnectionBD {
 
     public static Connection getConnnection() {
         try {
-            return DriverManager.getConnection(URL, USER, PASSWORD); // Passas as informacoes para a conexao
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao conectar com o banco de dados " + e);
         }

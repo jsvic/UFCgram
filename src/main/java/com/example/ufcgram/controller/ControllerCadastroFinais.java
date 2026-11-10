@@ -12,19 +12,52 @@ import java.util.Objects;
 
 public class ControllerCadastroFinais {
 
-    @FXML private TextArea inDescricao; // Atributo que referencia o campo Descricao
-    @FXML private PasswordField inSenha; // Atributo que referencia o campo Senha
-    @FXML private PasswordField inConfirmaSenha; // Atributo que referencia o campo Confirmar Senha
+    private Conta conta;
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
 
     @FXML
-    public void cadastrar() {
-        // Metodo chamado ao clicar no botao "Cadastrar"
+    private TextArea inDescricao;
+    @FXML
+    private PasswordField inSenha;
+    @FXML
+    private PasswordField inConfirmaSenha;
 
-        String bio, senha, confirmarSenha;
+    @FXML
+    public void cadastrar(ActionEvent event) throws IOException {
+            String bio, senha, confirmarSenha;
 
-        bio = inDescricao.getText(); // Pega o valor do campo Descricao
-        senha = inSenha.getText(); // Pega o valor do campo Senha
-        confirmarSenha = inConfirmaSenha.getText(); // Pega o valor do campo Confirmar Senha
+            bio = inDescricao.getText();
+            senha = inSenha.getText();
+            confirmarSenha = inConfirmaSenha.getText();
+
+            if (!Objects.equals(senha, confirmarSenha)) {
+                System.out.println("Erro ao confirmar senha: as senhas não coincidem.");
+                return;
+            }
+
+            if (this.conta == null) {
+                System.out.println("Erro: objeto conta está nulo.");
+                return;
+            }
+
+            try {
+                Cadastro cadastroService = new Cadastro();
+
+                cadastroService.cadastrarDados(
+                        this.conta.getMatr(),
+                        this.conta.getNome(),
+                        senha,
+                        this.conta.getEmail(),
+                        this.conta.getIdade(),
+                        this.conta.getCurso(),
+                        this.conta.getCampus(),
+                        bio,
+                        this.conta.getSemestreInicial(),
+                        this.conta.getGenero()
+                );
 
                 System.out.println("Processo de cadastro finalizado com sucesso!");
 
