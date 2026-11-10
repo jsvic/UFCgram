@@ -134,6 +134,21 @@ Classes do AtlantaFX e quando usar:
     -fx-spacing: 50em;
 }
 
+.gridLayout {
+    -fx-alignment: CENTER;
+}
+
+.VBox.navBar {
+    -fx-background-color: red;
+    -fx-height: 100vh;
+}
+
+.VBox.mainFeed {
+    -fx-background-color: green;
+    -fx-height: 100vh;
+    -fx-width: 100vw;
+}
+
 /* ============================================================
    3. TYPOGRAPHY
    ============================================================ */

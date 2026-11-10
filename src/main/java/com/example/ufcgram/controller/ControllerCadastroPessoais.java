@@ -12,31 +12,33 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ControllerCadastroPessoais {
-    @FXML private TextField inNome;
-    @FXML private TextField inEmail;
-    @FXML private ChoiceBox<String> inGenero;
-    @FXML private Spinner<Integer> inIdade;
+    @FXML private TextField inNome; // Atributo que referencia o campo Nome
+    @FXML private TextField inEmail; // Atributo que referencia o campo Email
+    @FXML private ChoiceBox<String> inGenero; // Atributo que referencia o campo Genero
+    @FXML private Spinner<Integer> inIdade; // Atributo que referencia o campo Idade
 
-    @FXML private Label nomeErrorLabel;
-    @FXML private Label emailErrorLabel;
-    @FXML private Label generoErrorLabel;
-    @FXML private Label idadeErrorLabel;
+    @FXML private Label nomeErrorLabel; // Atributo que referencia o Label de mensagem de erro Nome
+    @FXML private Label emailErrorLabel; // Atributo que referencia o Label de mensagem de erro Email
+    @FXML private Label generoErrorLabel; // Atributo que referencia o Label de mensagem de erro Genero
+    @FXML private Label idadeErrorLabel; // Atributo que referencia o Label de mensagem de erro Idade
 
     @FXML
     public void initialize() {
+        // Metodo que é chamado automaticamente ao abrir o FXML
+
         inIdade.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(
                         10,
                         100
 
                 )
-        );
+        ); // Configura o campo Idade
 
         inGenero.getItems().addAll(
                 "Masculino",
                 "Feminino",
                 "Não Binário"
-        );
+        ); // Configura o campo Genero
     }
 
     @FXML
@@ -50,22 +52,24 @@ public class ControllerCadastroPessoais {
         ControllerCadastroAcademico controller = loader.getController();
         controller.setConta(conta);
 
-        Stage stage = (Stage) ((Node) event.getSource())
+        Stage stage = (Stage) ((Node) event.getSource()) // Carrega a janela
                 .getScene()
                 .getWindow();
 
-        stage.getScene().setRoot(root);
+        stage.getScene().setRoot(root); // Insere a pagina na janela
     }
 
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
+        // Metodo chamado ao clicar em "Avançar"
+
         String nome, email, genero;
         int idade;
 
-        nome = inNome.getText();
-        email = inEmail.getText();
-        genero = inGenero.getValue();
-        idade = inIdade.getValue();
+        nome = inNome.getText(); // Pega o valor do campo Nome
+        email = inEmail.getText(); // Pega o valor do campo Email
+        genero = inGenero.getValue(); // Pega o valor do campo Genero
+        idade = inIdade.getValue(); // Pega o valor do campo Idade
 
         Conta conta = new Conta();
         conta.setNome(nome);

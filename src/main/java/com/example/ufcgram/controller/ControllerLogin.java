@@ -15,13 +15,13 @@ import java.io.IOException;
 
 public class ControllerLogin {
 
-    @FXML private Spinner<Integer> inMatr;
-    @FXML private PasswordField inSenha;
+    @FXML private Spinner<Integer> inMatr; // Atributo que referência o campo Matricula
+    @FXML private PasswordField inSenha; // Atributo que referência o campo Senha
 
-    @FXML private Label matrErrorLabel;
-    @FXML private Label senhaErrorLabel;
+    @FXML private Label matrErrorLabel; // Atributo que referência o Label para a mensagem de erro no campo Matricula
+    @FXML private Label senhaErrorLabel; // Atributo que referência o Label para a mensagem de erro no campo Senha
 
-    private static Login contaSessao = new Login();
+    private static Login contaSessao = new Login(); // Cria uma instância da classe da session
 
     @FXML
     public void initialize() {
@@ -39,25 +39,41 @@ public class ControllerLogin {
 
     @FXML
     public void abrirViewCadastro(ActionEvent event) throws IOException {
-        // Redireciona para a tela de cadastro
+        // Redireciona para a tela de cadastro para os dados pessoais
 
         Parent root = FXMLLoader.load(
                 getClass().getResource(
                         "/com/example/ufcgram/view/viewCadastroPessoais.fxml"
                 )
-        );
+        ); // Carrega o arquivo FXML
 
-        Stage stage = (Stage) ((Node) event.getSource())
+        Stage stage = (Stage) ((Node) event.getSource()) // Carrega a janela
                 .getScene()
                 .getWindow();
 
-        stage.getScene().setRoot(root);
+        stage.getScene().setRoot(root); // Insere a pagina na janela
     }
 
     @FXML
-    public void fazerLogin() {
-        // A função chama contaSessao para validar o login e, caso retorne true, redireciona para o Feed, caso de false, apresentará mensagem de erro + label de erro
+    public void abrirViewFeed(ActionEvent event) throws IOException {
+        // Redireciona para a tela do Feed
 
+        Parent root = FXMLLoader.load(
+                getClass().getResource(
+                        "/com/example/ufcgram/view/viewFeed.fxml"
+                )
+        ); // Abre o novo FXML
+
+        Stage stage = (Stage) ((Node) event.getSource()) // Carrega a janela
+                .getScene()
+                .getWindow();
+
+        stage.getScene().setRoot(root);  // Insere a pagina na janela
+    }
+
+    @FXML
+    public void fazerLogin(ActionEvent event) {
+        // Esse metodo é chamado ao o usuário clicar no botão "Login"
         String senha;
         int matr;
 
@@ -65,8 +81,9 @@ public class ControllerLogin {
         senha = inSenha.getText(); // Valor do campo senha
 
         try{
-            contaSessao.login(matr, senha);
+            contaSessao.login(matr, senha); // Chama o session e valida os dados
             System.out.print("\nLOGIN OK\n"); // print temporário
+            abrirViewFeed(event); // Chama o metodo para redirecionar a tela
          } catch(Exception e) {
             System.out.printf("\nErro no login: %s\n",e.getMessage()); // print temporário
         }
