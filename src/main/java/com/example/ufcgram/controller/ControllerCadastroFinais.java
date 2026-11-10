@@ -1,8 +1,14 @@
 package com.example.ufcgram.controller;
 
+import com.example.ufcgram.model.Conta;
+import com.example.ufcgram.service.Cadastro;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class ControllerCadastroFinais {
 
@@ -20,7 +26,10 @@ public class ControllerCadastroFinais {
         senha = inSenha.getText(); // Pega o valor do campo Senha
         confirmarSenha = inConfirmaSenha.getText(); // Pega o valor do campo Confirmar Senha
 
-        System.out.printf("\nInformações:\nbio: %s\nsenha: %s\nconfirmar senha: %s", bio, senha, confirmarSenha);
+                System.out.println("Processo de cadastro finalizado com sucesso!");
 
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro ao realizar o cadastro.");
+            }
     }
 }

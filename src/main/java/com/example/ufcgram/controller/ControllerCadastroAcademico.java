@@ -1,5 +1,6 @@
 package com.example.ufcgram.controller;
 
+import com.example.ufcgram.model.Conta;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -176,25 +177,28 @@ public class ControllerCadastroAcademico {
 
     @FXML
     public void abrirCadastroFinal(ActionEvent event) throws IOException {
-        // Redireciona para a tela de cadastro dos dados finais
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewCadastroFinais.fxml"
+        )
+        );
 
-        Parent root = FXMLLoader.load(
-                getClass().getResource(
-                        "/com/example/ufcgram/view/viewCadastroFinais.fxml"
-                )
-        ); // Carrega o arquivo FXML
+        Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node) event.getSource()) // Carrega a janela
+        Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
                 .getWindow();
 
-        stage.getScene().setRoot(root);  // Insere a pagina na janela
+        ControllerCadastroFinais controller = loader.getController();
+        controller.setConta(conta);
+
+        stage.getScene().setRoot(root);
     }
 
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
-        // Metodo chamado ao clicar no botao "Avançar"
-
+        if (conta == null) {
+            throw new IllegalStateException("Conta não foi repassada para ControllerCadastroAcademico");
+        }
         String curso, semestre, campus;
         int matr;
 
@@ -203,9 +207,14 @@ public class ControllerCadastroAcademico {
         semestre = inSemestre.getValue(); // Pega o valor do campo Semestre
         campus = inCampus.getValue(); // Pega o valor do Campus
 
+        if (conta != null){
+            conta.setMatr(matr);
+            conta.setCurso(curso);
+            conta.setSemestreInicial(semestre);
+            conta.setCampus(campus);
+        }
+
         System.out.printf("\nInformações:\nMatr: %d\ncurso: %s\nsemestre: %s\ncampus: %s\n", matr, curso, semestre, campus);
-        abrirCadastroFinal(event); // Chama o metodo para redirecionar a tela
-
-
+        abrirCadastroFinal(event);
     }
 }

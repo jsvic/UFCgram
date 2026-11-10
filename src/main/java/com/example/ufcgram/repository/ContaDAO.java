@@ -1,11 +1,15 @@
 package com.example.ufcgram.repository;
 
 import com.example.ufcgram.model.Conta;
+import org.postgresql.core.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class ContaDAO {
     // Classe para ligar os valores de Conta que estao no BD
