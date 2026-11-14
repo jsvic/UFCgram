@@ -19,50 +19,52 @@ public class ControllerCadastroFinais {
     }
 
     @FXML
-    private TextArea inDescricao;
+    private TextArea inDescricao; // Atributo que referencia o campo Descricao
     @FXML
-    private PasswordField inSenha;
+    private PasswordField inSenha;  // Atributo que referencia o campo Senha
     @FXML
-    private PasswordField inConfirmaSenha;
+    private PasswordField inConfirmaSenha;  // Atributo que referencia o campo Confirmar Senha
 
     @FXML
     public void cadastrar(ActionEvent event) throws IOException {
-            String bio, senha, confirmarSenha;
+        // Metodo chamado ao clicar no botao "Cadastrar"
 
-            bio = inDescricao.getText();
-            senha = inSenha.getText();
-            confirmarSenha = inConfirmaSenha.getText();
+        String bio, senha, confirmarSenha;
 
-            if (!Objects.equals(senha, confirmarSenha)) {
-                System.out.println("Erro ao confirmar senha: as senhas não coincidem.");
-                return;
-            }
+        bio = inDescricao.getText(); // Pega o valor do campo Descricao
+        senha = inSenha.getText();  // Pega o valor do campo Senha
+        confirmarSenha = inConfirmaSenha.getText();  // Pega o valor do campo Confirmar Senha
 
-            if (this.conta == null) {
-                System.out.println("Erro: objeto conta está nulo.");
-                return;
-            }
+        if (!Objects.equals(senha, confirmarSenha)) {
+            System.out.println("Erro ao confirmar senha: as senhas não coincidem.");
+            return;
+        }
 
-            try {
-                Cadastro cadastroService = new Cadastro();
+        if (this.conta == null) {
+            System.out.println("Erro: objeto conta está nulo.");
+            return;
+        }
 
-                cadastroService.cadastrarDados(
-                        this.conta.getMatr(),
-                        this.conta.getNome(),
-                        senha,
-                        this.conta.getEmail(),
-                        this.conta.getIdade(),
-                        this.conta.getCurso(),
-                        this.conta.getCampus(),
-                        bio,
-                        this.conta.getSemestreInicial(),
-                        this.conta.getGenero()
-                );
+        try {
+            Cadastro cadastroService = new Cadastro();
 
-                System.out.println("Processo de cadastro finalizado com sucesso!");
+            cadastroService.cadastrarDados(
+                    this.conta.getMatr(),
+                    this.conta.getNome(),
+                    senha,
+                    this.conta.getEmail(),
+                    this.conta.getIdade(),
+                    this.conta.getCurso(),
+                    this.conta.getCampus(),
+                    bio,
+                    this.conta.getSemestreInicial(),
+                    this.conta.getGenero()
+            );
 
-            } catch (Exception e) {
-                System.out.println("Ocorreu um erro ao realizar o cadastro.");
-            }
+            System.out.println("Processo de cadastro finalizado com sucesso!");
+
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao realizar o cadastro.");
+        }
     }
 }
