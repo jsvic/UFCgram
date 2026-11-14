@@ -43,29 +43,32 @@ public class ControllerCadastroPessoais {
     public void abrirCadastroAcademico(ActionEvent event, Conta conta) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "/com/example/ufcgram/view/viewCadastroAcademico.fxml"
-                )
-        );
+        )
+        ); // Abre o arquivo FXMl
+
         Parent root = loader.load();
 
-        ControllerCadastroAcademico controller = loader.getController();
-        controller.setConta(conta);
+        ControllerCadastroAcademico controller = loader.getController(); // Pega o Controller do FXML
+        controller.setConta(conta); // Passa o objeto Conta para o Controller
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
                 .getWindow();
 
-        stage.getScene().setRoot(root);
+        stage.getScene().setRoot(root); // Adicionar o FXMl à janela
     }
 
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
+        // Metodo chamado ao clicar em "Avançar"
+
         String nome, email, genero;
         int idade;
 
-        nome = inNome.getText();
-        email = inEmail.getText();
-        genero = inGenero.getValue();
-        idade = inIdade.getValue();
+        nome = inNome.getText(); // Pega o valor do campo Nome
+        email = inEmail.getText();  // Pega o valor do campo Email
+        genero = inGenero.getValue();  // Pega o valor do campo Genero
+        idade = inIdade.getValue();  // Pega o valor do campo Idade
 
         Conta conta = new Conta();
         conta.setNome(nome);

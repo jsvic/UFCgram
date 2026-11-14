@@ -67,7 +67,7 @@ public class ControllerLogin {
         try{
             contaSessao.login(matr, senha);
             System.out.print("\nLOGIN OK\n"); // print temporário
-         } catch(Exception e) {
+        } catch(Exception e) {
             System.out.printf("\nErro no login: %s\n",e.getMessage()); // print temporário
         }
 
