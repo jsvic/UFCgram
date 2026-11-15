@@ -25,9 +25,6 @@ public class Login {
             }
         } catch (Exception e) {
             throw new RuntimeException(e); // Caso de algum erro no BD
-        } catch (Throwable e) {
-            throw new NullPointerException("Campo da senha vazia");
-
         }
 
     }

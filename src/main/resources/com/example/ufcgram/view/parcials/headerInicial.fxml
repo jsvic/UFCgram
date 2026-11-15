@@ -4,5 +4,5 @@
 
 <?import javafx.scene.control.Label?>
 <HBox styleClass="header" alignment="CENTER" stylesheets="@../../style/header.css">
-    <Label alignment="CENTER" styleClass="title-1" text="UFCgram"/>
+    <Label alignment="CENTER" styleClass="title-1" text="UFCGram"/>
 </HBox>

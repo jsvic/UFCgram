@@ -122,7 +122,20 @@ Classes do AtlantaFX e quando usar:
     -fx-spacing: 3em;
 }
 
-/* Grid */
+.navBar {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+}
+
+.mainFeed {
+    -fx-background-color: -color-bg-subtle;
+    -fx-border-color: -color-border-default;
+}
+
+/* ============================================================
+   3. GridForm
+   ============================================================ */
+
 .gridForm {
     -fx-hgap: 1em;
     -fx-vgap: 2em;
@@ -424,4 +437,14 @@ Classes do AtlantaFX e quando usar:
     -fx-max-height: 24em;
     -fx-translate-y: 12em;
     -fx-translate-x: 2em;
+}
+
+
+/* ============================================================
+   10. Imagens
+   ============================================================ */
+
+.logo {
+    -fx-fit-width: 10em;
+    -fx-fit-height: 5em;
 }

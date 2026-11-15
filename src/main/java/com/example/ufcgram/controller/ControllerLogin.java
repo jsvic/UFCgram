@@ -41,8 +41,12 @@ public class ControllerLogin {
 
                 )
         );
+    }
 
-        mensagemController.ocultar();
+    public void abrirMessagemCadastro() {
+        // Caso a tela de login seja aberta apos a criacao de um conta, é adiciona uma mensagem de confirmacao da criacao da conta
+
+        mensagemController.exibir("Conta Criada", "Cadastro feito com sucesso.", "accent");
     }
 
     @FXML
@@ -54,7 +58,7 @@ public class ControllerLogin {
     }
 
     @FXML
-    public void abrirViewCadastro(ActionEvent event) throws IOException {
+    public void abrirCadastro(ActionEvent event) throws IOException {
         // Redireciona para a tela de cadastro
 
         Parent root = FXMLLoader.load(
@@ -71,20 +75,23 @@ public class ControllerLogin {
     }
 
     @FXML
-    public void abrirViewFeed(ActionEvent event) throws IOException {
-        // Redireciona para a tela de feed
+    public void abrirFeed(ActionEvent event, Conta conta) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewFeed.fxml"
+        )
+        ); // Abre o arquivo FXMl
 
-        Parent root = FXMLLoader.load(
-                getClass().getResource(
-                        "/com/example/ufcgram/view/viewFeed.fxml"
-                )
-        );
+        Parent root = loader.load();
+
+        ControllerFeed controller = loader.getController(); // Pega o Controller do FXML
+        controller.setContaSessao(conta); // Passa o objeto Conta para o Controller
+        controller.abrirMensagemLogin(); // Abre uma mensagem para informar que o login foi feito
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
                 .getWindow();
 
-        stage.getScene().setRoot(root);
+        stage.getScene().setRoot(root); // Adicionar o FXMl à janela
     }
 
     @FXML
@@ -102,10 +109,13 @@ public class ControllerLogin {
 
         try{
             conta.fazerLogin(); // Chamando o metodo de criar conta
-            abrirViewFeed(event); // Caso a matricula e a senha estejam corretas, é redirecionado para a tela do Feed
+            abrirFeed(event, conta); // Caso a matricula e a senha estejam corretas, é redirecionado para a tela do Feed
         } catch(Exception e) {
-            String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem necessária para o usuario
-            mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensage com o texto do erro
+            System.out.print("\nEntrei no catch\nMensagem: ");
+            e.printStackTrace();
+            if(!(e.getCause() instanceof IllegalArgumentException)) {
+                mensagemController.exibir("Erro no Login", e.getMessage().split(": ")[1], "danger"); // Exibe o componente de Mensage com o texto do erro
+            }
         }
 
     }
