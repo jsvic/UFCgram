@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import atlantafx.base.controls.Card?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerCadastroAcademico">
     <BorderPane>
         <top>
@@ -17,7 +18,10 @@
             <Card styleClass="form">
                 <header>
                     <VBox>
-                        <Label styleClass="title-3" text="Criando sua Conta"/>
+                        <HBox spacing="20">
+                            <Button text="←" onAction="#abrirCadastroPessoal" styleClass="ordinary"/>
+                            <Label styleClass="title-3" text="Criando sua Conta"/>
+                        </HBox>
                         <Separator/>
                     </VBox>
                 </header>
@@ -42,7 +46,7 @@
 
                             <Spinner
                                     fx:id="inMatr"
-                                    styleClass="large"
+                                    styleClass="inputForm"
                                     promptText="Matrícula"
                                     editable="true"
                             />
@@ -63,7 +67,7 @@
                             <ComboBox
                                     fx:id="inCurso"
                                     promptText="Selecione seu curso"
-                                    styleClass="large"
+                                    styleClass="inputForm"
                             />
                             <Label
                                     fx:id="cursoErrorLabel"
@@ -79,7 +83,7 @@
                             <ComboBox
                                     fx:id="inSemestre"
                                     promptText="Selecione seu Semestre que Entrou"
-                                    styleClass="large"
+                                    styleClass="inputForm"
                             />
                             <Label
                                     fx:id="semestreErrorLabel"
@@ -95,7 +99,7 @@
                             <ComboBox
                                     fx:id="inCampus"
                                     promptText="Selecione seu Campus"
-                                    styleClass="large"
+                                    styleClass="inputForm"
                             />
                             <Label
                                     fx:id="campusErrorLabel"
@@ -110,11 +114,23 @@
                                 styleClass="buttonGroup"
                                 alignment="BOTTOM_RIGHT"
                         >
-                            <Button text="Avançar" onAction="#continuarCadastro" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                            <Button text="Avançar" onAction="#continuarCadastro" styleClass="accent"/>  <Button text="Limpar" onAction="#limpar" styleClass="danger"/>
                         </HBox>
                     </GridPane>
                 </body>
             </Card>
         </center>
     </BorderPane>
+
+    <VBox
+            StackPane.alignment="BOTTOM_RIGHT"
+            styleClass="message-container"
+            pickOnBounds="false"
+    >
+        <StackPane.margin>
+            <Insets right="20" top="20"/>
+        </StackPane.margin>
+
+        <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
+    </VBox>
 </StackPane>

@@ -127,15 +127,16 @@ Classes do AtlantaFX e quando usar:
     -fx-hgap: 1em;
     -fx-vgap: 2em;
     -fx-alignment: CENTER;
-
 }
 
 .gridForm  .VBox {
+    -fx-alignment: CENTER;
     -fx-spacing: 50em;
 }
 
 .gridForm .inputForm {
-    -fx-min-width: 5em;
+    -fx-max-width: 20em;
+    -fx-min-width: 10em;
 }
 
 /* ============================================================

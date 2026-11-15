@@ -17,7 +17,6 @@ public class ControllerMensagem {
     public void exibir(String titulo, String descricao, String classe) {
         // Metodo usado para exibir o componente Message
 
-        System.out.printf("Classe do componente Message: %s", classe);
         mensagem.getStyleClass().removeAll( // Remove os atributos que o componente tem
                 "accent",
                 "success",

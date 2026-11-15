@@ -12,15 +12,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ControllerCadastroPessoais {
-    @FXML private TextField inNome;
-    @FXML private TextField inEmail;
-    @FXML private ChoiceBox<String> inGenero;
-    @FXML private Spinner<Integer> inIdade;
+    @FXML private TextField inNome; // Atributo que referencia o campo nome
+    @FXML private TextField inEmail; // Atributo que referencia o campo email
+    @FXML private ComboBox<String> inGenero; // Atributo que referencia o campo genero
+    @FXML private Spinner<Integer> inIdade; // Atributo que referencia o campo idade
 
-    @FXML private Label nomeErrorLabel;
-    @FXML private Label emailErrorLabel;
-    @FXML private Label generoErrorLabel;
-    @FXML private Label idadeErrorLabel;
+    @FXML private ControllerMensagem mensagemController; // Cria um objeto para o Controller do Message
 
     @FXML
     public void initialize() {
@@ -37,6 +34,8 @@ public class ControllerCadastroPessoais {
                 "Feminino",
                 "Não Binário"
         );
+
+        mensagemController.ocultar();
     }
 
     @FXML
@@ -59,6 +58,34 @@ public class ControllerCadastroPessoais {
     }
 
     @FXML
+    public void abrirLogin(ActionEvent event) throws IOException {
+        // Meotodo chamado no botao de voltar, esse metodo redireciona para a tela de Login
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewLogin.fxml"
+        )
+        ); // Abre o arquivo FXMl
+
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource())
+                .getScene()
+                .getWindow();
+
+        stage.getScene().setRoot(root); // Adicionar o FXMl à janela
+    }
+
+    @FXML
+    public void limpar() {
+        // Metodo chamada ao clicar no botao "limpar"
+
+        inNome.setText("");
+        inEmail.setText("");
+        inGenero.setValue("");
+        inIdade.getValueFactory().setValue(10);
+    }
+
+    @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
         // Metodo chamado ao clicar em "Avançar"
 
@@ -76,8 +103,13 @@ public class ControllerCadastroPessoais {
         conta.setGenero(genero);
         conta.setIdade(idade);
 
-        System.out.printf("\nInformações:\nnome: %s\nemail: %s\ngenero: %s\nidade: %d\n", nome, email, genero, idade);
-        abrirCadastroAcademico(event, conta);
+        try {
+            System.out.printf("\nInformações:\nnome: %s\nemail: %s\ngenero: %s\nidade: %d\n", nome, email, genero, idade);
+            abrirCadastroAcademico(event, conta);
+        } catch (Exception e) {
+            String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem necessária para o usuario
+            mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensage com o texto do erro
+        }
 
     }
 }
