@@ -134,6 +134,10 @@ Classes do AtlantaFX e quando usar:
     -fx-spacing: 50em;
 }
 
+.gridForm .inputForm {
+    -fx-min-width: 5em;
+}
+
 /* ============================================================
    3. TYPOGRAPHY
    ============================================================ */
