@@ -1,5 +1,7 @@
 package com.example.ufcgram.model;
 
+import com.example.ufcgram.service.Login;
+
 import java.util.ArrayList;
 
 public class Conta {
@@ -19,12 +21,14 @@ public class Conta {
     private static int qtdContas;
 
     public Conta() {
+        // Construtor sem parâmetro
         qtdContas++;
     }
 
     public Conta(int matr, String nome, String senha, String email,
                  int idade, String curso, String campus, String bio,
                  String semestreInicial, String genero) {
+        // Construtor com parâmetro
         this();
         this.matr = matr;
         this.nome = nome;
@@ -36,6 +40,12 @@ public class Conta {
         this.bio = bio;
         this.semestreInicial = semestreInicial;
         this.genero = genero;
+    }
+
+    public void fazerLogin() {
+        // Criando a conta
+        Login contaSessao = new Login();
+        contaSessao.login(matr, senha);
     }
 
     // Get

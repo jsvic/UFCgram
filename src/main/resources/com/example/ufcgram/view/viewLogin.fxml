@@ -16,6 +16,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerLogin">
     <BorderPane>
         <top>
@@ -45,7 +46,7 @@
                                 <Label style="text-normal" text="Matrícula"/>
                                 <Spinner
                                     fx:id="inMatr"
-                                    styleClass="large"
+                                    styleClass="inputForm"
                                     promptText="Matrícula"
                                     editable="true"
                                 />
@@ -58,7 +59,7 @@
                                 <Label style="text-normal" text="Senha"/>
                                 <PasswordField
                                         fx:id="inSenha"
-                                        styleClass="large"
+                                        styleClass="campo"
                                         promptText="Senha"/>
 
                                 <Label fx:id="senhaErrorLabel" styleClass="danger" wrapText="true"/>
@@ -70,7 +71,7 @@
                                 GridPane.rowIndex="2"
                                 GridPane.columnIndex="0"
                         >
-                            <Button text="Login" onAction="#fazerLogin" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                            <Button text="Login" onAction="#fazerLogin" styleClass="accent"/>  <Button text="Limpar" onAction="#limpar" styleClass="danger"/>
                         </HBox>
 
 
@@ -88,5 +89,15 @@
             </Card>
         </center>
     </BorderPane>
+    <VBox
+            StackPane.alignment="BOTTOM_RIGHT"
+            styleClass="message-container"
+            pickOnBounds="false"
+    >
+        <StackPane.margin>
+            <Insets right="20" top="20"/>
+        </StackPane.margin>
 
+        <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
+    </VBox>
 </StackPane>
