@@ -42,10 +42,10 @@ public class Conta {
         this.genero = genero;
     }
 
-    public void fazerLogin() {
+    public Conta fazerLogin() {
         // Criando a conta
         Login contaSessao = new Login();
-        contaSessao.login(matr, senha);
+        return contaSessao.login(matr, senha);
     }
 
     // Get

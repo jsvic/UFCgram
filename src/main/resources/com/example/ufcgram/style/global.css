@@ -144,7 +144,6 @@ Classes do AtlantaFX e quando usar:
 
 .gridForm  .VBox {
     -fx-alignment: CENTER;
-    -fx-spacing: 50em;
 }
 
 .gridForm .inputForm {

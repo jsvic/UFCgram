@@ -100,6 +100,7 @@ public class ControllerLogin {
 
         String senha;
         int matr;
+        Conta contaSessao;
 
         matr = inMatr.getValue(); // Valor do campo matricula
         senha = inSenha.getText(); // Valor do campo senha
@@ -108,8 +109,8 @@ public class ControllerLogin {
         conta.setSenha(senha); // Inserindo a senha no objeto Conta
 
         try{
-            conta.fazerLogin(); // Chamando o metodo de criar conta
-            abrirFeed(event, conta); // Caso a matricula e a senha estejam corretas, é redirecionado para a tela do Feed
+            contaSessao = conta.fazerLogin(); // Chamando o metodo de criar conta
+            abrirFeed(event, contaSessao); // Caso a matricula e a senha estejam corretas, é redirecionado para a tela do Feed
         } catch(Exception e) {
             System.out.print("\nEntrei no catch\nMensagem: ");
             e.printStackTrace();
