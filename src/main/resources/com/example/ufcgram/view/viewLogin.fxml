@@ -59,7 +59,7 @@
                                 <Label style="text-normal" text="Senha"/>
                                 <PasswordField
                                         fx:id="inSenha"
-                                        styleClass="campo"
+                                        styleClass="inputForm"
                                         promptText="Senha"/>
 
                                 <Label fx:id="senhaErrorLabel" styleClass="danger" wrapText="true"/>

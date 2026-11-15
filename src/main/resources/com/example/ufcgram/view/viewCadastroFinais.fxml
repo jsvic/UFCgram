@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import atlantafx.base.controls.Card?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerCadastroFinais">
     <BorderPane>
         <top>
@@ -17,8 +18,11 @@
            <Card styleClass="form">
                <header>
                    <VBox>
-                       <Label styleClass="title-3" text="Criando sua Conta"/>
-                        <Separator/>
+                       <HBox spacing="20">
+                           <Button text="←"  onAction="#abrirCadastroAcademico" styleClass="ordinary"/>
+                           <Label styleClass="title-3" text="Criando sua Conta"/>
+                       </HBox>
+                       <Separator/>
                    </VBox>
                </header>
                <subHeader>
@@ -54,7 +58,7 @@
                            <Label styleClass="text-normal" text="Senha" />
                            <PasswordField
                                    fx:id="inSenha"
-                                   styleClass="large, tranparent"
+                                   styleClass="inputForm"
                                    promptText="Senha"
                                    prefWidth="150"
 
@@ -73,7 +77,7 @@
                            <Label styleClass="text-normal" text="Confirmar Senha" />
                            <PasswordField
                                    fx:id="inConfirmaSenha"
-                                   styleClass="large, tranparent"
+                                   styleClass="inputForm"
                                    promptText="Senha"
                                    prefWidth="150"
 
@@ -95,6 +99,7 @@
 
                            <Button
                                    text="Limpar"
+                                   onAction="#limpar"
                                    styleClass="danger"
                                    alignment="BOTTOM_LEFT"
                            />
@@ -105,4 +110,16 @@
            </Card>
         </center>
     </BorderPane>
+
+    <VBox
+            StackPane.alignment="BOTTOM_RIGHT"
+            styleClass="message-container"
+            pickOnBounds="false"
+    >
+        <StackPane.margin>
+            <Insets right="20" top="20"/>
+        </StackPane.margin>
+
+        <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
+    </VBox>
 </StackPane>

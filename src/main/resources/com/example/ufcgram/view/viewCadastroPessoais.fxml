@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import atlantafx.base.controls.Card?>
+<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerCadastroPessoais">
     <BorderPane>
         <top>
@@ -16,7 +17,13 @@
         <center>
             <Card styleClass="form">
                 <header>
-                    <fx:include source="parcials/headerCadastro.fxml"/>
+                    <VBox>
+                        <HBox spacing="20">
+                            <Button text="←" onAction="#abrirLogin" styleClass="ordinary"/>
+                            <Label styleClass="title-3" text="Criando sua Conta"/>
+                        </HBox>
+                        <Separator/>
+                    </VBox>
                 </header>
                 <subHeader>
                     <VBox>
@@ -38,7 +45,7 @@
                            <Label styleClass="text-normal" text="Nome"/>
                             <TextField
                                 fx:id="inNome"
-                                styleClass="large"
+                                styleClass="inputForm"
                                 promptText="Nome"/>
                             <Label
                                 fx:id="nomeErrorLabel"
@@ -53,7 +60,7 @@
                             <Label styleClass="text-normal" text="Email"/>
                             <TextField
                                     fx:id="inEmail"
-                                    styleClass="large"
+                                    styleClass="inputForm"
                                     promptText="Email"/>
                             <Label
                                     fx:id="emailErrorLabel"
@@ -66,9 +73,10 @@
                                 GridPane.rowIndex="1"
                         >
                             <Label styleClass="text-normal" text="Gênero"/>
-                            <ChoiceBox
+                            <ComboBox
                                     fx:id="inGenero"
-                                    styleClass="large"
+                                    promptText="Gênero"
+                                    styleClass="inputForm"
                                     />
                             <Label
                                     fx:id="generoErrorLabel"
@@ -83,7 +91,8 @@
                             <Label styleClass="text-normal" text="Idade"/>
                             <Spinner
                                     fx:id="inIdade"
-                                    styleClass="large"
+                                    promptText="Idade"
+                                    styleClass="inputForm"
                                     editable="true"
                             />
                             <Label
@@ -97,11 +106,23 @@
                                 GridPane.columnIndex="1"
                                 alignment="BOTTOM_RIGHT"
                         >
-                            <Button text="Avançar" onAction="#continuarCadastro" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                            <Button text="Avançar" onAction="#continuarCadastro" styleClass="accent"/>  <Button text="Limpar" onAction="#limpar" styleClass="danger"/>
                         </HBox>
                     </GridPane>
                 </body>
             </Card>
         </center>
     </BorderPane>
+
+    <VBox
+            StackPane.alignment="BOTTOM_RIGHT"
+            styleClass="message-container"
+            pickOnBounds="false"
+    >
+        <StackPane.margin>
+            <Insets right="20" top="20"/>
+        </StackPane.margin>
+
+        <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
+    </VBox>
 </StackPane>

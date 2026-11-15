@@ -26,6 +26,8 @@ public class ControllerCadastroAcademico {
     @FXML private ComboBox<String> inSemestre; // Atributo que referencia o campo Semestre
     @FXML private ComboBox<String> inCampus;  // Atributo que referencia o campo Campus
 
+    @FXML private ControllerMensagem mensagemController; // Cria um objeto para o Controller do Message
+
     @FXML
     public void initialize() {
         // Metodo chamado automaticamente ao abrir o FXML
@@ -203,6 +205,33 @@ public class ControllerCadastroAcademico {
     }
 
     @FXML
+    public void abrirCadastroPessoal(ActionEvent event) throws IOException {
+        // Meotodo chamado no botao de voltar, esse metodo redireciona para a tela de cadastro de dados pessoais
+
+        Parent root = FXMLLoader.load(
+                getClass().getResource(
+                        "/com/example/ufcgram/view/viewCadastroPessoais.fxml"
+                )
+        );
+
+        Stage stage = (Stage) ((Node) event.getSource())
+                .getScene()
+                .getWindow();
+
+        stage.getScene().setRoot(root);
+    }
+
+    @FXML
+    public void limpar() {
+        // Metodo chamada ao clicar no botao "limpar"
+
+        inMatr.getValueFactory().setValue(100000);
+        inCurso.setValue("");
+        inCampus.setValue("");
+        inSemestre.setValue("");
+    }
+
+    @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
         if (conta == null) {
             throw new IllegalStateException("Conta não foi repassada para ControllerCadastroAcademico");
@@ -223,7 +252,13 @@ public class ControllerCadastroAcademico {
             conta.setCampus(campus);
         }
 
-        System.out.printf("\nInformações:\nMatr: %d\ncurso: %s\nsemestre: %s\ncampus: %s\n", matr, curso, semestre, campus);
-        abrirCadastroFinal(event);
+        try {
+            System.out.printf("\nInformações:\nMatr: %d\ncurso: %s\nsemestre: %s\ncampus: %s\n", matr, curso, semestre, campus);
+            abrirCadastroFinal(event);
+        } catch (Exception e) {
+            String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem necessária para o usuario
+            mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensage com o texto do erro
+        }
+
     }
 }

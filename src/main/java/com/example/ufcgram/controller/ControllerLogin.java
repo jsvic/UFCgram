@@ -47,7 +47,7 @@ public class ControllerLogin {
 
     @FXML
     public void limpar() {
-        // Funcao chamada ao clicar no botao "limpar"
+        // Metodo chamada ao clicar no botao "limpar"
 
         inMatr.getValueFactory().setValue(100000); // Retoma o valor do campo matricula ao valor inicial
         inSenha.setText(""); // Retoma o valor do campo senha ao valor inicial
@@ -104,8 +104,8 @@ public class ControllerLogin {
             conta.fazerLogin(); // Chamando o metodo de criar conta
             abrirViewFeed(event); // Caso a matricula e a senha estejam corretas, é redirecionado para a tela do Feed
         } catch(Exception e) {
-            String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem para o usuario
-            mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensagem com o texto do erro
+            String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem necessária para o usuario
+            mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensage com o texto do erro
         }
 
     }

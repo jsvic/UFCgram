@@ -4,8 +4,12 @@ import com.example.ufcgram.model.Conta;
 import com.example.ufcgram.service.Cadastro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -25,8 +29,52 @@ public class ControllerCadastroFinais {
     @FXML
     private PasswordField inConfirmaSenha;  // Atributo que referencia o campo Confirmar Senha
 
+    @FXML private ControllerMensagem mensagemController; // Cria um objeto para o Controller do Message
+
     @FXML
-    public void cadastrar(ActionEvent event) throws IOException {
+    public void abrirLogin(ActionEvent event) throws IOException {
+        // Metodo que redireciona para a pagina de dados finais do cadastro
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewLogin.fxml"
+        )
+        ); // Abre o arquivo FXML
+
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource())
+                .getScene()
+                .getWindow();
+
+        stage.getScene().setRoot(root); // Adiona o arquino na janela
+    }
+
+    @FXML
+    public void abrirCadastroAcademico(ActionEvent event) throws IOException {
+        // Meotodo chamado no botao de voltar, esse metodo redireciona para a tela de cadastro de dados academicos
+
+        Parent root = FXMLLoader.load(
+                getClass().getResource(
+                        "/com/example/ufcgram/view/viewCadastroAcademico.fxml"
+                )
+        );
+
+        Stage stage = (Stage) ((Node) event.getSource())
+                .getScene()
+                .getWindow();
+
+        stage.getScene().setRoot(root);
+    }
+
+    @FXML
+    public void limpar() {
+        inDescricao.setText("");
+        inSenha.setText("");
+        inConfirmaSenha.setText("");
+    }
+
+    @FXML
+    public void cadastrar(ActionEvent event) {
         // Metodo chamado ao clicar no botao "Cadastrar"
 
         String bio, senha, confirmarSenha;
@@ -63,7 +111,11 @@ public class ControllerCadastroFinais {
 
             System.out.println("Processo de cadastro finalizado com sucesso!");
 
+            abrirLogin(event);
+
         } catch (Exception e) {
+            String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem necessária para o usuario
+            mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensage com o texto do erro
             System.out.println("Ocorreu um erro ao realizar o cadastro.");
         }
     }
