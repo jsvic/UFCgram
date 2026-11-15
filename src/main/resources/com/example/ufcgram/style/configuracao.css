@@ -1,0 +1,28 @@
+.mainConfig {
+    -fx-background-color: -color-bg-subtle;
+    -fx-predf-width: 70em;
+    -fx-max-width: 70em;
+    -fx-min-height: 100%;
+    -fx-padding: 2em;
+}
+
+.card {
+    -fx-pref-width: 50em;
+    -fx-border-radius: 0;
+}
+
+.gridForm {
+    -fx-alignment: center;
+    -fx-hgap: 5em;
+    -fx-vgap: 5em;
+}
+
+.gridForm > .VBox {
+    -fx-alignment: center;
+}
+
+.gridForm .inputForm {
+    -fx-min-width: 20em;
+    -fx-max-width: 20em;
+    -fx-pref-height: 3em;
+}
