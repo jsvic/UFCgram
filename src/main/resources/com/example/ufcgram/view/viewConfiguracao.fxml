@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import atlantafx.base.controls.Card?>
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ufcgram.controller.ControllerConfiguracao">
+    <BorderPane>
+        <top>
+            <fx:include fx:id="headerFeed" source="parcials/headerFeed.fxml"/>
+        </top>
+
+        <center>
+            <Card styleClass="form">
+                <header>
+                    <VBox>
+                        <HBox spacing="20">
+                            <Button text="←" onAction="#abrirFeed" styleClass="ordinary"/>
+                            <Label styleClass="title-3" text="Editar sua Conta"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Button text="Editar Conta" styleClass="accent"/>
+                            <Button text="Excluir Conta" styleClass="danger"/>
+                        </HBox>
+                        <Separator/>
+                    </VBox>
+                </header>
+                <subHeader>
+                    <VBox>
+                        <Label styleClass="text-lighter" text="Configure a sua conta"/>
+                    </VBox>
+                </subHeader>
+
+                <body>
+                    <GridPane styleClass="gridForm">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+
+
+                    </GridPane>
+                </body>
+            </Card>
+        </center>
+    </BorderPane>
+
+    <VBox
+            StackPane.alignment="BOTTOM_RIGHT"
+            styleClass="message-container"
+            pickOnBounds="false"
+    >
+        <StackPane.margin>
+            <Insets right="20" top="20"/>
+        </StackPane.margin>
+
+        <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
+    </VBox>
+</StackPane>

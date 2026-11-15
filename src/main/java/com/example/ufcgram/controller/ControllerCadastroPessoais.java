@@ -79,10 +79,10 @@ public class ControllerCadastroPessoais {
     public void limpar() {
         // Metodo chamada ao clicar no botao "limpar"
 
-        inNome.setText("");
-        inEmail.setText("");
-        inGenero.setValue("");
-        inIdade.getValueFactory().setValue(10);
+        inNome.setText(""); // Retoma o valor do campo nome ao valor inicial
+        inEmail.setText(""); // Retoma o valor do campo email ao valor inicial
+        inGenero.setValue(""); // Retoma o valor do campo genero ao valor inicial
+        inIdade.getValueFactory().setValue(10); // Retoma o valor do campo idade ao valor inicial
     }
 
     @FXML

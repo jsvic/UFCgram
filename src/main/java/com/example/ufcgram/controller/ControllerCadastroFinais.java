@@ -46,6 +46,9 @@ public class ControllerCadastroFinais {
                 .getScene()
                 .getWindow();
 
+        ControllerLogin controller = loader.getController(); // Armazena o controller do FXMl
+        controller.abrirMessagemCadastro(); // Carrega a mensagem de criacao de conta na tela de login
+
         stage.getScene().setRoot(root); // Adiona o arquino na janela
     }
 
@@ -68,9 +71,9 @@ public class ControllerCadastroFinais {
 
     @FXML
     public void limpar() {
-        inDescricao.setText("");
-        inSenha.setText("");
-        inConfirmaSenha.setText("");
+        inDescricao.setText(""); // Retoma o valor do campo descricao ao valor inicial
+        inSenha.setText(""); // Retoma o valor do campo senha ao valor inicial
+        inConfirmaSenha.setText(""); // Retoma o valor do campo confirmar senha ao valor inicial
     }
 
     @FXML

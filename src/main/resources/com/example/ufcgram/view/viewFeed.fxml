@@ -6,9 +6,51 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            >
-    <Label text="FEED" styleClass="title-1"/>
+<?import javafx.geometry.Insets?>
+<StackPane fx:controller="com.example.ufcgram.controller.ControllerFeed" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane>
+        <top>
+            <fx:include
+                    fx:id="headerFeed"
+                    source="parcials/headerFeed.fxml"/>
+        </top>
+        <center>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="15"/>
+                    <ColumnConstraints percentWidth="70"/>
+                </columnConstraints>
 
+                <Pane
+                    GridPane.columnIndex="0"
+                    GridPane.rowIndex="0"
+                >
+                    <fx:include
+                            fx:id="navBar"
+                            source="parcials/navBar.fxml"/>
+                </Pane>
+
+                <Pane
+                    GridPane.columnIndex="1"
+                    GridPane.rowIndex="0"
+                >
+                    <fx:include
+                            fx:id="mainFeed"
+                            source="parcials/mainFeed.fxml"/>
+                </Pane>
+
+            </GridPane>
+        </center>
+    </BorderPane>
+    <VBox
+            StackPane.alignment="BOTTOM_RIGHT"
+            styleClass="message-container"
+            pickOnBounds="false"
+    >
+        <StackPane.margin>
+            <Insets right="20" top="20"/>
+        </StackPane.margin>
+
+        <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
+    </VBox>
 </StackPane>

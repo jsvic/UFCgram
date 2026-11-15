@@ -225,10 +225,10 @@ public class ControllerCadastroAcademico {
     public void limpar() {
         // Metodo chamada ao clicar no botao "limpar"
 
-        inMatr.getValueFactory().setValue(100000);
-        inCurso.setValue("");
-        inCampus.setValue("");
-        inSemestre.setValue("");
+        inMatr.getValueFactory().setValue(100000); // Retoma o valor do campo matricula ao valor inicial
+        inCurso.setValue(""); // Retoma o valor do campo curso ao valor inicial
+        inCampus.setValue(""); // Retoma o valor do campo campus ao valor inicial
+        inSemestre.setValue(""); // Retoma o valor do campo semestre ao valor inicial
     }
 
     @FXML

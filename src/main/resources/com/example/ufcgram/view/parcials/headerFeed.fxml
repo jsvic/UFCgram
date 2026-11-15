@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<?import javafx.scene.control.Button?>
+<HBox styleClass="headerFeed" stylesheets="@../../style/headerFeed.css" fx:controller="com.example.ufcgram.controller.ControllerHeaderFeed" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" >
+    <ImageView styleClass="logo" onMouseClicked="#abrirFeed" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../images/logo/logotipo-ufcgram-png.png"/>
+    </ImageView>
+    <Region HBox.hgrow="ALWAYS" />
+    <Button text="config" onAction="#abrirConfiguracao" styleClass="ordinary"/>
+</HBox>
