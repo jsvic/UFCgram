@@ -33,6 +33,7 @@ public class ControllerConfiguracao {
 
     @FXML private ControllerHeaderFeed headerFeedController; // Referencia o Controller do Header
     @FXML private ControllerMensagem mensagemController; // Referencia o Controller do Mesagem
+    @FXML private ControllerModalDeletarConta modalController;
 
     @FXML private Button btnEdicao; // Referencia o botao de edicao
 
@@ -206,6 +207,10 @@ public class ControllerConfiguracao {
                 "Campus de Russas",
                 "Campus de Sobral"
         );
+    }
+
+    @FXML public void abrirModal() {
+        modalController.abrirModal();
     }
 
     @FXML public void setContaSessao(Conta contaSessao) {

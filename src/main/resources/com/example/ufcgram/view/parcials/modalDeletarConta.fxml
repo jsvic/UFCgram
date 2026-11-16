@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import atlantafx.base.controls.ModalPane?>
+<?import atlantafx.base.controls.Card?>
+<?import javafx.geometry.Insets?>
+<?import atlantafx.base.layout.ModalBox?>
+
+<ModalPane
+        xmlns="http://javafx.com/javafx/26"
+        xmlns:fx="http://javafx.com/fxml/1"
+        stylesheets="@../../style/modal.css"
+        fx:controller="com.example.ufcgram.controller.ControllerModalDeletarConta"
+        fx:id="modalPane"
+        alignment="CENTER"
+>
+    <fx:define>
+
+    <ModalBox fx:id="modalBox" styleClass="modalBox">
+            <children>
+                <Card styleClass="modalCard"
+                      AnchorPane.topAnchor="40"
+                      AnchorPane.rightAnchor="0"
+                      AnchorPane.bottomAnchor="0"
+                      AnchorPane.leftAnchor="0"
+                >
+                    <header>
+                        <VBox>
+                            <Label text="Deletar a Conta" styleClass="title-1"/>
+                            <Separator/>
+                        </VBox>
+                    </header>
+                    <body>
+                        <VBox styleClass="cardBody">
+                            <Label text="Você tem certeza que vai deletar sua conta?"/>
+                            <CheckBox
+                                fx:id="inConfirmar"
+                                text="Eu concordo que ao deletar minha conta não será possível recuperar os dados dela"
+                                styleClass="text-normal"
+                                />
+                        </VBox>
+                    </body>
+                    <footer>
+                            <Button
+                                text="Deletar"
+                                styleClass="danger"
+                                onAction="#deletar"
+                            />
+                    </footer>
+                </Card>
+            </children>
+
+        </ModalBox>
+    </fx:define>
+</ModalPane>
+
