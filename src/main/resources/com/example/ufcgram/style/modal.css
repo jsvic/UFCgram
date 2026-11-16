@@ -1,0 +1,17 @@
+.modalBox {
+    -fx-max-width: 65em;
+    -fx-max-height: 45em;
+    -fx-padding: 2em;
+}
+
+.modalBox > .modalCard {
+    -fx-alignment: center;
+    -fx-spacing: 1.5em;
+}
+
+.modalCard > .container {
+    -fx-spacing: 2em;
+}
+
+
+

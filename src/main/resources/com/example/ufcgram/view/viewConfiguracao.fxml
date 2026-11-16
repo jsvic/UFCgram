@@ -23,7 +23,7 @@
                             <Label styleClass="title-3" text="Editar sua Conta"/>
                             <Region HBox.hgrow="ALWAYS" />
                             <Button text="Habilitar Edição" fx:id="btnEdicao" onAction="#camposEdicao" styleClass="accent"/>
-                            <Button text="Excluir Conta" styleClass="danger"/>
+                            <Button text="Excluir Conta" styleClass="danger" onAction="#abrirModal"/>
                         </HBox>
                         <Separator/>
                     </VBox>
@@ -80,6 +80,7 @@
                                         styleClass="inputForm"
                                         disable="true"
                                         promptText="Idade"
+                                        editable="true"
                                 />
                             </VBox>
 
@@ -106,6 +107,7 @@
                                         styleClass="inputForm"
                                         promptText="Matrícula"
                                         disable="true"
+                                        editable="true"
                                 />
                             </VBox>
 
@@ -223,4 +225,6 @@
 
         <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
     </VBox>
+
+    <fx:include source="parcials/modalDeletarConta.fxml" fx:id="modal"/>
 </StackPane>
