@@ -210,6 +210,7 @@ public class ControllerConfiguracao {
     }
 
     @FXML public void abrirModal() {
+        modalController.setContaSessao(contaSessao);
         modalController.abrirModal();
     }
 
@@ -236,6 +237,28 @@ public class ControllerConfiguracao {
         System.out.printf("\nConta Sessao (Configuracao): %d", contaSessao.getMatr());
         ControllerFeed controller = loader.getController(); // Pega o Controller do FXML
         controller.setContaSessao(contaSessao); // Passa o objeto Conta para o Controller
+
+        Stage stage = (Stage) ((Node) event.getSource())
+                .getScene()
+                .getWindow();
+
+        stage.getScene().setRoot(root); // Adicionar o FXMl à janela
+    }
+
+    @FXML
+    public void abrirLogin(ActionEvent event) throws IOException {
+        // Redereciona para o Login
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/ufcgram/view/viewLogin.fxml"
+        )
+        ); // Abre o arquivo FXMl
+
+        Parent root = loader.load();
+
+        System.out.printf("\nConta Sessao (Configuracao): %d", contaSessao.getMatr());
+        ControllerLogin controller = loader.getController(); // Pega o Controller do FXML
+        controller.abrirMensagemSair(); // Passa o objeto Conta para o Controller
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()

@@ -23,6 +23,7 @@
                             <Label styleClass="title-3" text="Editar sua Conta"/>
                             <Region HBox.hgrow="ALWAYS" />
                             <Button text="Habilitar Edição" fx:id="btnEdicao" onAction="#camposEdicao" styleClass="accent"/>
+                            <Button text="Sair da Conta" styleClass="danger" onAction="#abrirLogin"/>
                             <Button text="Excluir Conta" styleClass="danger" onAction="#abrirModal"/>
                         </HBox>
                         <Separator/>
@@ -36,161 +37,161 @@
 
                 <body>
 
-                        <GridPane styleClass="gridForm">
-                            <columnConstraints>
-                                <ColumnConstraints percentWidth="25"/>
-                                <ColumnConstraints percentWidth="25"/>
-                                <ColumnConstraints percentWidth="25"/>
-                                <ColumnConstraints percentWidth="25"/>
-                            </columnConstraints>
+                    <GridPane styleClass="gridForm">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                        </columnConstraints>
 
-                            <VBox
+                        <VBox
                                 GridPane.rowIndex="0"
                                 GridPane.columnIndex="0"
-                            >
-                                <Label text="Nome" styleClass="text-normal"/>
-                                <TextField
-                                        fx:id="inNome"
-                                        styleClass="inputForm"
-                                        promptText="Nome"
-                                        disable="true"
-                                />
-                            </VBox>
+                        >
+                            <Label text="Nome" styleClass="text-normal"/>
+                            <TextField
+                                    fx:id="inNome"
+                                    styleClass="inputForm"
+                                    promptText="Nome"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="0"
-                                    GridPane.columnIndex="1"
-                            >
-                                <Label text="Email" styleClass="text-normal"/>
-                                <TextField
-                                        fx:id="inEmail"
-                                        styleClass="inputForm"
-                                        promptText="Email"
-                                        disable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="1"
+                        >
+                            <Label text="Email" styleClass="text-normal"/>
+                            <TextField
+                                    fx:id="inEmail"
+                                    styleClass="inputForm"
+                                    promptText="Email"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="0"
-                                    GridPane.columnIndex="2"
-                            >
-                                <Label text="Idade" styleClass="text-normal"/>
-                                <Spinner
-                                        fx:id="inIdade"
-                                        styleClass="inputForm"
-                                        disable="true"
-                                        promptText="Idade"
-                                        editable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="2"
+                        >
+                            <Label text="Idade" styleClass="text-normal"/>
+                            <Spinner
+                                    fx:id="inIdade"
+                                    styleClass="inputForm"
+                                    disable="true"
+                                    promptText="Idade"
+                                    editable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="0"
-                                    GridPane.columnIndex="3"
-                            >
-                                <Label text="Gênero" styleClass="text-normal"/>
-                                <ComboBox
-                                        fx:id="inGenero"
-                                        styleClass="inputForm"
-                                        promptText="Gênero"
-                                        disable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="0"
+                                GridPane.columnIndex="3"
+                        >
+                            <Label text="Gênero" styleClass="text-normal"/>
+                            <ComboBox
+                                    fx:id="inGenero"
+                                    styleClass="inputForm"
+                                    promptText="Gênero"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="1"
-                                    GridPane.columnIndex="0"
-                            >
-                                <Label text="Matrícula" styleClass="text-normal"/>
-                                <Spinner
-                                        fx:id="inMatr"
-                                        styleClass="inputForm"
-                                        promptText="Matrícula"
-                                        disable="true"
-                                        editable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="0"
+                        >
+                            <Label text="Matrícula" styleClass="text-normal"/>
+                            <Spinner
+                                    fx:id="inMatr"
+                                    styleClass="inputForm"
+                                    promptText="Matrícula"
+                                    disable="true"
+                                    editable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="1"
-                                    GridPane.columnIndex="1"
-                            >
-                                <Label text="Campus" styleClass="text-normal"/>
-                                <ComboBox
-                                        fx:id="inCampus"
-                                        styleClass="inputForm"
-                                        promptText="Campus"
-                                        disable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="1"
+                        >
+                            <Label text="Campus" styleClass="text-normal"/>
+                            <ComboBox
+                                    fx:id="inCampus"
+                                    styleClass="inputForm"
+                                    promptText="Campus"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="1"
-                                    GridPane.columnIndex="2"
-                            >
-                                <Label text="Semestre Inicial" styleClass="text-normal"/>
-                                <ComboBox
-                                        fx:id="inSemestre"
-                                        styleClass="inputForm"
-                                        promptText="Semestre Inicial"
-                                        disable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="2"
+                        >
+                            <Label text="Semestre Inicial" styleClass="text-normal"/>
+                            <ComboBox
+                                    fx:id="inSemestre"
+                                    styleClass="inputForm"
+                                    promptText="Semestre Inicial"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="1"
-                                    GridPane.columnIndex="3"
-                            >
-                                <Label text="Curso" styleClass="text-normal"/>
-                                <ComboBox
-                                        fx:id="inCurso"
-                                        styleClass="inputForm"
-                                        promptText="Curso"
-                                        disable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="1"
+                                GridPane.columnIndex="3"
+                        >
+                            <Label text="Curso" styleClass="text-normal"/>
+                            <ComboBox
+                                    fx:id="inCurso"
+                                    styleClass="inputForm"
+                                    promptText="Curso"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="2"
-                                    GridPane.columnIndex="1"
-                                    GridPane.columnSpan="2"
-                            >
-                                <Label text="Senha" styleClass="text-normal"/>
-                                <PasswordField
-                                        fx:id="inSenha"
-                                        styleClass="inputForm"
-                                        promptText="Senha"
-                                        disable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="1"
+                                GridPane.columnSpan="2"
+                        >
+                            <Label text="Senha" styleClass="text-normal"/>
+                            <PasswordField
+                                    fx:id="inSenha"
+                                    styleClass="inputForm"
+                                    promptText="Senha"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="2"
-                                    GridPane.columnIndex="2"
-                                    GridPane.columnSpan="2"
-                            >
-                                <Label text="Confirmar a Senha" styleClass="text-normal"/>
-                                <PasswordField
-                                        fx:id="inSenhaConfirma"
-                                        styleClass="inputForm"
-                                        promptText="Confirmar a Senha"
-                                        disable="true"
-                                />
-                            </VBox>
+                        <VBox
+                                GridPane.rowIndex="2"
+                                GridPane.columnIndex="2"
+                                GridPane.columnSpan="2"
+                        >
+                            <Label text="Confirmar a Senha" styleClass="text-normal"/>
+                            <PasswordField
+                                    fx:id="inSenhaConfirma"
+                                    styleClass="inputForm"
+                                    promptText="Confirmar a Senha"
+                                    disable="true"
+                            />
+                        </VBox>
 
-                            <VBox
-                                    GridPane.rowIndex="3"
-                                    GridPane.columnIndex="0"
-                                    GridPane.columnSpan="4"
-                                    alignment="CENTER"
-                            >
-                                <Label text="Descrição" styleClass="text-normal"/>
-                                <TextArea
-                                        fx:id="inDescricao"
-                                        disable="true"
-                                />
-                            </VBox>
-                        </GridPane>
+                        <VBox
+                                GridPane.rowIndex="3"
+                                GridPane.columnIndex="0"
+                                GridPane.columnSpan="4"
+                                alignment="CENTER"
+                        >
+                            <Label text="Descrição" styleClass="text-normal"/>
+                            <TextArea
+                                    fx:id="inDescricao"
+                                    disable="true"
+                            />
+                        </VBox>
+                    </GridPane>
 
                 </body>
 
