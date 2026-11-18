@@ -9,7 +9,12 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       styleClass="navBar"
+      fx:controller="com.example.ufcgram.controller.ControllerNavBar"
 >
-    <Label text="Aqui será o NavBar" styleClass="title-1"/>
-
+    <VBox styleClass="vboxNavConta">
+        <Button text="Ver Conta" onAction="#abrirContaSessao" styleClass="accent"/>
+    </VBox>
+    <VBox styleClass="vboxContasRecomendadas">
+        <Label text="Aqui será as contas recomendadas"/>
+    </VBox>
 </VBox>

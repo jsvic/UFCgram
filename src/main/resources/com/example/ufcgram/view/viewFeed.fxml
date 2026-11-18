@@ -15,31 +15,17 @@
                     source="parcials/headerFeed.fxml"/>
         </top>
         <center>
-            <GridPane>
-                <columnConstraints>
-                    <ColumnConstraints percentWidth="15"/>
-                    <ColumnConstraints percentWidth="70"/>
-                </columnConstraints>
+           <HBox styleClass="containerFeed">
+                <fx:include
+                        fx:id="navBar"
+                        source="parcials/navBar.fxml"/>
 
-                <Pane
-                    GridPane.columnIndex="0"
-                    GridPane.rowIndex="0"
-                >
-                    <fx:include
-                            fx:id="navBar"
-                            source="parcials/navBar.fxml"/>
-                </Pane>
+               <fx:include
+                        fx:id="mainFeed"
+                        source="parcials/mainFeed.fxml"/>
 
-                <Pane
-                    GridPane.columnIndex="1"
-                    GridPane.rowIndex="0"
-                >
-                    <fx:include
-                            fx:id="mainFeed"
-                            source="parcials/mainFeed.fxml"/>
-                </Pane>
-
-            </GridPane>
+               <fx:include source="parcials/conta.fxml" fx:id="conta"/>
+           </HBox>
         </center>
     </BorderPane>
     <VBox

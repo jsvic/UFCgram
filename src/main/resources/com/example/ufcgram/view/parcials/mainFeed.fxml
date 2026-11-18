@@ -6,8 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox  xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-      styleClass="mainFeed"
+<VBox  xmlns="http://javafx.com/javafx/26"
+       xmlns:fx="http://javafx.com/fxml/1"
+       styleClass="mainFeed"
+       fx:controller="com.example.ufcgram.controller.ControllerMainFeed"
+       fx:id="mainFeed"
 >
-        <Label text="Aqui será o Main" styleClass="title-1"/>
+        <Label text="Aqui será os posts" styleClass="title-1"/>
+
 </VBox>
