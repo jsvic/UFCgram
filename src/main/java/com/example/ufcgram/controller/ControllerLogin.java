@@ -43,10 +43,20 @@ public class ControllerLogin {
         );
     }
 
-    public void abrirMessagemCadastro() {
+    public void abrirMesagemCadastro() {
         // Caso a tela de login seja aberta apos a criacao de um conta, é adiciona uma mensagem de confirmacao da criacao da conta
 
         mensagemController.exibir("Conta Criada", "Cadastro feito com sucesso.", "accent");
+    }
+
+    public void abrirMensagemExcluir() {
+        // Caso a tela de login seja aberta apos a excluir
+        mensagemController.exibir("Conta Excluida", "Conta deletada com sucesso.", "accent");
+    }
+
+    public void abrirMensagemSair() {
+        // Caso a tela de login seja aberta apos a sair
+        mensagemController.exibir("Sessão Encerrada", "Conta encerrada com sucesso.", "accent");
     }
 
     @FXML

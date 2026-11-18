@@ -47,7 +47,7 @@ public class ControllerCadastroFinais {
                 .getWindow();
 
         ControllerLogin controller = loader.getController(); // Armazena o controller do FXMl
-        controller.abrirMessagemCadastro(); // Carrega a mensagem de criacao de conta na tela de login
+        controller.abrirMesagemCadastro(); // Carrega a mensagem de criacao de conta na tela de login
 
         stage.getScene().setRoot(root); // Adiona o arquino na janela
     }
