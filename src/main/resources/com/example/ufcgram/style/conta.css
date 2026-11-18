@@ -1,10 +1,10 @@
 .conta {
-    -fx-padding: 2em 0em 2em 30em;
+    -fx-padding: 2em;
     -fx-min-width: 100%;
 }
 
 .mainConta {
-    -fx-padding: 2em 15em 2em 0em;
+    -fx-padding: 2em;
     -fx-spacing: .5em;
 }
 

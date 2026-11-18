@@ -12,12 +12,15 @@
       fx:controller="com.example.ufcgram.controller.ControllerNavBar"
 >
     <VBox styleClass="vboxNavConta">
-        <Button text="Ver Conta" onAction="#abrirContaSessao" styleClass="accent"/>
+        <Button text="Ver Conta" onAction="#abrirContaSessao" fx:id="navButton" styleClass="accent"/>
         <Button text="Criar Post" styleClass="accent"/>
     </VBox>
     <VBox styleClass="vboxContasRecomendadas">
         <Label text="Contas Recomendadas" styleClass="title-3"/>
-        <TextField promptText="Pesquisar Conta" styleClass="search"/>
+        <HBox styleClass="contentSearch">
+            <TextField promptText="Pesquisar Conta" styleClass="search"/>
+            <Button text="buscar" styleClass="accent"/>
+        </HBox>
 
         <ScrollPane fitToWidth="true"
                     fitToHeight="true"

@@ -14,11 +14,13 @@
                     fx:id="headerFeed"
                     source="parcials/headerFeed.fxml"/>
         </top>
-        <center>
-           <HBox styleClass="containerFeed">
+        <left>
                 <fx:include
                         fx:id="navBar"
                         source="parcials/navBar.fxml"/>
+        </left>
+        <center>
+           <HBox styleClass="containerFeed">
 
                <fx:include
                         fx:id="mainFeed"

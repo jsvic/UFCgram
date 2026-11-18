@@ -22,6 +22,8 @@ public class ControllerConta {
     @FXML private HBox conta;
     @FXML private HBox btnGroup;
 
+    private boolean status = false;
+
     private Conta contaSessao;
     private Conta contaPerfil;
 
@@ -33,14 +35,11 @@ public class ControllerConta {
         mostarInfos();
     }
 
-    @FXML public void abrir() {
-        conta.setManaged(true);
-        conta.setVisible(true);
-    }
+    @FXML public void alterarStatus() {
+        status = !status;
 
-    @FXML public void fechar() {
-        conta.setManaged(false);
-        conta.setVisible(false);
+        conta.setManaged(status);
+        conta.setVisible(status);
     }
 
     private void mostarInfos() {
@@ -61,5 +60,9 @@ public class ControllerConta {
             btnGroup.setVisible(true);
             btnGroup.setManaged(true);
         }
+    }
+
+    public boolean getStatus() {
+        return status;
     }
 }

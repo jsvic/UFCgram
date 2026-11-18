@@ -6,14 +6,17 @@ import javafx.scene.layout.VBox;
 public class ControllerMainFeed {
     @FXML private VBox mainFeed;
 
-    @FXML public void abrir() {
-        mainFeed.setManaged(true);
-        mainFeed.setVisible(true);
+    private boolean status;
+
+    @FXML public void alterarStatus() {
+        status = !status;
+
+        mainFeed.setManaged(status);
+        mainFeed.setVisible(status);
     }
 
-    @FXML public void fechar() {
-        mainFeed.setManaged(false);
-        mainFeed.setVisible(false);
+    public boolean getStatus() {
+        return status;
     }
 }
 
