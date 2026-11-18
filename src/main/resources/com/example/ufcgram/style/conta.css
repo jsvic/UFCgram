@@ -24,3 +24,22 @@
     -fx-spacing: 2em;
     -fx-padding: 2em;
 }
+
+.contentPost {
+    -fx-spacing: 2em;
+    -fx-padding: 2em;
+}
+
+.postList {
+    -fx-spacing: 1.5em;
+    -fx-alignment: center;
+}
+
+.postItem {
+    -fx-background-color: -color-bg-overlay;
+    -fx-spacing: 1em;
+    -fx-padding: 1.5em;
+    -fx-alignment: center;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}

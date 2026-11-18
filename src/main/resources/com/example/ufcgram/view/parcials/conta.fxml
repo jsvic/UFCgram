@@ -30,9 +30,93 @@
 
         <Separator/>
 
-        <VBox>
-            <Label text="Aqui ficarão os posts do perfil"/>
-        </VBox>
+            <VBox styleClass="contentPost">
+                <TextField promptText="Pesquisar Post" styleClass="search"/>
+                    <ScrollPane fitToWidth="true"
+                                fitToHeight="true"
+                                hbarPolicy="NEVER"
+                                vbarPolicy="AS_NEEDED">
+                            <VBox styleClass="postList">
+                                <HBox styleClass="postItem">
+                                    <Label text="Titulo" styleClass="title-3"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label text="11-18-26" styleClass="text-lighter"/>
+                                    <MenuButton text="⋮">
+                                        <items>
+                                            <MenuItem text="Editar"/>
+                                            <MenuItem text="Excluir"/>
+                                        </items>
+                                    </MenuButton>
+                                </HBox>
+                                <HBox styleClass="postItem">
+                                    <Label text="Titulo" styleClass="title-3"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label text="11-18-26" styleClass="text-lighter"/>
+                                    <MenuButton text="⋮">
+                                        <items>
+                                            <MenuItem text="Editar"/>
+                                            <MenuItem text="Excluir"/>
+                                        </items>
+                                    </MenuButton>
+                                </HBox>
+                                <HBox styleClass="postItem">
+                                    <Label text="Titulo" styleClass="title-3"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label text="11-18-26" styleClass="text-lighter"/>
+                                    <MenuButton text="⋮">
+                                        <items>
+                                            <MenuItem text="Editar"/>
+                                            <MenuItem text="Excluir"/>
+                                        </items>
+                                    </MenuButton>
+                                </HBox>
+                                <HBox styleClass="postItem">
+                                    <Label text="Titulo" styleClass="title-3"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label text="11-18-26" styleClass="text-lighter"/>
+                                    <MenuButton text="⋮">
+                                        <items>
+                                            <MenuItem text="Editar"/>
+                                            <MenuItem text="Excluir"/>
+                                        </items>
+                                    </MenuButton>
+                                </HBox>
+                                <HBox styleClass="postItem">
+                                    <Label text="Titulo" styleClass="title-3"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label text="11-18-26" styleClass="text-lighter"/>
+                                    <MenuButton text="⋮">
+                                        <items>
+                                            <MenuItem text="Editar"/>
+                                            <MenuItem text="Excluir"/>
+                                        </items>
+                                    </MenuButton>
+                                </HBox>
+                                <HBox styleClass="postItem">
+                                    <Label text="Titulo" styleClass="title-3"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label text="11-18-26" styleClass="text-lighter"/>
+                                    <MenuButton text="⋮">
+                                        <items>
+                                            <MenuItem text="Editar"/>
+                                            <MenuItem text="Excluir"/>
+                                        </items>
+                                    </MenuButton>
+                                </HBox>
+                                <HBox styleClass="postItem">
+                                    <Label text="Titulo Ultimo" styleClass="title-3"/>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label text="11-18-26" styleClass="text-lighter"/>
+                                    <MenuButton text="⋮">
+                                        <items>
+                                            <MenuItem text="Editar"/>
+                                            <MenuItem text="Excluir"/>
+                                        </items>
+                                    </MenuButton>
+                                </HBox>
+                        </VBox>
+                    </ScrollPane>
+            </VBox>
     </VBox>
 
     <VBox styleClass="informacoesPerfil">
