@@ -118,11 +118,12 @@ Classes do AtlantaFX e quando usar:
 
 .form > .container > .body {
     -fx-padding: 0;
-    -fx-alignment: CENTER;
+    -fx-alignment: center;
     -fx-spacing: 3em;
 }
 
 .containerFeed {
+    -fx-alignment: center;
     -fx-spacing: 3em;
     -fx-min-width: 100%;
     -fx-min-height: 100%;
@@ -140,18 +141,13 @@ Classes do AtlantaFX e quando usar:
     -fx-spacing: 2em;
 }
 
-.search {
-    -fx-background-color:-color-bg-overlay;
-    -fx-padding: 1em .5em;
-}
-
 .vboxContasRecomendadas {
-    -fx-alignment: CENTER;
+    -fx-alignment: center;
     -fx-spacing: 2em;
 }
 
 .contaList {
-    -fx-alignment: CENTER;
+    -fx-alignment: center;
     -fx-spacing: 1.5em;
     -fx-max-height: 5em;
 }
@@ -169,6 +165,12 @@ Classes do AtlantaFX e quando usar:
     -fx-padding: 5em;
     -fx-background-color: -color-bg-subtle;
     -fx-border-color: -color-border-default;
+}
+
+.contentSearch {
+    -fx-alignment: center;
+    -fx-spacing: .5em;
+    -fx-padding: 2em;
 }
 
 /* ============================================================
@@ -341,6 +343,10 @@ Classes do AtlantaFX e quando usar:
     -fx-opacity: 0.5;
 }
 
+.search {
+    -fx-background-color:-color-bg-overlay;
+    -fx-padding: .75em .5em;
+}
 
 /* ============================================================
    6. SELECTION CONTROLS

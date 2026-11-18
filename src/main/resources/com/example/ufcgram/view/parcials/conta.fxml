@@ -31,8 +31,11 @@
         <Separator/>
 
             <VBox styleClass="contentPost">
-                <TextField promptText="Pesquisar Post" styleClass="search"/>
-                    <ScrollPane fitToWidth="true"
+                <HBox styleClass="contentSearch">
+                    <TextField promptText="Pesquisar Post" styleClass="search"/>
+                    <Button text="buscar" styleClass="accent"/>
+                </HBox>
+                <ScrollPane fitToWidth="true"
                                 fitToHeight="true"
                                 hbarPolicy="NEVER"
                                 vbarPolicy="AS_NEEDED">

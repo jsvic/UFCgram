@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +16,8 @@ public class ControllerNavBar {
 
     @FXML private ControllerMainFeed mainFeedController;
     @FXML private ControllerConta contaController;
+
+    @FXML private Button navButton;
 
     private Conta contaSessao;
 
@@ -32,29 +35,14 @@ public class ControllerNavBar {
 
     @FXML
     public void abrirContaSessao() {
-/*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "/com/example/ufcgram/view/parcials/conta.fxml"
-        )
-        ); // Abre o arquivo FXMl
-
-        Parent root = loader.load();
-
-        System.out.printf("\nConta Sessao (HeaderFeed): %d", contaSessao.getMatr());
-        ControllerConta controller = loader.getController(); // Pega o Controller do FXML
-        controller.setContaSessao(contaSessao); // Passa o objeto Conta para o Controller
-        controller.setContaPerfil(contaSessao);
-
-        Stage stage = (Stage) ((Node) event.getSource())
-                .getScene()
-                .getWindow();
-
-        stage.getScene().setRoot(root); // Adicionar o FXMl à janela
-    }
- */
-
-        mainFeedController.fechar();
-        contaController.abrir();
+        if(contaController.getStatus()) {
+            navButton.setText("Ver Conta");
+        } else {
+            navButton.setText("Feed");
+            contaController.setContas(contaSessao, contaSessao);
+        }
+        mainFeedController.alterarStatus();
+        contaController.alterarStatus();
         contaController.setContas(contaSessao, contaSessao);
     }
 }
