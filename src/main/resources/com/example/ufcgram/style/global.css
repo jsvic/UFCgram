@@ -122,12 +122,25 @@ Classes do AtlantaFX e quando usar:
     -fx-spacing: 3em;
 }
 
+.containerFeed {
+    -fx-spacing: 3em;
+    -fx-min-width: 100%;
+    -fx-min-height: 100%;
+}
+
 .navBar {
     -fx-background-color: -color-bg-subtle;
     -fx-border-color: -color-border-default;
+    -fx-padding: 2em;
+}
+
+.vboxNavConta {
+    -fx-alignment: CENTER;
 }
 
 .mainFeed {
+    -fx-spacing: 5em;
+    -fx-padding: 5em;
     -fx-background-color: -color-bg-subtle;
     -fx-border-color: -color-border-default;
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<HBox
+        xmlns="http://javafx.com/javafx/26"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.example.ufcgram.controller.ControllerConta"
+        stylesheets="@../../style/conta.css"
+        managed="false"
+        visible="false"
+        fx:id="conta"
+        styleClass="conta"
+>
+    <VBox styleClass="mainConta">
+        <VBox styleClass="informacoesPrincipais">
+            <Label fx:id="nomeConta" styleClass="title-1"/>
+            <Label fx:id="cursoConta" styleClass="title-2"/>
+            <TextArea fx:id="descricaoConta" styleClass="descricaoConta" disable="true"/>
+            <HBox styleClass="btnGroup" fx:id="btnGroup">
+                <Button text="Seguir" styleClass="accent"/>
+            </HBox>
+        </VBox>
+
+        <Separator/>
+
+        <VBox>
+            <Label text="Aqui ficarão os posts do perfil"/>
+        </VBox>
+    </VBox>
+
+    <VBox styleClass="informacoesPerfil">
+            <VBox>
+                <Label text="Email:"/>
+                <Label fx:id="emailConta"/>
+            </VBox>
+
+            <VBox>
+                <Label text="Idade:"/>
+                <Label fx:id="idadeConta"/>
+            </VBox>
+
+            <VBox>
+                <Label text="Gênero:"/>
+                <Label fx:id="generoConta"/>
+            </VBox>
+
+            <VBox>
+                <Label text="Matrícula:"/>
+                <Label fx:id="matrConta"/>
+            </VBox>
+
+            <VBox>
+                <Label text="Campus:"/>
+                <Label fx:id="campusConta"/>
+            </VBox>
+
+            <VBox>
+                <Label text="Semestre que entrou:"/>
+                <Label fx:id="semetreConta"/>
+            </VBox>
+    </VBox>
+</HBox>

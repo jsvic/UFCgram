@@ -1,0 +1,26 @@
+.conta {
+    -fx-padding: 2em 0em 2em 30em;
+    -fx-min-width: 100%;
+}
+
+.mainConta {
+    -fx-padding: 2em 15em 2em 0em;
+    -fx-spacing: .5em;
+}
+
+.informacoesPrincipais {
+    -fx-spacing: 2em;
+    -fx-padding: 2em;
+}
+
+.descricaoConta {
+    -fx-background-color: -color-bg-subtle;
+    -fx-max-height: 5em;
+    -fx-padding: 1em;
+}
+
+.informacoesPerfil {
+    -fx-background-color: -color-bg-overlay;
+    -fx-spacing: 2em;
+    -fx-padding: 2em;
+}
