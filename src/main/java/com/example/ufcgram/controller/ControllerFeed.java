@@ -1,29 +1,22 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
-import javafx.event.ActionEvent;
+import com.example.ufcgram.model.Usuario;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class ControllerFeed {
-    private Conta contaSessao;
+    private Usuario usuarioSessao;
     @FXML private ControllerHeaderFeed headerFeedController;
     @FXML private ControllerNavBar navBarController;
     @FXML private ControllerMainFeed mainFeedController;
     @FXML private ControllerConta contaController;
     @FXML private ControllerMensagem mensagemController;
 
-    public void setContaSessao(Conta contaSessao) {
-        this.contaSessao = contaSessao;
-        System.out.printf("\nConta Sessao (Feed): %d", contaSessao.getMatr());
-        headerFeedController.setContaSessao(contaSessao);
+    public void setContaSessao(Usuario usuarioSessao) {
+        this.usuarioSessao = usuarioSessao;
+        System.out.printf("\nConta Sessao (Feed): %d", usuarioSessao.getMatricula());
+        headerFeedController.setContaSessao(usuarioSessao);
 
-        navBarController.setContaSessao(contaSessao);
+        navBarController.setContaSessao(usuarioSessao);
         navBarController.setMainFeedController(mainFeedController);
         navBarController.setContaController(contaController);
 

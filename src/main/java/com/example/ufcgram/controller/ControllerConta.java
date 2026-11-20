@@ -1,11 +1,10 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
+import com.example.ufcgram.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class ControllerConta {
 
@@ -24,13 +23,13 @@ public class ControllerConta {
 
     private boolean status = false;
 
-    private Conta contaSessao;
-    private Conta contaPerfil;
+    private Usuario usuarioSessao;
+    private Usuario usuarioPerfil;
 
-    public void setContas(Conta contaSessao, Conta contaPerfil) {
-        System.out.printf("\nConta Sessao (Conta): %d\n", contaSessao.getMatr());
-        this.contaSessao = contaSessao;
-        this.contaPerfil = contaPerfil;
+    public void setContas(Usuario usuarioSessao, Usuario usuarioPerfil) {
+        System.out.printf("\nConta Sessao (Conta): %d\n", usuarioSessao.getMatricula());
+        this.usuarioSessao = usuarioSessao;
+        this.usuarioPerfil = usuarioPerfil;
 
         mostarInfos();
     }
@@ -43,17 +42,17 @@ public class ControllerConta {
     }
 
     private void mostarInfos() {
-        nomeConta.setText(contaPerfil.getNome());
-        cursoConta.setText(contaPerfil.getCurso());
-        descricaoConta.setText(contaPerfil.getBio());
-        emailConta.setText(contaPerfil.getEmail());
-        idadeConta.setText(String.valueOf(contaPerfil.getIdade()));
-        generoConta.setText(String.valueOf(contaPerfil.getGenero()));
-        matrConta.setText(String.valueOf(contaPerfil.getMatr()));
-        campusConta.setText(contaPerfil.getCampus());
-        semetreConta.setText(contaPerfil.getSemestreInicial());
+        nomeConta.setText(usuarioPerfil.getNome());
+        cursoConta.setText(usuarioPerfil.getCurso());
+        descricaoConta.setText(usuarioPerfil.getBio());
+        emailConta.setText(usuarioPerfil.getEmail());
+        idadeConta.setText(String.valueOf(usuarioPerfil.getIdade()));
+        generoConta.setText(String.valueOf(usuarioPerfil.getGenero()));
+        matrConta.setText(String.valueOf(usuarioPerfil.getMatricula()));
+        campusConta.setText(usuarioPerfil.getCampus());
+        semetreConta.setText(usuarioPerfil.getSemestreInicial());
 
-        if(contaSessao.getMatr() == contaPerfil.getMatr()) {
+        if(usuarioSessao.getMatricula() == usuarioPerfil.getMatricula()) {
             btnGroup.setVisible(false);
             btnGroup.setManaged(false);
         } else {

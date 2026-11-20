@@ -1,32 +1,25 @@
 package com.example.ufcgram.service;
 
-import com.example.ufcgram.model.Conta;
+import com.example.ufcgram.model.Usuario;
 import com.example.ufcgram.repository.ContaDAO;
 import com.example.ufcgram.security.SecuritySenha;
 
-import java.util.Objects;
-
 public class Login {
 
-    ContaDAO contaDAO = new ContaDAO(); // Chama a classe de interacao com o BD
-    SecuritySenha security = new SecuritySenha(); // Chama a classe para o hash da senha
+    ContaDAO contaDAO = new ContaDAO(); //Chama a classe de interacao com o BD
+    SecuritySenha security = new SecuritySenha(); //Chama a classe para o hash da senha
 
-    public Conta login(int matr, String senha) {
-        Conta conta;
+    public Usuario login(int matr, String senha) {
 
-        //if(security.checar(senha, conta.getSenha())) {
+        //Busca o usuário pela matrícula no banco de dados.
+        Usuario usuario = contaDAO.getContabyMatr(matr);
 
-        try {
-            conta = contaDAO.getContabyMatr(matr); // Pega os dados da conta no BD
-            if(Objects.equals(senha, conta.getSenha())){ // Verifica se a senha digita é a correta
-                return conta;  // Caso esteja tudo correto, retorna a Conta para iniciar a sessao
-            } else {
-                throw new RuntimeException("Senha incorreta"); // Caso a senha esteja errada
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e); // Caso de algum erro no BD
+        //Verifica se a senha digitada corresponde ao hash armazenado.
+        if (!security.checar(senha, usuario.getSenha())) {
+            throw new RuntimeException("Senha incorreta");
         }
 
+        // Retorna o usuário caso a autenticação seja bem-sucedida.
+        return usuario;
     }
-
 }

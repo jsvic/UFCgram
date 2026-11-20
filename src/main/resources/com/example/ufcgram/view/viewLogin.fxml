@@ -81,7 +81,7 @@
                     <VBox alignment="CENTER">
                         <Separator/>
                         <HBox alignment="CENTER">
-                            <Label styleClass="text-bolder" text="Não possui uma conta? "/>
+                            <Label styleClass="text-bolder" text="Não possui uma usuario? "/>
                             <Hyperlink styleClass="text-bolder" onAction="#abrirCadastro" text="Clique aqui para criar uma."/>
                         </HBox>
                     </VBox>

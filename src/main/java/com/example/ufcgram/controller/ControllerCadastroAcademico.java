@@ -1,6 +1,6 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
+import com.example.ufcgram.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +15,10 @@ import java.io.IOException;
 
 public class ControllerCadastroAcademico {
 
-    private Conta conta;
+    private Usuario usuario;
 
-    public void setConta(Conta conta){
-        this.conta = conta;
+    public void setConta(Usuario usuario){
+        this.usuario = usuario;
     }
 
     @FXML private Spinner<Integer> inMatr;  // Atributo que referencia o campo Matricul
@@ -199,7 +199,7 @@ public class ControllerCadastroAcademico {
                 .getWindow();
 
         ControllerCadastroFinais controller = loader.getController(); // Armazena o controller do FXMl
-        controller.setConta(conta); // Passa o objeto Conta para o Controller
+        controller.setConta(usuario); // Passa o objeto Conta para o Controller
 
         stage.getScene().setRoot(root); // Adiona o arquino na janela
     }
@@ -233,7 +233,7 @@ public class ControllerCadastroAcademico {
 
     @FXML
     public void continuarCadastro(ActionEvent event) throws IOException {
-        if (conta == null) {
+        if (usuario == null) {
             throw new IllegalStateException("Conta não foi repassada para ControllerCadastroAcademico");
         }
 
@@ -245,11 +245,11 @@ public class ControllerCadastroAcademico {
         semestre = inSemestre.getValue(); // Pega o valor do campo Semestre
         campus = inCampus.getValue(); // Pega o valor do Campus
 
-        if (conta != null){
-            conta.setMatr(matr);
-            conta.setCurso(curso);
-            conta.setSemestreInicial(semestre);
-            conta.setCampus(campus);
+        if (usuario != null){
+            usuario.setMatricula(matr);
+            usuario.setCurso(curso);
+            usuario.setSemestreInicial(semestre);
+            usuario.setCampus(campus);
         }
 
         try {

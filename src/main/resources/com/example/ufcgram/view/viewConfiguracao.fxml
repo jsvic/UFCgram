@@ -31,7 +31,7 @@
                 </header>
                 <subHeader>
                     <VBox>
-                        <Label styleClass="text-lighter" text="Configure a sua conta"/>
+                        <Label styleClass="text-lighter" text="Configure a sua usuario"/>
                     </VBox>
                 </subHeader>
 

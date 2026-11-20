@@ -1,7 +1,6 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
-import com.example.ufcgram.service.Cadastro;
+import com.example.ufcgram.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +11,13 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class ControllerCadastroFinais {
 
-    private Conta conta;
+    private Usuario usuario;
 
-    public void setConta(Conta conta) {
-        this.conta = conta;
+    public void setConta(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @FXML
@@ -29,7 +27,8 @@ public class ControllerCadastroFinais {
     @FXML
     private PasswordField inConfirmaSenha;  // Atributo que referencia o campo Confirmar Senha
 
-    @FXML private ControllerMensagem mensagemController; // Cria um objeto para o Controller do Message
+    @FXML
+    private ControllerMensagem mensagemController; // Cria um objeto para o Controller do Message
 
     @FXML
     public void abrirLogin(ActionEvent event) throws IOException {
@@ -86,40 +85,41 @@ public class ControllerCadastroFinais {
         senha = inSenha.getText();  // Pega o valor do campo Senha
         confirmarSenha = inConfirmaSenha.getText();  // Pega o valor do campo Confirmar Senha
 
-        if (!Objects.equals(senha, confirmarSenha)) {
-            System.out.println("Erro ao confirmar senha: as senhas não coincidem.");
-            return;
-        }
-
-        if (this.conta == null) {
-            System.out.println("Erro: objeto conta está nulo.");
-            return;
-        }
-
         try {
-            Cadastro cadastroService = new Cadastro();
+            // Verifica se o objeto Usuario foi recebido.
+            if (this.usuario == null) {
+                throw new RuntimeException(
+                        "Não foi possível concluir o cadastro. Volte e preencha os dados novamente."
+                );
+            }
+            //Adiciona a descrição ao usuário.
+            this.usuario.setBio(bio);
 
-            cadastroService.cadastrarDados(
-                    this.conta.getMatr(),
-                    this.conta.getNome(),
-                    senha,
-                    this.conta.getEmail(),
-                    this.conta.getIdade(),
-                    this.conta.getCurso(),
-                    this.conta.getCampus(),
-                    bio,
-                    this.conta.getSemestreInicial(),
-                    this.conta.getGenero()
-            );
-
+            //Encaminha os dados para o Model e, posteriormente, para o Service.
+            this.usuario.criarUsuario(this.usuario, senha, confirmarSenha);
             System.out.println("Processo de cadastro finalizado com sucesso!");
-
             abrirLogin(event);
 
         } catch (Exception e) {
-            String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem necessária para o usuario
-            mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensage com o texto do erro
+            mensagemController.exibir(
+                    "Erro no Cadastro",
+                    extrairMensagem(e),
+                    "danger"
+            );
             System.out.println("Ocorreu um erro ao realizar o cadastro.");
         }
+    }
+    //Metodo de extração de mensagem
+    private String extrairMensagem(Exception e) {
+
+        String textoCompleto = e.getMessage();
+        if (textoCompleto == null) {
+            return "Erro desconhecido";
+        }
+        String[] partes = textoCompleto.split(": ");
+        if (partes.length < 2) {
+            return textoCompleto;
+        }
+        return partes[1];
     }
 }
