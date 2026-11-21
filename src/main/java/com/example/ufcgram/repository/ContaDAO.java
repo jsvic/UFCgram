@@ -2,10 +2,12 @@ package com.example.ufcgram.repository;
 
 import com.example.ufcgram.model.Usuario;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ContaDAO {
     // Classe para ligar os valores de Conta que estao no BD
@@ -153,5 +155,71 @@ public class ContaDAO {
                 default:      throw new RuntimeException("Erro ao seguir: falha ao salvar no banco de dados", e);
             }
         }
+    }
+
+    public ArrayList<Usuario> recomendar (int matricula, String curso, String campus, String semestreinicial, int atributoComum, int limiteContas) {
+        String sql =
+                //Filtro de contas: todas, menos o proprio usuario e as que ele ja segue
+                "WITH R1 AS ( " +
+                        " SELECT * " +
+                        " FROM Conta " +
+                        " WHERE matr <> ? " +
+                        " AND matr NOT IN (SELECT matr_seguido FROM seguidores WHERE matr_seguidor = ?) " +
+                        "), " +
+                        //Soma 1 ponto para cada atributo em comum
+                        "R2 AS ( " +
+                        " SELECT *, " +
+                        " (CASE WHEN curso = ? THEN 1 ELSE 0 END) + " +
+                        " (CASE WHEN campus = ? THEN 1 ELSE 0 END) + " +
+                        " (CASE WHEN semestreInicial = ? THEN 1 ELSE 0 END) AS R3 " +
+                        "    FROM R1 " +
+                        ") " +
+                        //Resultado das contas
+                        "SELECT matr, nome, email, idade, curso, campus, bio, semestreInicial, genero " +
+                        "FROM R2 " +
+                        "WHERE R3 >= ? " +
+                        "ORDER BY R3 DESC, nome ASC " +
+                        "LIMIT ?";
+
+        try (Connection conn = ConnectionBD.getConnnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, matricula);
+            stmt.setInt(2, matricula);
+            stmt.setString(3, curso);
+            stmt.setString(4, campus);
+            stmt.setString(5, semestreinicial);
+            stmt.setInt(6, atributoComum);
+            stmt.setInt(7, limiteContas);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return listaContas(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro de recomendação: Não foi possível consultar o banco de dados.", e);
+        }
+    }
+
+    private ArrayList<Usuario> listaContas(ResultSet rs) throws SQLException {
+        ArrayList<Usuario> contas = new ArrayList<>();
+        while (rs.next()) {
+            contas.add(esquematizarUsuario(rs));
+        }
+        return contas;
+    }
+
+    private Usuario esquematizarUsuario(ResultSet rs) throws SQLException {
+        Usuario usuario = new Usuario();
+        usuario.setMatricula(rs.getInt("matr"));
+        usuario.setNome(rs.getString("nome"));
+        usuario.setEmail(rs.getString("email"));
+        usuario.setIdade(rs.getInt("idade"));
+        usuario.setCurso(rs.getString("curso"));
+        usuario.setCampus(rs.getString("campus"));
+        usuario.setBio(rs.getString("bio"));
+        usuario.setSemestreInicial(rs.getString("semestreInicial"));
+        usuario.setGenero(rs.getString("genero"));
+        return usuario;
     }
 }

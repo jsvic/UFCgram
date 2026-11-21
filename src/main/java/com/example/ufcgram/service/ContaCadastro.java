@@ -110,4 +110,9 @@ public class ContaCadastro {
         }
         return true;
     }
+    public void validarMatricula(int matricula) {
+        if (matricula < 100000 || matricula > 999999){
+            throw new RuntimeException("Erro de validação: A matricula deve ter 6 dígitos.");
+        }
+    }
 }
