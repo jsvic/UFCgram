@@ -1,4 +1,5 @@
 package com.example.ufcgram.model;
+import com.example.ufcgram.service.Consulta;
 import com.example.ufcgram.service.Login;
 import com.example.ufcgram.service.Seguimento;
 
@@ -17,14 +18,14 @@ public class Usuario extends Aluno {
     private ArrayList<Usuario> seguidores = new ArrayList<>();
     private static int qtdUsuarios;
 
-    // Construtor sem parâmetro:
+    //Construtor sem parâmetro:
 
     public Usuario() {
         super();
         qtdUsuarios++;
     }
 
-    // Construtor com parâmetro:
+    //Construtor com parâmetro:
     public Usuario(int matr, String nome, String senha, String email,
                    int idade, String curso, String campus, String bio,
                    String semestreInicial, String genero) {
@@ -48,6 +49,13 @@ public class Usuario extends Aluno {
         Seguimento service = new Seguimento();
         service.seguirUsuario(matriculaSeguidor, matriculaSeguido);
     }
+
+    public ArrayList<Usuario> recomendarContas(){
+        Consulta service = new Consulta();
+
+        return service.recomendarContas(this);
+    }
+
 
     @Override
     protected void copiarDados(Usuario outro) {
