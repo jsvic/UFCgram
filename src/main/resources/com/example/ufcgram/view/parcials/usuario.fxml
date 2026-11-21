@@ -11,7 +11,7 @@
 <HBox
         xmlns="http://javafx.com/javafx/26"
         xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="com.example.ufcgram.controller.ControllerConta"
+        fx:controller="com.example.ufcgram.controller.ControllerUsuario"
         stylesheets="@../../style/usuario.css"
         managed="false"
         visible="false"

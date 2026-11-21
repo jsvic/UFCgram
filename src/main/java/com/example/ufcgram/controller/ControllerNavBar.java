@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 public class ControllerNavBar {
 
     @FXML private ControllerMainFeed mainFeedController;
-    @FXML private ControllerConta contaController;
+    @FXML private ControllerUsuario usuarioController;
 
     @FXML private Button navButton;
 
@@ -22,20 +22,20 @@ public class ControllerNavBar {
         mainFeedController = controller;
     }
 
-    @FXML public void setContaController(ControllerConta controlller) {
-        contaController = controlller;
+    @FXML public void setContaController(ControllerUsuario controlller) {
+        usuarioController = controlller;
     }
 
     @FXML
     public void abrirContaSessao() {
-        if(contaController.getStatus()) {
+        if(usuarioController.getStatus()) {
             navButton.setText("Ver Conta");
         } else {
             navButton.setText("Feed");
-            contaController.setContas(usuarioSessao, usuarioSessao);
+            usuarioController.setContas(usuarioSessao, usuarioSessao);
         }
         mainFeedController.alterarStatus();
-        contaController.alterarStatus();
-        contaController.setContas(usuarioSessao, usuarioSessao);
+        usuarioController.alterarStatus();
+        usuarioController.setContas(usuarioSessao, usuarioSessao);
     }
 }

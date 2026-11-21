@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 
-public class ControllerConta {
+public class ControllerUsuario {
 
     @FXML private Label nomeConta;
     @FXML private Label cursoConta;
@@ -18,7 +18,7 @@ public class ControllerConta {
     @FXML private Label campusConta;
     @FXML private Label semetreConta;
 
-    @FXML private HBox conta;
+    @FXML private HBox usuario;
     @FXML private HBox btnGroup;
 
     private boolean status = false;
@@ -37,8 +37,8 @@ public class ControllerConta {
     @FXML public void alterarStatus() {
         status = !status;
 
-        conta.setManaged(status);
-        conta.setVisible(status);
+        usuario.setManaged(status);
+        usuario.setVisible(status);
     }
 
     private void mostarInfos() {
