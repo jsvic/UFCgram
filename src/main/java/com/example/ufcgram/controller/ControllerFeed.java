@@ -8,7 +8,7 @@ public class ControllerFeed {
     @FXML private ControllerHeaderFeed headerFeedController;
     @FXML private ControllerNavBar navBarController;
     @FXML private ControllerMainFeed mainFeedController;
-    @FXML private ControllerConta contaController;
+    @FXML private ControllerUsuario usuarioController;
     @FXML private ControllerMensagem mensagemController;
 
     public void setContaSessao(Usuario usuarioSessao) {
@@ -18,7 +18,7 @@ public class ControllerFeed {
 
         navBarController.setContaSessao(usuarioSessao);
         navBarController.setMainFeedController(mainFeedController);
-        navBarController.setContaController(contaController);
+        navBarController.setContaController(usuarioController);
 
         mainFeedController.alterarStatus();
     }
