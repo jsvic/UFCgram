@@ -1,6 +1,6 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
+import com.example.ufcgram.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +12,11 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 
 public class ControllerHeaderFeed {
-    private Conta contaSessao;
+    private Usuario usuarioSessao;
 
-    public void setContaSessao(Conta contaSessao) {
-        System.out.printf("\nConta Sessao (HeaderFeed): %d", contaSessao.getMatr());
-        this.contaSessao = contaSessao;
+    public void setContaSessao(Usuario usuarioSessao) {
+        System.out.printf("\nConta Sessao (HeaderFeed): %d", usuarioSessao.getMatricula());
+        this.usuarioSessao = usuarioSessao;
     }
 
     @FXML
@@ -28,9 +28,9 @@ public class ControllerHeaderFeed {
 
         Parent root = loader.load();
 
-        System.out.printf("\nConta Sessao (HeaderFeed): %d", contaSessao.getMatr());
+        System.out.printf("\nConta Sessao (HeaderFeed): %d", usuarioSessao.getMatricula());
         ControllerConfiguracao controller = loader.getController(); // Pega o Controller do FXML
-        controller.setContaSessao(contaSessao); // Passa o objeto Conta para o Controller
+        controller.setContaSessao(usuarioSessao); // Passa o objeto Conta para o Controller
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
@@ -49,7 +49,7 @@ public class ControllerHeaderFeed {
         Parent root = loader.load();
 
         ControllerFeed controller = loader.getController(); // Pega o Controller do FXML
-        controller.setContaSessao(contaSessao); // Passa o objeto Conta para o Controller
+        controller.setContaSessao(usuarioSessao); // Passa o objeto Conta para o Controller
 
         Stage stage = (Stage) ((Node) mouseEvent.getSource())
                 .getScene()

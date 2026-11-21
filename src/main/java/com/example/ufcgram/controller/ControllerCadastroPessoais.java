@@ -1,6 +1,6 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
+import com.example.ufcgram.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +39,7 @@ public class ControllerCadastroPessoais {
     }
 
     @FXML
-    public void abrirCadastroAcademico(ActionEvent event, Conta conta) throws IOException {
+    public void abrirCadastroAcademico(ActionEvent event, Usuario usuario) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "/com/example/ufcgram/view/viewCadastroAcademico.fxml"
         )
@@ -48,7 +48,7 @@ public class ControllerCadastroPessoais {
         Parent root = loader.load();
 
         ControllerCadastroAcademico controller = loader.getController(); // Pega o Controller do FXML
-        controller.setConta(conta); // Passa o objeto Conta para o Controller
+        controller.setConta(usuario); // Passa o objeto Conta para o Controller
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
@@ -97,20 +97,19 @@ public class ControllerCadastroPessoais {
         genero = inGenero.getValue();  // Pega o valor do campo Genero
         idade = inIdade.getValue();  // Pega o valor do campo Idade
 
-        Conta conta = new Conta();
-        conta.setNome(nome);
-        conta.setEmail(email);
-        conta.setGenero(genero);
-        conta.setIdade(idade);
+        Usuario usuario = new Usuario();
+        usuario.setNome(nome);
+        usuario.setEmail(email);
+        usuario.setGenero(genero);
+        usuario.setIdade(idade);
 
         try {
             System.out.printf("\nInformações:\nnome: %s\nemail: %s\ngenero: %s\nidade: %d\n", nome, email, genero, idade);
-            abrirCadastroAcademico(event, conta);
+            abrirCadastroAcademico(event, usuario);
         } catch (Exception e) {
             String[] msgError= e.getMessage().split(": "); // Seleciona apenas a mensagem necessária para o usuario
             mensagemController.exibir("Erro no Login", msgError[1], "danger"); // Exibe o componente de Mensage com o texto do erro
         }
-
     }
 }
 

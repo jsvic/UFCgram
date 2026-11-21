@@ -36,10 +36,10 @@
                     </header>
                     <body>
                         <VBox styleClass="cardBody">
-                            <Label text="Você tem certeza que vai deletar sua conta?"/>
+                            <Label text="Você tem certeza que vai deletar sua usuario?"/>
                             <CheckBox
                                 fx:id="inConfirmar"
-                                text="Eu concordo que ao deletar minha conta não será possível recuperar os dados dela"
+                                text="Eu concordo que ao deletar minha usuario não será possível recuperar os dados dela"
                                 styleClass="text-normal"
                                 />
                         </VBox>

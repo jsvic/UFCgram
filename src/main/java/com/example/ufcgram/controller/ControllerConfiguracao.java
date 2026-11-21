@@ -1,6 +1,7 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
+import com.example.ufcgram.model.Usuario;
+import com.example.ufcgram.security.SecuritySenha;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class ControllerConfiguracao {
     // Controller para a pagina da Configuração
 
-    private Conta contaSessao; // Conta que esta em longada
+    private Usuario usuarioSessao; // Conta que esta em longada
 
     @FXML private TextField inNome; // Referencia o campo Nome
     @FXML private TextField inEmail; // Referencia o campo Email
@@ -207,19 +208,21 @@ public class ControllerConfiguracao {
                 "Campus de Russas",
                 "Campus de Sobral"
         );
+
+        inMatr.setDisable(true); // A matricula identifica a conta e nao pode ser editada
     }
 
     @FXML public void abrirModal() {
-        modalController.setContaSessao(contaSessao);
+        modalController.setContaSessao(usuarioSessao);
         modalController.abrirModal();
     }
 
-    @FXML public void setContaSessao(Conta contaSessao) {
+    @FXML public void setContaSessao(Usuario usuarioSessao) {
         // Define qual conta esta sessao
 
-        this.contaSessao = contaSessao;
-        headerFeedController.setContaSessao(contaSessao); // Adiciona a conta em sessao no componente do Header
-        System.out.printf("\nConta Sessao (Configuracao): %d", contaSessao.getMatr());
+        this.usuarioSessao = usuarioSessao;
+        headerFeedController.setContaSessao(usuarioSessao); // Adiciona a conta em sessao no componente do Header
+        System.out.printf("\nConta Sessao (Configuracao): %d", usuarioSessao.getMatricula());
         valoresPadrao();
     }
 
@@ -234,9 +237,9 @@ public class ControllerConfiguracao {
 
         Parent root = loader.load();
 
-        System.out.printf("\nConta Sessao (Configuracao): %d", contaSessao.getMatr());
+        System.out.printf("\nConta Sessao (Configuracao): %d", usuarioSessao.getMatricula());
         ControllerFeed controller = loader.getController(); // Pega o Controller do FXML
-        controller.setContaSessao(contaSessao); // Passa o objeto Conta para o Controller
+        controller.setContaSessao(usuarioSessao); // Passa o objeto Conta para o Controller
 
         Stage stage = (Stage) ((Node) event.getSource())
                 .getScene()
@@ -256,7 +259,7 @@ public class ControllerConfiguracao {
 
         Parent root = loader.load();
 
-        System.out.printf("\nConta Sessao (Configuracao): %d", contaSessao.getMatr());
+        System.out.printf("\nConta Sessao (Configuracao): %d", usuarioSessao.getMatricula());
         ControllerLogin controller = loader.getController(); // Pega o Controller do FXML
         controller.abrirMensagemSair(); // Passa o objeto Conta para o Controller
 
@@ -275,7 +278,7 @@ public class ControllerConfiguracao {
             disableInput = true;
             btnEdicao.setText("Habilitar Edição");
             valoresPadrao();
-            System.out.printf("\nNome: %s\n", contaSessao.getNome());
+            System.out.printf("\nNome: %s\n", usuarioSessao.getNome());
         } else {
             // Caso os campos estejam desabilitados, habilita os campos e altera o texto do botao
             disableInput = false;
@@ -289,7 +292,7 @@ public class ControllerConfiguracao {
         inEmail.setDisable(disableInput);
         inIdade.setDisable(disableInput);
         inGenero.setDisable(disableInput);
-        inMatr.setDisable(disableInput);
+        //inMatr nao é habilitado: a matricula nao pode ser editada
         inCampus.setDisable(disableInput);
         inSemestre.setDisable(disableInput);
         inCurso.setDisable(disableInput);
@@ -299,40 +302,68 @@ public class ControllerConfiguracao {
     }
 
     @FXML public void valoresPadrao() {
-        // Adiciona os valores da conta em sessao nos campos
+        //Adiciona os valores da conta em sessao nos campos
 
-        inNome.setText(contaSessao.getNome());
-        inEmail.setText(contaSessao.getEmail());
-        inIdade.getValueFactory().setValue(contaSessao.getIdade());
-        inGenero.setValue(contaSessao.getGenero());
-        inMatr.getValueFactory().setValue(contaSessao.getMatr());
-        inCampus.setValue(contaSessao.getCampus());
-        inSemestre.setValue(contaSessao.getSemestreInicial());
-        inCurso.setValue(contaSessao.getCurso());
-        inDescricao.setText(contaSessao.getBio());
+        inNome.setText(usuarioSessao.getNome());
+        inEmail.setText(usuarioSessao.getEmail());
+        inIdade.getValueFactory().setValue(usuarioSessao.getIdade());
+        inGenero.setValue(usuarioSessao.getGenero());
+        inMatr.getValueFactory().setValue(usuarioSessao.getMatricula());
+        inCampus.setValue(usuarioSessao.getCampus());
+        inSemestre.setValue(usuarioSessao.getSemestreInicial());
+        inCurso.setValue(usuarioSessao.getCurso());
+        inDescricao.setText(usuarioSessao.getBio());
     }
 
-    @FXML public void editar() {
-        // Metodo para enviar os dados dos campos para executar o update
+    @FXML
+    public void editar() {
 
-        String nome, email, genero, campus, semestre, curso, senha, senhaConfirma, descricao;
-        int idade, matr;
+        String senha = inSenha.getText();
+        String senhaConfirma = inSenhaConfirma.getText();
 
-        nome = inNome.getText();
-        email = inEmail.getText();
-        idade = inIdade.getValue();
-        genero = inGenero.getValue();
-        matr = inMatr.getValue();
-        campus = inCampus.getValue();
-        semestre = inSemestre.getValue();
-        curso = inCurso.getValue();
-        senha = inSenha.getText();
-        senhaConfirma = inSenhaConfirma.getText();
-        descricao = inDescricao.getText();
+        //Monta o objeto Usuario com os dados dos campos.
+        //A senha atual é mantida inicialmente.
+        Usuario usuarioEditado = new Usuario(
+                usuarioSessao.getMatricula(),
+                inNome.getText(),
+                usuarioSessao.getSenha(),
+                inEmail.getText(),
+                inIdade.getValue(),
+                inCurso.getValue(),
+                inCampus.getValue(),
+                inDescricao.getText(),
+                inSemestre.getValue(),
+                inGenero.getValue()
+        );
+        try {
+            //Encaminha os dados e as senhas para o Model e o Service.
+            usuarioSessao.editarUsuario(usuarioEditado, senha, senhaConfirma);
+            mensagemController.exibir(
+                    "Edição da Conta",
+                    "Sua conta foi editada com sucesso.",
+                    "accent"
+            );
+            inSenha.clear();
+            inSenhaConfirma.clear();
+        } catch (Exception e) {
+            mensagemController.exibir(
+                    "Erro na Edição",
+                    extrairMensagem(e),
+                    "danger"
+            );
+        }
+    }
+    //Metodo de extração de mensagem (obs.: eu copiei e colei em CadastroFinais)
+    private String extrairMensagem(Exception e) {
 
-        mensagemController.exibir("Edição da Conta", "Sua conta foi editada com sucesso.", "accent"); // Cria uma mensagem no caso de acerto
-
-        System.out.printf("\nNome: %s\nEmail: %s\nIdade: %d\nGenero: %s\nMatricula: %d\nCampus: %s\nSemestre: %s\nCurso: %s\nSenha: %s\nSenha Confirma: %s\nDescricao: %s\n",
-                nome, email, idade, genero, matr, campus, semestre, curso, senha, senhaConfirma, descricao);
+        String textoCompleto = e.getMessage();
+        if (textoCompleto == null) {
+            return "Erro desconhecido";
+        }
+        String[] partes = textoCompleto.split(": ");
+        if (partes.length < 2) {
+            return textoCompleto;
+        }
+        return partes[1];
     }
 }

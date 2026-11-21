@@ -26,7 +26,7 @@
                         fx:id="mainFeed"
                         source="parcials/mainFeed.fxml"/>
 
-               <fx:include source="parcials/conta.fxml" fx:id="conta"/>
+               <fx:include source="parcials/usuario.fxml" fx:id="usuario"/>
            </HBox>
         </center>
     </BorderPane>

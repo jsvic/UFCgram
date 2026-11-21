@@ -1,16 +1,9 @@
 package com.example.ufcgram.controller;
 
 
-import com.example.ufcgram.model.Conta;
-import javafx.event.ActionEvent;
+import com.example.ufcgram.model.Usuario;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class ControllerNavBar {
 
@@ -19,10 +12,10 @@ public class ControllerNavBar {
 
     @FXML private Button navButton;
 
-    private Conta contaSessao;
+    private Usuario usuarioSessao;
 
-    public void setContaSessao(Conta contaSessao) {
-        this.contaSessao = contaSessao;
+    public void setContaSessao(Usuario usuarioSessao) {
+        this.usuarioSessao = usuarioSessao;
     }
 
     @FXML public void setMainFeedController(ControllerMainFeed controller) {
@@ -39,10 +32,10 @@ public class ControllerNavBar {
             navButton.setText("Ver Conta");
         } else {
             navButton.setText("Feed");
-            contaController.setContas(contaSessao, contaSessao);
+            contaController.setContas(usuarioSessao, usuarioSessao);
         }
         mainFeedController.alterarStatus();
         contaController.alterarStatus();
-        contaController.setContas(contaSessao, contaSessao);
+        contaController.setContas(usuarioSessao, usuarioSessao);
     }
 }

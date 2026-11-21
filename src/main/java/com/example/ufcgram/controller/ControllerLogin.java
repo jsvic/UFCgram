@@ -1,33 +1,33 @@
 package com.example.ufcgram.controller;
 
-import com.example.ufcgram.model.Conta;
-import com.example.ufcgram.service.Login;
+import com.example.ufcgram.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class ControllerLogin {
     // Classe para a pagina de login
 
-    @FXML private Spinner<Integer> inMatr; // Referencia o campo matricula
-    @FXML private PasswordField inSenha; // Referencia o campo senha
+    @FXML
+    private Spinner<Integer> inMatr; // Referencia o campo matricula
+    @FXML
+    private PasswordField inSenha; // Referencia o campo senha
 
-    @FXML private Label matrErrorLabel; // Mensagem de erro do campo matricula
-    @FXML private Label senhaErrorLabel; // Mensagem de erro do campo senha
+    @FXML
+    private Label matrErrorLabel; // Mensagem de erro do campo matricula
+    @FXML
+    private Label senhaErrorLabel; // Mensagem de erro do campo senha
 
-    @FXML private ControllerMensagem mensagemController; // Cria um objeto para o Controller do Message
+    @FXML
+    private ControllerMensagem mensagemController; // Cria um objeto para o Controller do Message
 
-    private final Conta conta = new Conta(); // Cria um objeto do model Conta
+    private final Usuario usuario = new Usuario(); // Cria um objeto do model Conta
 
     @FXML
     public void initialize() {
@@ -85,7 +85,7 @@ public class ControllerLogin {
     }
 
     @FXML
-    public void abrirFeed(ActionEvent event, Conta conta) throws IOException {
+    public void abrirFeed(ActionEvent event, Usuario usuario) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "/com/example/ufcgram/view/viewFeed.fxml"
         )
@@ -94,7 +94,7 @@ public class ControllerLogin {
         Parent root = loader.load();
 
         ControllerFeed controller = loader.getController(); // Pega o Controller do FXML
-        controller.setContaSessao(conta); // Passa o objeto Conta para o Controller
+        controller.setContaSessao(usuario); // Passa o objeto Conta para o Controller
         controller.abrirMensagemLogin(); // Abre uma mensagem para informar que o login foi feito
 
         Stage stage = (Stage) ((Node) event.getSource())
@@ -110,24 +110,33 @@ public class ControllerLogin {
 
         String senha;
         int matr;
-        Conta contaSessao;
+        Usuario usuarioSessao;
 
         matr = inMatr.getValue(); // Valor do campo matricula
         senha = inSenha.getText(); // Valor do campo senha
 
-        conta.setMatr(matr); // Inserindo a matrícula no objeto Conta
-        conta.setSenha(senha); // Inserindo a senha no objeto Conta
+        usuario.setMatricula(matr); // Inserindo a matrícula no objeto Conta
+        usuario.setSenha(senha); // Inserindo a senha no objeto Conta
 
-        try{
-            contaSessao = conta.fazerLogin(); // Chamando o metodo de criar conta
-            abrirFeed(event, contaSessao); // Caso a matricula e a senha estejam corretas, é redirecionado para a tela do Feed
-        } catch(Exception e) {
-            System.out.print("\nEntrei no catch\nMensagem: ");
+        try {
+            usuarioSessao = usuario.fazerLogin(); // Chamando o metodo de criar conta
+            abrirFeed(event, usuarioSessao); // Caso a matricula e a senha estejam corretas, é redirecionado para a tela do Feed
+        } catch (Exception e) {
+
+            System.out.println("\nErro durante o login:");
             e.printStackTrace();
-            if(!(e.getCause() instanceof IllegalArgumentException)) {
-                mensagemController.exibir("Erro no Login", e.getMessage().split(": ")[1], "danger"); // Exibe o componente de Mensage com o texto do erro
-            }
-        }
 
+            String mensagemErro = e.getMessage();
+
+            if (mensagemErro == null || mensagemErro.isBlank()) {
+                mensagemErro = "Ocorreu um erro inesperado durante o login.";
+            }
+
+            mensagemController.exibir(
+                    "Erro no Login",
+                    mensagemErro,
+                    "danger"
+            );
+        }
     }
 }
