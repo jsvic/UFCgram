@@ -16,7 +16,7 @@ public class ControllerMainFeed {
     }
 
     @FXML public void fechar() {
-        status = !status;
+        status = false;
 
         mainFeed.setManaged(status);
         mainFeed.setVisible(status);

@@ -3,6 +3,8 @@ package com.example.ufcgram.controller;
 import com.example.ufcgram.model.Usuario;
 import javafx.fxml.FXML;
 
+import java.io.IOException;
+
 public class ControllerFeed {
     private Usuario usuarioSessao;
     @FXML private ControllerHeaderFeed headerFeedController;
@@ -12,7 +14,7 @@ public class ControllerFeed {
     @FXML private ControllerMensagem mensagemController;
     @FXML private ControllerCriarPublicacao createPostController;
 
-    public void setContaSessao(Usuario usuarioSessao) {
+    public void setContaSessao(Usuario usuarioSessao) throws IOException {
         this.usuarioSessao = usuarioSessao;
         System.out.printf("\nConta Sessao (Feed): %d", usuarioSessao.getMatricula());
         headerFeedController.setContaSessao(usuarioSessao);

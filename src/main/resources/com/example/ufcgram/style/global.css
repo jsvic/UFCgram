@@ -146,18 +146,22 @@ Classes do AtlantaFX e quando usar:
     -fx-spacing: 2em;
 }
 
-.contaList {
+.usuarioList {
     -fx-alignment: center;
     -fx-spacing: 1.5em;
     -fx-max-height: 5em;
 }
 
-.contaItem {
+.usuarioItem {
     -fx-background-color: -color-bg-overlay;
-    -fx-padding: 1em;
+    -fx-padding: .5em;
     -fx-alignment: center;
     -fx-border-radius: 6px;
     -fx-background-radius: 6px;
+}
+
+.usuarioItem:hover {
+    -fx-cursor: hand;
 }
 
 .mainFeed {
