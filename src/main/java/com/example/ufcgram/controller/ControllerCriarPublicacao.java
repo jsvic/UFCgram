@@ -40,6 +40,13 @@ public class ControllerCriarPublicacao {
         createPublicacao.setVisible(status);
     }
 
+    public void abrir() {
+        status = true;
+
+        createPublicacao.setManaged(status);
+        createPublicacao.setVisible(status);
+    }
+
     @FXML public void mostrarForm() {
         Toggle toggle = inTipo.getSelectedToggle();
 
