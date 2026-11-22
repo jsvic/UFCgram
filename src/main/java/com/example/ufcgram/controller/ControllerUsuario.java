@@ -41,6 +41,13 @@ public class ControllerUsuario {
         usuario.setVisible(status);
     }
 
+    @FXML public void abrir() {
+        status = true;
+
+        usuario.setManaged(status);
+        usuario.setVisible(status);
+    }
+
     private void mostarInfos() {
         nomeConta.setText(usuarioPerfil.getNome());
         cursoConta.setText(usuarioPerfil.getCurso());

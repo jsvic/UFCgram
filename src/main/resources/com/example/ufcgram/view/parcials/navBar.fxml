@@ -26,57 +26,8 @@
                     fitToHeight="true"
                     hbarPolicy="NEVER"
                     vbarPolicy="AS_NEEDED">
-            <VBox styleClass="contaList">
-                <HBox styleClass="contaItem">
-                    <Label text="Nome" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome Ultimo" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome Ultimo" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
-                <HBox styleClass="contaItem">
-                    <Label text="Nome Ultimo" styleClass="title-4"/>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <Button text="Seguir" styleClass="accent"/>
-                </HBox>
+            <VBox fx:id= "usuarioList" styleClass="usuarioList">
+
             </VBox>
         </ScrollPane>
     </VBox>
