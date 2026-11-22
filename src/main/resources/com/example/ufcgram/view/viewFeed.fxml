@@ -27,6 +27,8 @@
                         source="parcials/mainFeed.fxml"/>
 
                <fx:include source="parcials/usuario.fxml" fx:id="usuario"/>
+               <fx:include source="parcials/createPublicacao.fxml" fx:id="createPost"/>
+
            </HBox>
         </center>
     </BorderPane>

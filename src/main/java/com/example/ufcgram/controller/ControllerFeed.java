@@ -10,6 +10,7 @@ public class ControllerFeed {
     @FXML private ControllerMainFeed mainFeedController;
     @FXML private ControllerUsuario usuarioController;
     @FXML private ControllerMensagem mensagemController;
+    @FXML private ControllerCriarPublicacao createPostController;
 
     public void setContaSessao(Usuario usuarioSessao) {
         this.usuarioSessao = usuarioSessao;
@@ -19,6 +20,7 @@ public class ControllerFeed {
         navBarController.setContaSessao(usuarioSessao);
         navBarController.setMainFeedController(mainFeedController);
         navBarController.setContaController(usuarioController);
+        navBarController.setCreatePostController(createPostController);
 
         mainFeedController.alterarStatus();
     }

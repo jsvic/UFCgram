@@ -9,8 +9,10 @@ public class ControllerNavBar {
 
     @FXML private ControllerMainFeed mainFeedController;
     @FXML private ControllerUsuario usuarioController;
+    @FXML private ControllerCriarPublicacao createPostController;
 
     @FXML private Button navButton;
+    @FXML private Button btnCriarPublicacao;
 
     private Usuario usuarioSessao;
 
@@ -26,6 +28,10 @@ public class ControllerNavBar {
         usuarioController = controlller;
     }
 
+    @FXML public void setCreatePostController(ControllerCriarPublicacao controlller) {
+        createPostController = controlller;
+    }
+
     @FXML
     public void abrirContaSessao() {
         if(usuarioController.getStatus()) {
@@ -37,5 +43,18 @@ public class ControllerNavBar {
         mainFeedController.alterarStatus();
         usuarioController.alterarStatus();
         usuarioController.setContas(usuarioSessao, usuarioSessao);
+    }
+
+    @FXML
+    public void abrirCriarPublicacao() {
+        if(createPostController.getStatus()) {
+            btnCriarPublicacao.setText("Criar Publicação");
+        } else {
+            btnCriarPublicacao.setText("Feed");
+        }
+        mainFeedController.fechar();
+        usuarioController.fechar();
+        createPostController.alterarStatus();
+        createPostController.setUsuarioSessao(usuarioSessao);
     }
 }
