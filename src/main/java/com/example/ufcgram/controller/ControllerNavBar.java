@@ -48,14 +48,61 @@ public class ControllerNavBar {
     @FXML
     public void abrirContaSessao() {
         if(usuarioController.getStatus()) {
+            // Se tiver Aberto
             navButton.setText("Ver Conta");
+            mainFeedController.abrir();
+            usuarioController.fechar();
         } else {
+            // Se tiver Fechado
             navButton.setText("Feed");
+            btnCriarPublicacao.setText("Criar Publicação");
+            mainFeedController.fechar();
+            createPostController.fechar();
+            usuarioController.abrir();
             usuarioController.setContas(usuarioSessao, usuarioSessao);
         }
-        mainFeedController.alterarStatus();
-        usuarioController.alterarStatus();
-        usuarioController.setContas(usuarioSessao, usuarioSessao);
+
+    }
+
+    @FXML
+    public void abrirConta(MouseEvent event) {
+        Usuario usuario = new Usuario();
+
+        Node elemento = (Node) event.getSource();
+
+        int id = Integer.parseInt(elemento.getId());
+
+        for(Usuario item:  usuarioSessao.recomendarContas()) {
+            if(item.getMatricula() == id) {
+                usuario = item;
+                break;
+            }
+        }
+
+        navButton.setText("Feed");
+        btnCriarPublicacao.setText("Criar Publicação");
+        mainFeedController.fechar();
+        createPostController.fechar();
+        usuarioController.abrir();
+        usuarioController.setContas(usuarioSessao, usuario);
+    }
+
+    @FXML
+    public void abrirCriarPublicacao() {
+        if(createPostController.getStatus()) {
+            // se tiver Aberto
+            btnCriarPublicacao.setText("Criar Publicação");
+            mainFeedController.abrir();
+            createPostController.fechar();
+            createPostController.setUsuarioSessao(usuarioSessao);
+        } else {
+            // se tiver Fechado
+            btnCriarPublicacao.setText("Feed");
+            navButton.setText("Ver Conta");
+            mainFeedController.fechar();
+            usuarioController.fechar();
+            createPostController.abrir();
+        }
     }
 
     @FXML public void listarUsuarios() throws IOException {
@@ -86,27 +133,6 @@ public class ControllerNavBar {
             btnSeguir.setOnMouseClicked(event -> seguir(event));
             usuarioList.getChildren().add(item);
         }
-    }
-
-    @FXML
-    public void abrirConta(MouseEvent event) {
-        Usuario usuario = new Usuario();
-
-        Node elemento = (Node) event.getSource();
-
-        int id = Integer.parseInt(elemento.getId());
-
-        for(Usuario item:  usuarioSessao.recomendarContas()) {
-            if(item.getMatricula() == id) {
-                usuario = item;
-                break;
-            }
-        }
-
-        navButton.setText("Feed");
-        mainFeedController.fechar();
-        usuarioController.abrir();
-        usuarioController.setContas(usuarioSessao, usuario);
     }
 
     @FXML

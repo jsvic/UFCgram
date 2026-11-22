@@ -24,7 +24,7 @@ public class ControllerFeed {
         navBarController.setContaController(usuarioController);
         navBarController.setCreatePostController(createPostController);
 
-        mainFeedController.alterarStatus();
+        mainFeedController.abrir();
     }
 
     public void abrirMensagemLogin() {
