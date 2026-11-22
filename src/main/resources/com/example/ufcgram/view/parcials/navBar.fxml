@@ -13,7 +13,7 @@
 >
     <VBox styleClass="vboxNavConta">
         <Button text="Ver Conta" onAction="#abrirContaSessao" fx:id="navButton" styleClass="accent"/>
-        <Button text="Criar Post" styleClass="accent"/>
+        <Button text="Criar Publicação" fx:id="btnCriarPublicacao" onAction="#abrirCriarPublicacao" styleClass="accent"/>
     </VBox>
     <VBox styleClass="vboxContasRecomendadas">
         <Label text="Contas Recomendadas" styleClass="title-3"/>

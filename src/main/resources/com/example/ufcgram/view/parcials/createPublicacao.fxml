@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import atlantafx.base.controls.Card?>
+<VBox xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        managed="false"
+        visible="false"
+      stylesheets="@../../style/createPublicacao.css"
+      styleClass="createPublicacao"
+        fx:controller="com.example.ufcgram.controller.ControllerCriarPublicacao"
+        fx:id="createPublicacao"
+           >
+        <Card>
+            <header>
+                <VBox>
+                    <Label text="Criando Publicação" styleClass="title-1"/>
+                    <Separator/>
+                </VBox>
+            </header>
+            <subHeader>
+                <Label text="Insira os dados da publicação" styleClass="text-lighter"/>
+            </subHeader>
+            <body>
+                <VBox styleClass="contentForm">
+                    <HBox
+                            styleClass="contentTipoPubli">
+                        <fx:define>
+                            <ToggleGroup fx:id="inTipo"/>
+                        </fx:define>
+                        <RadioButton text="Publicação Texto" fx:id="rdTexto" toggleGroup="$inTipo"
+                                     onAction="#mostrarForm"/>
+                        <RadioButton text="Publicação Evento" fx:id="rdEvento" toggleGroup="$inTipo"
+                                     onAction="#mostrarForm"/>
+                    </HBox>
+
+                    <VBox managed="false" visible="false" fx:id="formTexto">
+                        <Label text="Texto" styleClass="text-normal"/>
+                        <TextArea promptText="Texto" fx:id="inTexto" styleClass="inputForm"/>
+                    </VBox>
+
+                    <VBox managed="false" visible="false" fx:id="formEvento" styleClass="formEvento">
+                        <VBox>
+                            <Label text="Título" styleClass="text-normal"/>
+                            <TextField promptText="Título" fx:id="inTitulo" styleClass="inputForm"/>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Local" styleClass="text-normal"/>
+                            <TextField promptText="Local" fx:id="inLocal" styleClass="inputForm"/>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Data" styleClass="text-normal"/>
+                            <DatePicker styleClass="inputForm" fx:id="inData"/>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Descrição" styleClass="text-normal"/>
+                            <TextArea promptText="Descrição" fx:id="inDescricao" styleClass="inputForm"/>
+                        </VBox>
+                    </VBox>
+                </VBox>
+            </body>
+
+            <footer>
+                <HBox
+                        fx:id="btnGroup"
+                        styleClass="buttonGroup"
+                        alignment="BOTTOM_RIGHT"
+
+                >
+                    <Button text="Criar Publicação" onAction="#criar" styleClass="accent"/>  <Button text="Limpar" onAction="#limpar" styleClass="danger"/>
+                </HBox>
+            </footer>
+        </Card>
+</VBox>

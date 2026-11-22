@@ -1,0 +1,29 @@
+.contentForm {
+    -fx-alignment: center;
+    -fx-spacing: 3em;
+    -fx-padding: 2em;
+}
+
+.createPublicacao {
+    -fx-predf-height: infinity;
+    -fx-alignment: center;
+    -fx-padding: 2em;
+}
+
+.contentTipoPubli {
+    -fx-alignment: center;
+    -fx-spacing: 3em;
+}
+
+.contentTipoPubli > .radio-button {
+    -fx-background-color: -color-bg-overlay !important;
+}
+
+.formEvento {
+    -fx-alignment: center;
+    -fx-spacing: 1.5em;
+}
+
+.formEvento > .VBox {
+    -fx-alignment: center;
+}

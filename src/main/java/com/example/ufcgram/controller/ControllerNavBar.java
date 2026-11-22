@@ -19,9 +19,11 @@ public class ControllerNavBar {
 
     @FXML private ControllerMainFeed mainFeedController;
     @FXML private ControllerUsuario usuarioController;
+    @FXML private ControllerCriarPublicacao createPostController;
 
     @FXML private Button navButton;
     @FXML private VBox usuarioList;
+    @FXML private Button btnCriarPublicacao;
 
     private Usuario usuarioSessao;
 
@@ -37,6 +39,10 @@ public class ControllerNavBar {
 
     @FXML public void setContaController(ControllerUsuario controlller) {
         usuarioController = controlller;
+    }
+
+    @FXML public void setCreatePostController(ControllerCriarPublicacao controlller) {
+        createPostController = controlller;
     }
 
     @FXML
