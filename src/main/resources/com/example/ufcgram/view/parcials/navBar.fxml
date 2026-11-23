@@ -17,10 +17,13 @@
     </VBox>
     <VBox styleClass="vboxContasRecomendadas">
         <Label text="Contas Recomendadas" styleClass="title-3"/>
-        <HBox styleClass="contentSearch">
-            <TextField promptText="Pesquisar Conta" styleClass="search"/>
-            <Button text="buscar" styleClass="accent"/>
-        </HBox>
+        <VBox spacing="15">
+            <HBox styleClass="contentSearch">
+                <TextField promptText="Pesquisar Conta" fx:id="inNome" styleClass="search"/>
+                <Button text="buscar" onAction="#buscar" styleClass="accent"/>
+            </HBox>
+            <Button text="Recomendadas" onAction="#contasRecomendadas" styleClass="ordinary"/>
+        </VBox>
 
         <ScrollPane fitToWidth="true"
                     fitToHeight="true"

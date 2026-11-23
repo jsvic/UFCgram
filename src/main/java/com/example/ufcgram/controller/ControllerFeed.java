@@ -1,5 +1,6 @@
 package com.example.ufcgram.controller;
 
+import com.example.ufcgram.model.Feed;
 import com.example.ufcgram.model.Usuario;
 import javafx.fxml.FXML;
 

@@ -42,7 +42,41 @@ public class ContaDAO {
                 }
             }
         } catch(SQLException e) {
-            throw new RuntimeException("Erro ao conectar com o banco de dados: ", e); // Caso o metodo getConnnection()
+            throw new RuntimeException("Erro ao conectar com o banco de dados: ", e); // Caso o metodo getConnnection() de algum erro
+        }
+    }
+
+
+    public ArrayList<Usuario> getContabyNome(String nome) {
+        // Esse metodo busca a conta no banco de dados buscando pela nome
+
+        String sql = "SELECT * FROM Conta WHERE LOWER(nome) LIKE ?";  // Sql para a busca
+
+        try(Connection conn = ConnectionBD.getConnnection();  // Faz a conexao com o BD
+            PreparedStatement stmt = conn.prepareStatement(sql) // Prepara o sql
+        ) {
+            stmt.setString(1, "%" + nome.toLowerCase() + "%");  // Substitui o "?" do SQL pela busca do parametro
+            try(ResultSet rs = stmt.executeQuery()) {
+                ArrayList<Usuario> seguidores = new ArrayList<>();
+                while(rs.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setMatricula(rs.getInt("matr"));  // Armazena o valor da coluna matricula
+                    usuario.setNome(rs.getString("nome"));  // Armazena o valor da coluna Nome
+                    usuario.setSenha(rs.getString("senha"));  // Armazena o valor da coluna Senha
+                    usuario.setEmail(rs.getString("email"));  // Armazena o valor da coluna Email
+                    usuario.setIdade(rs.getInt("idade"));  // Armazena o valor da coluna Idade
+                    usuario.setCurso(rs.getString("curso")); // Armazena o valor da coluna Curso
+                    usuario.setCampus(rs.getString("campus"));  // Armazena o valor da coluna Campus
+                    usuario.setBio(rs.getString("bio")); ; // Armazena o valor da coluna Bio
+                    usuario.setSemestreInicial(rs.getString("semestreInicial"));  // Armazena o valor da coluna Semestre
+                    usuario.setGenero(rs.getString("genero"));  // Armazena o valor da coluna Genero
+                    seguidores.add(usuario);
+                }
+                return seguidores; // Retorna o ArrayList com os objetos dos usuarios que se adequarem da busca
+
+            }
+        } catch(SQLException e) {
+            throw new RuntimeException("Erro ao conectar com o banco de dados: ", e); // Caso o metodo getConnnection() de algum erro
         }
     }
 
@@ -132,7 +166,7 @@ public class ContaDAO {
         }
     }
 
-    //SEGUIR: insere em seguidores a relacao entre a conta que vai seguir e a conta a ser seguida
+    //SEGUIR: insere, em seguidores, a relacao entre a conta que vai seguir e a conta a ser seguida
     public void seguir(int matriculaSeguidor, int matriculaSeguido) {
 
         String sql = "INSERT INTO seguidores (matr_seguidor, matr_seguido) VALUES (?, ?)";
@@ -154,6 +188,91 @@ public class ContaDAO {
                 case "23514": throw new RuntimeException("Erro ao seguir: Você não pode seguir a si mesmo", e);
                 default:      throw new RuntimeException("Erro ao seguir: falha ao salvar no banco de dados", e);
             }
+        }
+    }
+
+    // DEIXAR SEGUIR: deleta, em seguidores, a relacao entre a conta que vai seguir e a conta a ser seguida
+    public void deixarSeguir(int matriculaSeguidor, int matriculaSeguido) {
+
+        String sql = "DELETE FROM seguidores WHERE matr_seguidor = ? AND matr_seguido = ?";
+
+        try (Connection conn = ConnectionBD.getConnnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, matriculaSeguidor); //Conta que vai seguir
+            stmt.setInt(2, matriculaSeguido);  //Conta a ser seguida
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            // Traduz erros do Banco de Dados
+            String estado = (e.getSQLState() == null) ? "" : e.getSQLState();
+            throw new RuntimeException("Erro ao seguir: falha ao salvar no banco de dados", e);
+
+        }
+    }
+
+    // Get Seguidor: recupera, em seguidores, os seguindos de um usuário
+    public ArrayList<Usuario> consultarSeguindo(int matriculaSeguindo) {
+
+        String sql = "SELECT * FROM conta WHERE matr in (SELECT matr_seguido FROM seguidores WHERE matr_seguidor = ?)";
+
+        try (Connection conn = ConnectionBD.getConnnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, matriculaSeguindo);  // Substitui o "?" do SQL pela a matricula do parametro
+            try(ResultSet rs = stmt.executeQuery()) {
+                ArrayList<Usuario> seguidores = new ArrayList<>();
+                while(rs.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setMatricula(rs.getInt("matr"));  // Armazena o valor da coluna matricula
+                    usuario.setNome(rs.getString("nome"));  // Armazena o valor da coluna Nome
+                    usuario.setSenha(rs.getString("senha"));  // Armazena o valor da coluna Senha
+                    usuario.setEmail(rs.getString("email"));  // Armazena o valor da coluna Email
+                    usuario.setIdade(rs.getInt("idade"));  // Armazena o valor da coluna Idade
+                    usuario.setCurso(rs.getString("curso")); // Armazena o valor da coluna Curso
+                    usuario.setCampus(rs.getString("campus"));  // Armazena o valor da coluna Campus
+                    usuario.setBio(rs.getString("bio")); ; // Armazena o valor da coluna Bio
+                    usuario.setSemestreInicial(rs.getString("semestreInicial"));  // Armazena o valor da coluna Semestre
+                    usuario.setGenero(rs.getString("genero"));  // Armazena o valor da coluna Genero
+                    seguidores.add(usuario);
+                }
+                return seguidores; // Retorna o ArrayList com os objetos dos seguidores de um usuario
+
+            }
+        } catch(SQLException e) {
+            throw new RuntimeException("Erro ao conectar com o banco de dados: ", e); // Caso o metodo getConnnection() de algum erro
+        }
+    }
+
+    // Get Seguidor: recupera, em seguidores, os seguidores de um usuário
+    public ArrayList<Usuario> consultarSeguidores(int matriculaSeguido) {
+
+        String sql = "SELECT * FROM conta WHERE matr in (SELECT matr_seguido FROM seguidores WHERE matr_seguido = ?)";
+
+        try (Connection conn = ConnectionBD.getConnnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, matriculaSeguido);  // Substitui o "?" do SQL pela a matricula do parametro
+            try(ResultSet rs = stmt.executeQuery()) {
+                ArrayList<Usuario> seguidores = new ArrayList<>();
+                while(rs.next()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setMatricula(rs.getInt("matr"));  // Armazena o valor da coluna matricula
+                    usuario.setNome(rs.getString("nome"));  // Armazena o valor da coluna Nome
+                    usuario.setSenha(rs.getString("senha"));  // Armazena o valor da coluna Senha
+                    usuario.setEmail(rs.getString("email"));  // Armazena o valor da coluna Email
+                    usuario.setIdade(rs.getInt("idade"));  // Armazena o valor da coluna Idade
+                    usuario.setCurso(rs.getString("curso")); // Armazena o valor da coluna Curso
+                    usuario.setCampus(rs.getString("campus"));  // Armazena o valor da coluna Campus
+                    usuario.setBio(rs.getString("bio")); ; // Armazena o valor da coluna Bio
+                    usuario.setSemestreInicial(rs.getString("semestreInicial"));  // Armazena o valor da coluna Semestre
+                    usuario.setGenero(rs.getString("genero"));  // Armazena o valor da coluna Genero
+                    seguidores.add(usuario);
+                }
+                return seguidores; // Retorna o ArrayList com os objetos dos seguidores de um usuario
+
+            }
+        } catch(SQLException e) {
+            throw new RuntimeException("Erro ao conectar com o banco de dados: ", e); // Caso o metodo getConnnection() de algum erro
         }
     }
 

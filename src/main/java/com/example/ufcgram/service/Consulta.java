@@ -24,5 +24,13 @@ public class Consulta {
                 usuario.getSemestreInicial(),atributoMinimo,limiteContas
                 );
     }
+
+    public Usuario buscarContaPorMatricula(int matricula) {
+        return dao.getContabyMatr(matricula);
+    }
+
+    public ArrayList<Usuario> buscarContaPorNome(String nome) {
+        return dao.getContabyNome(nome);
+    }
 }
 

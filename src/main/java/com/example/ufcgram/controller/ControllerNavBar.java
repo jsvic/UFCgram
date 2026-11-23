@@ -1,12 +1,14 @@
 package com.example.ufcgram.controller;
 
 
+import com.example.ufcgram.model.Feed;
 import com.example.ufcgram.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -26,11 +28,15 @@ public class ControllerNavBar {
     @FXML private Button btnCriarPublicacao;
 
     private Usuario usuarioSessao;
+    private Feed feed;
+
+    @FXML TextField inNome;
 
     @FXML public void setContaSessao(Usuario usuarioSessao) throws IOException {
 
         this.usuarioSessao = usuarioSessao;
-        listarUsuarios();
+        feed = new Feed(usuarioSessao);
+        listarUsuarios(feed.getUsuariosRecomendados());
     }
 
     @FXML public void setMainFeedController(ControllerMainFeed controller) {
@@ -66,18 +72,13 @@ public class ControllerNavBar {
 
     @FXML
     public void abrirConta(MouseEvent event) {
-        Usuario usuario = new Usuario();
+        Usuario usuario;
 
         Node elemento = (Node) event.getSource();
 
         int id = Integer.parseInt(elemento.getId());
 
-        for(Usuario item:  usuarioSessao.recomendarContas()) {
-            if(item.getMatricula() == id) {
-                usuario = item;
-                break;
-            }
-        }
+        usuario = feed.consultarUsuarioPorMatriucula(id);
 
         navButton.setText("Feed");
         btnCriarPublicacao.setText("Criar Publicação");
@@ -105,9 +106,10 @@ public class ControllerNavBar {
         }
     }
 
-    @FXML public void listarUsuarios() throws IOException {
-        String itemUsuario = "";
-        for(Usuario usuario: usuarioSessao.recomendarContas()) {
+    @FXML public void listarUsuarios(ArrayList<Usuario> usuariosList) throws IOException {
+        String itemUsuario;
+        usuarioList.getChildren().clear();
+        for(Usuario usuario: usuariosList) {
             itemUsuario = """
                         <?import javafx.scene.layout.HBox?>
                         <?import javafx.scene.layout.Region?>
@@ -117,7 +119,7 @@ public class ControllerNavBar {
                             <Label text="%s" styleClass="title-4"/>
                             <Region HBox.hgrow="ALWAYS" />
                             <Button text="Seguir" fx:id="btnSeguir" styleClass="accent"/>
-                            <Button text="Seguindo" fx:id="btnDeixarSeguir" styleClass="ordinary"  visible="false" managed="false"/>
+                            <Button text="Seguindo" fx:id="btnDeixarSeguir" styleClass="ordinary"/>
                         </HBox>
                     """.formatted(usuario.getMatricula(), usuario.getNome());
             FXMLLoader loader = new FXMLLoader();
@@ -129,8 +131,17 @@ public class ControllerNavBar {
             Button btnSeguir = (Button) loader.getNamespace().get("btnSeguir");
             Button btnDeixarSeguir = (Button) loader.getNamespace().get("btnDeixarSeguir");
 
+            if(usuarioSessao.consultarSeguindo(usuario)) {
+                btnSeguir.setManaged(false);
+                btnSeguir.setVisible(false);
+            } else {
+                btnDeixarSeguir.setManaged(false);
+                btnDeixarSeguir.setVisible(false);
+            }
+
             item.setOnMouseClicked(event -> abrirConta(event));
             btnSeguir.setOnMouseClicked(event -> seguir(event));
+            btnDeixarSeguir.setOnMouseClicked(event -> deixarSeguir(event));
             usuarioList.getChildren().add(item);
         }
     }
@@ -139,10 +150,43 @@ public class ControllerNavBar {
     private void seguir(MouseEvent event) {
         Node elemento = (Node) event.getSource();
 
+        Button btnSeguir = (Button) elemento.getParent().lookup("#btnSeguir");
+        Button btnDeixarSeguir = (Button) elemento.getParent().lookup("#btnDeixarSeguir");
+
+        btnSeguir.setVisible(false);
+        btnSeguir.setManaged(false);
+        btnDeixarSeguir.setVisible(true);
+        btnDeixarSeguir.setManaged(true);
+
         int id = Integer.parseInt(elemento.getParent().getId());
 
         // ArrayList<Usuario> usuarios = feed.buscarUsuarioPorMatr(id); // é uma boa criar um metodo no Feed buscarUsuario que  receba uma matricula e chame um service (ou um DAO) que retorne um ArrayLisy<Usuarios>, useo LIKE na consulta sql
-        usuarioSessao.seguirUsuario(usuarioSessao.getMatricula(), id);
+        usuarioSessao.seguir(id);
+    }
 
+    @FXML
+    private void deixarSeguir(MouseEvent event) {
+        Node elemento = (Node) event.getSource();
+
+        Button btnSeguir = (Button) elemento.getParent().lookup("#btnSeguir");
+        Button btnDeixarSeguir = (Button) elemento.getParent().lookup("#btnDeixarSeguir");
+
+        btnSeguir.setVisible(true);
+        btnSeguir.setManaged(true);
+        btnDeixarSeguir.setVisible(false);
+        btnDeixarSeguir.setManaged(false);
+
+        int id = Integer.parseInt(elemento.getParent().getId());
+
+        // ArrayList<Usuario> usuarios = feed.buscarUsuarioPorMatr(id); // é uma boa criar um metodo no Feed buscarUsuario que  receba uma matricula e chame um service (ou um DAO) que retorne um ArrayLisy<Usuarios>, useo LIKE na consulta sql
+        usuarioSessao.deixarSeguir(id);
+    }
+
+    @FXML private void buscar() throws IOException {
+        listarUsuarios(feed.consultarUsuarioPorNome(inNome.getText()));
+    }
+
+    @FXML private void contasRecomendadas() throws IOException {
+        listarUsuarios(feed.getUsuariosRecomendados());
     }
 }
