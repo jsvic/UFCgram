@@ -37,6 +37,8 @@ public class Usuario extends Aluno {
         this.campus = campus;
         this.bio = bio;
         this.semestreInicial = semestreInicial;
+        listarSeguindo();
+        listarSeguidores();
     }
 
     public Usuario fazerLogin() {
@@ -44,16 +46,29 @@ public class Usuario extends Aluno {
         return contaSessao.login(getMatricula(), senha);
     }
 
-    public void seguirUsuario(int matriculaSeguidor, int matriculaSeguido) {
+    public void seguir(int matriculaSeguido) {
         //Recebe a conta que vai seguir e a conta a ser seguida e passa para o Service
         Seguimento service = new Seguimento();
-        service.seguirUsuario(matriculaSeguidor, matriculaSeguido);
+        service.seguirUsuario(matricula, matriculaSeguido);
+        seguindos.add(new Consulta().buscarContaPorMatricula(matriculaSeguido));
     }
 
-    public ArrayList<Usuario> recomendarContas(){
-        Consulta service = new Consulta();
+    public void deixarSeguir(int matriculaSeguido) {
+        //Recebe a conta que vai deixar de seguir e a conta a ser deixar de ser seguida e passa para o Service
+        Seguimento service = new Seguimento();
+        service.deixarSeguirUsuario(matricula, matriculaSeguido);
+    }
 
-        return service.recomendarContas(this);
+    public void listarSeguindo() { seguindos = new Seguimento().seguindos(matricula); }
+    public void listarSeguidores() { seguidores = new Seguimento().seguidores(matricula); }
+    public void atualizarDados() { listarSeguidores(); listarSeguindo(); }
+    public boolean consultarSeguindo(Usuario usuario) {
+        listarSeguindo();
+        for(Usuario u : seguindos) {
+            if(u.getMatricula() == usuario.getMatricula()) { return true; }
+        }
+
+        return false;
     }
 
 

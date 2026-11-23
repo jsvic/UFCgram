@@ -5,11 +5,11 @@ import com.example.ufcgram.service.Cadastro;
 //Classe com dados pessoais do aluno.
 
 public class Aluno {
-    private int matricula;
-    private String nome;
-    private String email;
-    private int idade;
-    private String genero;
+    protected int matricula;
+    protected String nome;
+    protected String email;
+    protected int idade;
+    protected String genero;
 
     public Aluno() {
         // Construtor sem parâmetro

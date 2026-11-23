@@ -20,11 +20,19 @@
 >
     <VBox styleClass="mainConta">
         <VBox styleClass="informacoesPrincipais">
-            <Label fx:id="nomeConta" styleClass="title-1"/>
-            <Label fx:id="cursoConta" styleClass="title-2"/>
+            <HBox>
+                <Label fx:id="nomeConta" styleClass="title-1"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <HBox spacing="20">
+                    <Label fx:id="seguidores" styleClass="text-bold"/>
+                    <Label fx:id="seguindos" styleClass="text-bold"/>
+                </HBox>
+            </HBox>
+                <Label fx:id="cursoConta" styleClass="title-2"/>
             <TextArea fx:id="descricaoConta" styleClass="descricaoConta" disable="true"/>
             <HBox styleClass="btnGroup" fx:id="btnGroup">
-                <Button text="Seguir" styleClass="accent"/>
+                <Button text="Seguir" fx:id="btnSeguir" onAction="#seguir" styleClass="accent"/>
+                <Button text="Seguindo" fx:id="btnDeixarSeguir" onAction="#deixarSeguir" styleClass="ordinary"/>
             </HBox>
         </VBox>
 
