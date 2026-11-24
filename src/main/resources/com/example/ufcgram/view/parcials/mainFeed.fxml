@@ -6,12 +6,311 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox  xmlns="http://javafx.com/javafx/26"
-       xmlns:fx="http://javafx.com/fxml/1"
-       styleClass="mainFeed"
-       fx:controller="com.example.ufcgram.controller.ControllerMainFeed"
-       fx:id="mainFeed"
+<?import atlantafx.base.controls.Card?>
+<VBox xmlns="http://javafx.com/javafx/26"
+      xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="mainFeed"
+      stylesheets="@../../style/mainFeed.css"
+      fx:controller="com.example.ufcgram.controller.ControllerMainFeed"
+      fx:id="mainFeed"
 >
-        <Label text="Aqui será os posts" styleClass="title-1"/>
+       <VBox>
+               <ScrollPane fitToWidth="true"
+                           fitToHeight="true"
+                           hbarPolicy="NEVER"
+                           vbarPolicy="AS_NEEDED"
+                           styleClass="scrollPost"
+               >
+
+               <VBox styleClass="postList">
+
+                       <Card styleClass="postTexto">
+                               <header>
+                                       <VBox>
+                                               <HBox styleClass="postHeader">
+                                                       <Label text="Criado por: Pedrin" styleClass="title-3"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="23-11-26" styleClass="text-lighter"/>
+                                               </HBox>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+                               <body>
+                                       <VBox>
+                                       <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                              editable="false"
+                                              wrapText="true"
+                                              styleClass="postConteudo"/>
+                                               </VBox>
+
+                               </body>
+                               <footer>
+                                      <VBox>
+                                              <Separator/>
+                                              <HBox styleClass="buttonGroup">
+                                                      <Button text="Curtir" styleClass="accent"/>
+                                                      <Button text="Comentar" styleClass="ordinary" onAction="#abrirComentarios"/>
+                                              </HBox>
+                                      </VBox>
+                               </footer>
+                       </Card>
+
+                       <Card styleClass="postEvento">
+                               <header>
+                                       <VBox>
+                                               <Label text="Título" styleClass="title-1"/>
+                                               <HBox>
+                                                       <Label text="Criado por: Gal" styleClass="text-bold"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="23-11-26" styleClass="text-lighter"/>
+                                               </HBox>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+
+                               <body>
+                                       <VBox>
+                                               <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                                         editable="false"
+                                                         wrapText="true"
+                                                         styleClass="postConteudo"/>
+
+                                               <HBox styleClass="postEventoInfos">
+                                                       <Label text="Local: Sla"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="Data do Evento: 12/11/26"/>
+                                               </HBox>
+                                       </VBox>
+
+                               </body>
+                               <footer>
+                                       <VBox>
+                                               <Separator/>
+                                               <HBox styleClass="buttonGroup">
+                                                       <Button text="Curtir" styleClass="accent"/>
+                                                       <Button text="Comentar" styleClass="ordinary"/>
+                                               </HBox>
+                                       </VBox>
+                               </footer>
+                       </Card>
+
+
+                       <Card styleClass="postTexto">
+                               <header>
+                                       <VBox>
+                                               <HBox styleClass="postHeader">
+                                                       <Label text="Criado por: Pedrin" styleClass="title-3"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="23-11-26" styleClass="text-lighter"/>
+                                               </HBox>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+                               <body>
+                                       <VBox>
+                                               <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                                         editable="false"
+                                                         wrapText="true"
+                                                         styleClass="postConteudo"/>
+                                       </VBox>
+
+                               </body>
+                               <footer>
+                                       <VBox>
+                                               <Separator/>
+                                               <HBox styleClass="buttonGroup">
+                                                       <Button text="Curtir" styleClass="accent"/>
+                                                       <Button text="Comentar" styleClass="ordinary"/>
+                                               </HBox>
+                                       </VBox>
+                               </footer>
+                       </Card>
+
+                       <Card styleClass="postEvento">
+                               <header>
+                                       <VBox>
+                                               <Label text="Título" styleClass="title-1"/>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+                               <subHeader>
+                                       <HBox styleClass="postHeader">
+                                               <Label text="Criado por: Gal" styleClass="title-3"/>
+                                               <Region HBox.hgrow="ALWAYS" />
+                                               <Label text="23-11-26" styleClass="text-lighter"/>
+                                       </HBox>
+                               </subHeader>
+                               <body>
+                                       <VBox>
+                                               <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                                         editable="false"
+                                                         wrapText="true"
+                                                         styleClass="postConteudo"/>
+
+                                               <HBox styleClass="postEventoInfos">
+                                                       <Label text="Local: Sla"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="Data do Evento: 12/11/26"/>
+                                               </HBox>
+                                       </VBox>
+
+                               </body>
+                               <footer>
+                                       <VBox>
+                                               <Separator/>
+                                               <HBox styleClass="buttonGroup">
+                                                       <Button text="Curtir" styleClass="accent"/>
+                                                       <Button text="Comentar" styleClass="ordinary"/>
+                                               </HBox>
+                                       </VBox>
+                               </footer>
+                       </Card>
+
+
+                       <Card styleClass="postTexto">
+                               <header>
+                                       <VBox>
+                                               <HBox styleClass="postHeader">
+                                                       <Label text="Criado por: Pedrin" styleClass="title-3"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="23-11-26" styleClass="text-lighter"/>
+                                               </HBox>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+                               <body>
+                                       <VBox>
+                                               <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                                         editable="false"
+                                                         wrapText="true"
+                                                         styleClass="postConteudo"/>
+                                       </VBox>
+
+                               </body>
+                               <footer>
+                                       <VBox>
+                                               <Separator/>
+                                               <HBox styleClass="buttonGroup">
+                                                       <Button text="Curtir" styleClass="accent"/>
+                                                       <Button text="Comentar" styleClass="ordinary"/>
+                                               </HBox>
+                                       </VBox>
+                               </footer>
+                       </Card>
+
+                       <Card styleClass="postEvento">
+                               <header>
+                                       <VBox>
+                                               <Label text="Título" styleClass="title-1"/>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+                               <subHeader>
+                                       <HBox styleClass="postHeader">
+                                               <Label text="Criado por: Gal" styleClass="title-3"/>
+                                               <Region HBox.hgrow="ALWAYS" />
+                                               <Label text="23-11-26" styleClass="text-lighter"/>
+                                       </HBox>
+                               </subHeader>
+                               <body>
+                                       <VBox>
+                                               <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                                         editable="false"
+                                                         wrapText="true"
+                                                         styleClass="postConteudo"/>
+
+                                               <HBox styleClass="postEventoInfos">
+                                                       <Label text="Local: Sla"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="Data do Evento: 12/11/26"/>
+                                               </HBox>
+                                       </VBox>
+
+                               </body>
+                               <footer>
+                                       <VBox>
+                                               <Separator/>
+                                               <HBox styleClass="buttonGroup">
+                                                       <Button text="Curtir" styleClass="accent"/>
+                                                       <Button text="Comentar" styleClass="ordinary"/>
+                                               </HBox>
+                                       </VBox>
+                               </footer>
+                       </Card>
+
+
+                       <Card styleClass="postTexto">
+                               <header>
+                                       <VBox>
+                                               <HBox styleClass="postHeader">
+                                                       <Label text="Criado por: Pedrin" styleClass="title-3"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="23-11-26" styleClass="text-lighter"/>
+                                               </HBox>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+                               <body>
+                                       <VBox>
+                                               <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                                         editable="false"
+                                                         wrapText="true"
+                                                         styleClass="postConteudo"/>
+                                       </VBox>
+
+                               </body>
+                               <footer>
+                                       <VBox>
+                                               <Separator/>
+                                               <HBox styleClass="buttonGroup">
+                                                       <Button text="Curtir" styleClass="accent"/>
+                                                       <Button text="Comentar" styleClass="ordinary"/>
+                                               </HBox>
+                                       </VBox>
+                               </footer>
+                       </Card>
+
+                       <Card styleClass="postEvento">
+                               <header>
+                                       <VBox>
+                                               <Label text="Título" styleClass="title-1"/>
+                                               <Separator/>
+                                       </VBox>
+                               </header>
+                               <subHeader>
+                                       <HBox styleClass="postHeader">
+                                               <Label text="Criado por: Gal" styleClass="title-3"/>
+                                               <Region HBox.hgrow="ALWAYS" />
+                                               <Label text="23-11-26" styleClass="text-lighter"/>
+                                       </HBox>
+                               </subHeader>
+                               <body>
+                                       <VBox>
+                                               <TextArea text="Lorem ipsum dolor sitreeverra tempor quis eget augue. Curabis di"
+                                                         editable="false"
+                                                         wrapText="true"
+                                                         styleClass="postConteudo"/>
+
+                                               <HBox styleClass="postEventoInfos">
+                                                       <Label text="Local: Sla"/>
+                                                       <Region HBox.hgrow="ALWAYS" />
+                                                       <Label text="Data do Evento: 12/11/26"/>
+                                               </HBox>
+                                       </VBox>
+
+                               </body>
+                               <footer>
+                                       <VBox>
+                                               <Separator/>
+                                               <HBox styleClass="buttonGroup">
+                                                       <Button text="Curtir" styleClass="accent"/>
+                                                       <Button text="Comentar" styleClass="ordinary"/>
+                                               </HBox>
+                                       </VBox>
+                               </footer>
+                       </Card>
+               </VBox>
+               </ScrollPane>
+       </VBox>
 
 </VBox>

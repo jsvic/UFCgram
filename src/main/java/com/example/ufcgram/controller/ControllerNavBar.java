@@ -27,6 +27,7 @@ public class ControllerNavBar {
     @FXML private VBox usuarioList;
     @FXML private Button btnCriarPublicacao;
 
+
     private Usuario usuarioSessao;
     private Feed feed;
 
@@ -66,6 +67,7 @@ public class ControllerNavBar {
             createPostController.fechar();
             usuarioController.abrir();
             usuarioController.setContas(usuarioSessao, usuarioSessao);
+            //usuarioController.setControllerModals(modalExcluir, modalEditar, modalComentarios);
         }
 
     }

@@ -14,6 +14,9 @@ public class ControllerFeed {
     @FXML private ControllerUsuario usuarioController;
     @FXML private ControllerMensagem mensagemController;
     @FXML private ControllerCriarPublicacao createPostController;
+    @FXML private ControllerModalDeletarPost modalExcluirController;
+    @FXML private ControllerModalEditarPost modalEditarController;
+    @FXML private ControllerModalComentarios modalComentariosController;
 
     public void setContaSessao(Usuario usuarioSessao) throws IOException {
         this.usuarioSessao = usuarioSessao;
@@ -21,9 +24,11 @@ public class ControllerFeed {
         headerFeedController.setContaSessao(usuarioSessao);
 
         navBarController.setContaSessao(usuarioSessao);
+        usuarioController.setControllerModals(modalExcluirController, modalEditarController, modalComentariosController);
         navBarController.setMainFeedController(mainFeedController);
         navBarController.setContaController(usuarioController);
         navBarController.setCreatePostController(createPostController);
+        mainFeedController.setController(modalComentariosController);
 
         mainFeedController.abrir();
     }

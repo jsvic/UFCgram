@@ -31,6 +31,7 @@
 }
 
 .postList {
+    -fx-spacing: 2em;
     -fx-spacing: 1.5em;
     -fx-alignment: center;
 }

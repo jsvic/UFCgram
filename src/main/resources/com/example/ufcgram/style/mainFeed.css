@@ -1,0 +1,10 @@
+.scrollPost .scroll-pane {
+    -fx-vbar-policy: never;
+    -fx-hbar-policy: never;
+}
+
+.postList {
+    -fx-spacing: 2.5em;
+    -fx-padding: 2em;
+}
+

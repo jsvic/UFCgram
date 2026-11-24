@@ -167,14 +167,29 @@ Classes do AtlantaFX e quando usar:
 .mainFeed {
     -fx-spacing: 5em;
     -fx-padding: 5em;
-    -fx-background-color: -color-bg-subtle;
-    -fx-border-color: -color-border-default;
+
 }
 
 .contentSearch {
     -fx-alignment: center;
     -fx-spacing: .5em;
     -fx-padding: 2em;
+}
+
+.postHeader {
+    -fx-padding: 1.5em;
+    -fx-spacing: 1em;
+    -fx-alignment: center;
+}
+
+.postConteudo {
+    -fx-max-height: 50em;
+    -fx-background-color: -color-bg-subtle;
+}
+
+.postTextoConteudo .scroll-pane {
+    -fx-vbar-policy: never;
+    -fx-hbar-policy: never;
 }
 
 /* ============================================================

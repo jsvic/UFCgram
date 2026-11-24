@@ -13,5 +13,29 @@
     -fx-spacing: 2em;
 }
 
+.comentariosList {
+    -fx-spacing: 1.5em;
+    -fx-alignment: center;
+}
+
+.contentComentario {
+    -fx-max-height: 2em;
+    -fx-background-color: -color-bg-subtle;
+    -fx-spacing: .5em;
+    -fx-padding: 1em;
+    -fx-border-radius: 1.25em;
+    -fx-background-radius: 1.25em;
+}
+
+.textPost {
+    -fx-max-height: 1em;
+    -fx-predf-width: infinity;
+    -fx-background-color: -color-bg-subtle;
+}
+
+.comentar {
+    -fx-spacing: 1.5em;
+}
+
 
 

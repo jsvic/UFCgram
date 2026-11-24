@@ -1,4 +1,4 @@
-package com.example.ufcgram;
+package com.example .ufcgram;
 
 import javafx.application.Application;
 

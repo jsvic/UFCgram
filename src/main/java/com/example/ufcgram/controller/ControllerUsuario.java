@@ -32,12 +32,22 @@ public class ControllerUsuario {
     private Usuario usuarioSessao;
     private Usuario usuarioPerfil;
 
+    @FXML ControllerModalDeletarPost modalExcluir;
+    @FXML ControllerModalEditarPost modalEditar;
+    @FXML ControllerModalComentarios modalComentarios;
+
     public void setContas(Usuario usuarioSessao, Usuario usuarioPerfil) {
         System.out.printf("\nConta Sessao (Conta): %d\n", usuarioSessao.getMatricula());
         this.usuarioSessao = usuarioSessao;
         this.usuarioPerfil = usuarioPerfil;
 
         mostarInfos();
+    }
+
+    public void setControllerModals(ControllerModalDeletarPost controllerDeletar, ControllerModalEditarPost controllerEditar, ControllerModalComentarios controllerComentarios) {
+        modalExcluir = controllerDeletar;
+        modalEditar = controllerEditar;
+        modalComentarios = controllerComentarios;
     }
 
     @FXML public void alterarStatus() {
@@ -111,6 +121,17 @@ public class ControllerUsuario {
             }
         }
     }
+
+    @FXML public void abrirModalExcluir() {
+        modalExcluir.abrirModal();
+    }
+    @FXML public void abrirModalEditar() {
+        modalEditar.abrirModal();
+    }
+    @FXML public void abrirModalComentarios() {
+        modalComentarios.abrirModal();
+    }
+
 
     public boolean getStatus() {
         return status;
