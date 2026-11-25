@@ -2,7 +2,6 @@
 
 package com.example.ufcgram.service;
 import com.example.ufcgram.model.Usuario;
-
 import java.util.regex.Pattern;
 
 //Classe responsável por validar os dados do usuário antes de enviar ao banco de dados
