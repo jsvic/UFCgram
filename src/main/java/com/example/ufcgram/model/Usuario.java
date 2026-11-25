@@ -37,14 +37,14 @@ public class Usuario extends Aluno {
         this.campus = campus;
         this.bio = bio;
         this.semestreInicial = semestreInicial;
-        listarSeguindo();
-        listarSeguidores();
     }
 
     public Usuario fazerLogin() {
         Login contaSessao = new Login();
         return contaSessao.login(getMatricula(), senha);
     }
+
+    //Receber a conta que vai seguir e a conta a ser seguida e passa para o Service
 
     public void seguir(int matriculaSeguido) {
         //Recebe a conta que vai seguir e a conta a ser seguida e passa para o Service
@@ -71,10 +71,19 @@ public class Usuario extends Aluno {
         return false;
     }
 
+    //Recuperar as publicações criadas por este usuário, guarda em postsCriados e retorna a lista
+
+    public ArrayList<Publicacao> recuperarPublicacoes() {
+        Consulta service = new Consulta();
+        postsCriados = service.recuperarPublicacoes(getMatricula());
+        return postsCriados;
+    }
 
     @Override
+
+    //Copiar os dados pessoais e depois os dados academicos e a senha
+
     protected void copiarDados(Usuario outro) {
-        //Copia os dados pessoais (Aluno) e depois os dados academicos e a senha
         super.copiarDados(outro);
         this.senha = outro.getSenha();
         this.curso = outro.getCurso();

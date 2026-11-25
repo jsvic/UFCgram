@@ -109,7 +109,6 @@ public class ContaDAO {
 
             //Executa INSERT no banco de dados
             stmt.executeUpdate();
-
         } catch (Exception e) {
             //Se ocorrer, erro: a mensagem é encapsulada em um RuntimeException
             throw new RuntimeException("Erro ao criar conta", e);

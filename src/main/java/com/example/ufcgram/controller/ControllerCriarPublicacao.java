@@ -1,5 +1,7 @@
 package com.example.ufcgram.controller;
 
+import com.example.ufcgram.model.PublicacaoEvento;
+import com.example.ufcgram.model.PublicacaoTexto;
 import com.example.ufcgram.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -103,6 +105,18 @@ public class ControllerCriarPublicacao {
         descricao = inDescricao.getText();
         data = inData.getValue();
 
+        try {
+            PublicacaoEvento publicacao = new PublicacaoEvento(usuarioSessao.getMatricula(), titulo, descricao, local, data);
+            publicacao.criarPublicacao();
+            System.out.println("Evento criado.");
+            limpar();
+            fechar();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Erro ao criar evento." + e.getMessage());
+        }
+
+
         System.out.printf("\nTitulo: %s\nLocal: %s\nDescicao: %s\nData: %s\n", titulo, local, descricao, data);
     }
 
@@ -110,6 +124,18 @@ public class ControllerCriarPublicacao {
         String texto;
 
         texto = inTexto.getText();
+
+        try {
+            PublicacaoTexto publicacao = new PublicacaoTexto(usuarioSessao.getMatricula(), texto);
+            publicacao.criarPublicacao();
+            System.out.println("Publicação criada.");
+
+            limpar();
+            fechar();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Erro ao criar publicação" + e.getMessage());
+        }
 
         System.out.printf("\nTexto: %s\n", texto);
     }
