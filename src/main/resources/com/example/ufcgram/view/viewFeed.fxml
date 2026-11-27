@@ -43,4 +43,7 @@
 
         <fx:include fx:id="mensagem" source="parcials/message.fxml"/>
     </VBox>
+        <fx:include source="parcials/modalDeletarPost.fxml" fx:id="modalExcluir"/>
+        <fx:include source="parcials/modalEditarPost.fxml" fx:id="modalEditar"/>
+        <fx:include source="parcials/modalComentarios.fxml" fx:id="modalComentarios"/>
 </StackPane>

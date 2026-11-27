@@ -24,8 +24,8 @@ public class PublicacaoTexto extends Publicacao {
 
     //Construtor para montar uma publicação que veio do banco de dados:
 
-    public PublicacaoTexto(int idPublicacao, int matriculaCriador, LocalDate dataHoraCriacao, String texto) {
-        super(idPublicacao, matriculaCriador, dataHoraCriacao);
+    public PublicacaoTexto(int idPublicacao, String tipo, int matriculaCriador, LocalDate dataHoraCriacao, String texto) {
+        super(idPublicacao, tipo, matriculaCriador, dataHoraCriacao);
         this.texto = texto;
     }
 

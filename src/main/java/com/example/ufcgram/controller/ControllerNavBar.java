@@ -52,7 +52,7 @@ public class ControllerNavBar {
     }
 
     @FXML
-    public void abrirContaSessao() {
+    public void abrirContaSessao() throws IOException {
         if(usuarioController.getStatus()) {
             // Se tiver Aberto
             navButton.setText("Ver Conta");
@@ -71,7 +71,7 @@ public class ControllerNavBar {
     }
 
     @FXML
-    public void abrirConta(MouseEvent event) {
+    public void abrirConta(MouseEvent event) throws IOException {
         Usuario usuario;
 
         Node elemento = (Node) event.getSource();
@@ -139,7 +139,14 @@ public class ControllerNavBar {
                 btnDeixarSeguir.setVisible(false);
             }
 
-            item.setOnMouseClicked(event -> abrirConta(event));
+            item.setOnMouseClicked(event -> {
+                try {
+                    abrirConta(event);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
             btnSeguir.setOnMouseClicked(event -> seguir(event));
             btnDeixarSeguir.setOnMouseClicked(event -> deixarSeguir(event));
             usuarioList.getChildren().add(item);
@@ -160,7 +167,6 @@ public class ControllerNavBar {
 
         int id = Integer.parseInt(elemento.getParent().getId());
 
-        // ArrayList<Usuario> usuarios = feed.buscarUsuarioPorMatr(id); // é uma boa criar um metodo no Feed buscarUsuario que  receba uma matricula e chame um service (ou um DAO) que retorne um ArrayLisy<Usuarios>, useo LIKE na consulta sql
         usuarioSessao.seguir(id);
     }
 
