@@ -1,11 +1,11 @@
-.conta {
+.usuario {
     -fx-padding: 2em;
     -fx-min-width: 100%;
 }
 
 .mainConta {
     -fx-padding: 2em;
-    -fx-spacing: .5em;
+    -fx-spacing: 2em;
 }
 
 .informacoesPrincipais {

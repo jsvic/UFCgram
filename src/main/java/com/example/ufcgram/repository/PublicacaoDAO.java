@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 //Classe para ligar os valores de Publicacao que estao no BD
 //Os dois tipos de publicação ficam na mesma tabela, diferenciados pela coluna "tipo" (TEXTO ou EVENTO).
@@ -233,6 +234,7 @@ public class PublicacaoDAO {
         if (rs.getString("tipo").equals("EVENTO")) {
             return new PublicacaoEvento(
                     idPublicacao,
+                    rs.getString("tipo"),
                     matriculaCriador,
                     dataHoraCriacao,
                     rs.getString("titulo"),
@@ -241,6 +243,11 @@ public class PublicacaoDAO {
                     rs.getDate("dataEvento").toLocalDate()
             );
         }
-        return new PublicacaoTexto(idPublicacao, matriculaCriador, dataHoraCriacao, rs.getString("texto"));
+        return new PublicacaoTexto(
+                idPublicacao,
+                rs.getString("tipo"),
+                matriculaCriador,
+                dataHoraCriacao,
+                rs.getString("texto"));
     }
 }

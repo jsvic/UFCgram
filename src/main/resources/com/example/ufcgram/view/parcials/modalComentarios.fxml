@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import atlantafx.base.controls.ModalPane?>
+<?import atlantafx.base.layout.ModalBox?>
+<?import atlantafx.base.controls.Card?>
+<ModalPane
+        xmlns="http://javafx.com/javafx/26"
+        xmlns:fx="http://javafx.com/fxml/1"
+        stylesheets="@../../style/modal.css"
+        fx:controller="com.example.ufcgram.controller.ControllerModalComentarios"
+        fx:id="modalPane"
+        alignment="CENTER"
+>
+    <fx:define>
+
+        <ModalBox fx:id="modalBox" styleClass="modalBox">
+            <children>
+                <Card styleClass="modalCard"
+                      AnchorPane.topAnchor="40"
+                      AnchorPane.rightAnchor="0"
+                      AnchorPane.bottomAnchor="0"
+                      AnchorPane.leftAnchor="0"
+                >
+                    <header>
+                        <VBox>
+                            <Label text="Comentários" styleClass="title-1"/>
+                            <Separator/>
+                        </VBox>
+                    </header>
+                    <body>
+                        <ScrollPane fitToWidth="true"
+                                    fitToHeight="true"
+                                    hbarPolicy="NEVER"
+                                    vbarPolicy="AS_NEEDED"
+                        >
+                            <VBox fx:id="comentariosList" styleClass="comentariosList">
+
+                            </VBox>
+                        </ScrollPane>
+                    </body>
+                    <footer>
+                        <VBox>
+                            <Separator/>
+                            <HBox styleClass="comentar">
+                                <TextArea fx:id="inComentario" promptText="Comentário" styleClass="inputForm"/>
+                                <VBox styleClass="buttonGroup">
+                                    <Button
+                                            text="Comentar"
+                                            styleClass="accent"
+                                            onAction="#comentar"
+                                    />
+                                    <Button
+                                            text="Limpar"
+                                            styleClass="danger"
+                                            onAction="#limpar"
+                                    />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </footer>
+                </Card>
+            </children>
+
+        </ModalBox>
+    </fx:define>
+</ModalPane>

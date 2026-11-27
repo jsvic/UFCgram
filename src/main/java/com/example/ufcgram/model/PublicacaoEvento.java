@@ -31,8 +31,8 @@ public class PublicacaoEvento extends Publicacao {
 
     //Construtor para uma publicação que veio do banco de dados:
 
-    public PublicacaoEvento(int idPublicacao, int matriculaCriador, LocalDate dataHoraCriacao, String titulo, String descricao, String local, LocalDate dataEvento) {
-        super(idPublicacao, matriculaCriador, dataHoraCriacao);
+    public PublicacaoEvento(int idPublicacao, String tipo, int matriculaCriador, LocalDate dataHoraCriacao, String titulo, String descricao, String local, LocalDate dataEvento) {
+        super(idPublicacao, tipo, matriculaCriador, dataHoraCriacao);
         this.titulo = titulo;
         this.descricao = descricao;
         this.local = local;

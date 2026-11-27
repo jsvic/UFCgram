@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import atlantafx.base.controls.ModalPane?>
+<?import atlantafx.base.controls.Card?>
+<?import javafx.geometry.Insets?>
+<?import atlantafx.base.layout.ModalBox?>
+
+<ModalPane
+        xmlns="http://javafx.com/javafx/26"
+        xmlns:fx="http://javafx.com/fxml/1"
+        stylesheets="@../../style/modal.css"
+        fx:controller="com.example.ufcgram.controller.ControllerModalEditarPost"
+        fx:id="modalPane"
+        alignment="CENTER"
+>
+    <fx:define>
+
+        <ModalBox fx:id="modalBox" styleClass="modalBox">
+            <children>
+                <Card styleClass="modalCard"
+                      AnchorPane.topAnchor="40"
+                      AnchorPane.rightAnchor="0"
+                      AnchorPane.bottomAnchor="0"
+                      AnchorPane.leftAnchor="0"
+                >
+                    <header>
+                        <VBox>
+                            <Label text="Deletar a Conta" styleClass="title-1"/>
+                            <Separator/>
+                        </VBox>
+                    </header>
+                    <body>
+                        <VBox styleClass="contentForm">
+                            <VBox fx:id="formEvento" styleClass="formEvento">
+                                <VBox>
+                                    <Label text="Título" styleClass="text-normal"/>
+                                    <TextField promptText="Título" fx:id="inTitulo" styleClass="inputForm"/>
+                                </VBox>
+
+                                <VBox>
+                                    <Label text="Local" styleClass="text-normal"/>
+                                    <TextField promptText="Local" fx:id="inLocal" styleClass="inputForm"/>
+                                </VBox>
+
+                                <VBox>
+                                    <Label text="Data" styleClass="text-normal"/>
+                                    <DatePicker styleClass="inputForm" fx:id="inData"/>
+                                </VBox>
+
+                                <VBox>
+                                    <Label text="Descrição" styleClass="text-normal"/>
+                                    <TextArea promptText="Descrição" fx:id="inDescricao" styleClass="inputForm"/>
+                                </VBox>
+                            </VBox>
+                        </VBox>
+                    </body>
+
+                    <footer>
+                        <HBox
+                                fx:id="btnGroup"
+                                styleClass="buttonGroup"
+                                alignment="BOTTOM_RIGHT"
+
+                        >
+                            <Button text="Editar" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                        </HBox>
+                    </footer>
+                </Card>
+            </children>
+
+        </ModalBox>
+    </fx:define>
+</ModalPane>

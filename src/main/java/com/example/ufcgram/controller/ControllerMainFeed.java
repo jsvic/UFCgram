@@ -5,8 +5,13 @@ import javafx.scene.layout.VBox;
 
 public class ControllerMainFeed {
     @FXML private VBox mainFeed;
+    @FXML private ControllerModalComentarios modalComentarios;
 
     private boolean status = true;
+
+    @FXML public void setController(ControllerModalComentarios modalComentarios) {
+        this.modalComentarios = modalComentarios;
+    }
 
     @FXML public void alterarStatus() {
         status = !status;

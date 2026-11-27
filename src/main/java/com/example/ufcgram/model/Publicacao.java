@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public abstract class Publicacao {
     protected int idPublicacao;
+    private String tipo;
     protected int matriculaCriador;
     protected LocalDate dataHoraCriacao;
     protected ArrayList<Comentario> comentarios = new ArrayList<>();
@@ -24,8 +25,9 @@ public abstract class Publicacao {
     }
 
     //Construtor usado para montar uma publicação que veio do banco de dados:
-    public Publicacao(int idPublicacao, int matriculaCriador, LocalDate dataHoraCriacao) {
+    public Publicacao(int idPublicacao, String tipo, int matriculaCriador, LocalDate dataHoraCriacao) {
         this.idPublicacao = idPublicacao;
+        this.tipo = tipo;
         this.matriculaCriador = matriculaCriador;
         this.dataHoraCriacao = dataHoraCriacao;
     }
@@ -74,6 +76,11 @@ public abstract class Publicacao {
     public int getIdPublicacao() {
         return idPublicacao;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
     public int getMatriculaCriador() {
         return matriculaCriador;
     }
@@ -92,6 +99,11 @@ public abstract class Publicacao {
     public void setIdPublicacao(int idPublicacao) {
         this.idPublicacao = idPublicacao;
     }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public void setMatriculaCriador(int matriculaCriador) {
         this.matriculaCriador = matriculaCriador;
     }

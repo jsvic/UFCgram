@@ -21,6 +21,7 @@
             <HBox styleClass="contentSearch">
                 <TextField promptText="Pesquisar Conta" fx:id="inNome" styleClass="search"/>
                 <Button text="buscar" onAction="#buscar" styleClass="accent"/>
+
             </HBox>
             <Button text="Recomendadas" onAction="#contasRecomendadas" styleClass="ordinary"/>
         </VBox>

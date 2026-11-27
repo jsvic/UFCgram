@@ -6,8 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
-
 <HBox
         xmlns="http://javafx.com/javafx/26"
         xmlns:fx="http://javafx.com/fxml/1"
@@ -18,117 +16,42 @@
         fx:id="usuario"
         styleClass="usuario"
 >
-    <VBox styleClass="mainConta">
-        <VBox styleClass="informacoesPrincipais">
-            <HBox>
-                <Label fx:id="nomeConta" styleClass="title-1"/>
-                <Region HBox.hgrow="ALWAYS" />
-                <HBox spacing="20">
-                    <Label fx:id="seguidores" styleClass="text-bold"/>
-                    <Label fx:id="seguindos" styleClass="text-bold"/>
-                </HBox>
-            </HBox>
-                <Label fx:id="cursoConta" styleClass="title-2"/>
-            <TextArea fx:id="descricaoConta" styleClass="descricaoConta" disable="true"/>
-            <HBox styleClass="btnGroup" fx:id="btnGroup">
-                <Button text="Seguir" fx:id="btnSeguir" onAction="#seguir" styleClass="accent"/>
-                <Button text="Seguindo" fx:id="btnDeixarSeguir" onAction="#deixarSeguir" styleClass="ordinary"/>
-            </HBox>
-        </VBox>
+    <ScrollPane fitToWidth="true"
+                fitToHeight="true"
+                hbarPolicy="NEVER"
+                vbarPolicy="AS_NEEDED">
+            <VBox styleClass="mainConta">
+                <VBox styleClass="informacoesPrincipais">
+                    <HBox>
+                        <Label fx:id="nomeConta" styleClass="title-1"/>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox spacing="20">
+                            <Label fx:id="seguidores" styleClass="text-bold"/>
+                            <Label fx:id="seguindos" styleClass="text-bold"/>
+                        </HBox>
+                    </HBox>
+                        <Label fx:id="cursoConta" styleClass="title-2"/>
+                    <TextArea fx:id="descricaoConta" styleClass="descricaoConta" disable="true"/>
+                    <HBox styleClass="btnGroup" fx:id="btnGroup">
+                        <Button text="Seguir" fx:id="btnSeguir" onAction="#seguir" styleClass="accent"/>
+                        <Button text="Seguindo" fx:id="btnDeixarSeguir" onAction="#deixarSeguir" styleClass="ordinary"/>
+                    </HBox>
+                </VBox>
 
-        <Separator/>
+                <Separator/>
 
-            <VBox styleClass="contentPost">
-                <HBox styleClass="contentSearch">
-                    <TextField promptText="Pesquisar Post" styleClass="search"/>
-                    <Button text="buscar" styleClass="accent"/>
-                </HBox>
-                <ScrollPane fitToWidth="true"
-                                fitToHeight="true"
-                                hbarPolicy="NEVER"
-                                vbarPolicy="AS_NEEDED">
-                            <VBox styleClass="postList">
-                                <HBox styleClass="postItem">
-                                    <Label text="Titulo" styleClass="title-3"/>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Label text="11-18-26" styleClass="text-lighter"/>
-                                    <MenuButton text="⋮">
-                                        <items>
-                                            <MenuItem text="Editar"/>
-                                            <MenuItem text="Excluir"/>
-                                        </items>
-                                    </MenuButton>
-                                </HBox>
-                                <HBox styleClass="postItem">
-                                    <Label text="Titulo" styleClass="title-3"/>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Label text="11-18-26" styleClass="text-lighter"/>
-                                    <MenuButton text="⋮">
-                                        <items>
-                                            <MenuItem text="Editar"/>
-                                            <MenuItem text="Excluir"/>
-                                        </items>
-                                    </MenuButton>
-                                </HBox>
-                                <HBox styleClass="postItem">
-                                    <Label text="Titulo" styleClass="title-3"/>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Label text="11-18-26" styleClass="text-lighter"/>
-                                    <MenuButton text="⋮">
-                                        <items>
-                                            <MenuItem text="Editar"/>
-                                            <MenuItem text="Excluir"/>
-                                        </items>
-                                    </MenuButton>
-                                </HBox>
-                                <HBox styleClass="postItem">
-                                    <Label text="Titulo" styleClass="title-3"/>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Label text="11-18-26" styleClass="text-lighter"/>
-                                    <MenuButton text="⋮">
-                                        <items>
-                                            <MenuItem text="Editar"/>
-                                            <MenuItem text="Excluir"/>
-                                        </items>
-                                    </MenuButton>
-                                </HBox>
-                                <HBox styleClass="postItem">
-                                    <Label text="Titulo" styleClass="title-3"/>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Label text="11-18-26" styleClass="text-lighter"/>
-                                    <MenuButton text="⋮">
-                                        <items>
-                                            <MenuItem text="Editar"/>
-                                            <MenuItem text="Excluir"/>
-                                        </items>
-                                    </MenuButton>
-                                </HBox>
-                                <HBox styleClass="postItem">
-                                    <Label text="Titulo" styleClass="title-3"/>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Label text="11-18-26" styleClass="text-lighter"/>
-                                    <MenuButton text="⋮">
-                                        <items>
-                                            <MenuItem text="Editar"/>
-                                            <MenuItem text="Excluir"/>
-                                        </items>
-                                    </MenuButton>
-                                </HBox>
-                                <HBox styleClass="postItem">
-                                    <Label text="Titulo Ultimo" styleClass="title-3"/>
-                                    <Region HBox.hgrow="ALWAYS" />
-                                    <Label text="11-18-26" styleClass="text-lighter"/>
-                                    <MenuButton text="⋮">
-                                        <items>
-                                            <MenuItem text="Editar"/>
-                                            <MenuItem text="Excluir"/>
-                                        </items>
-                                    </MenuButton>
-                                </HBox>
-                        </VBox>
-                    </ScrollPane>
+                    <VBox styleClass="contentPost">
+                        <HBox styleClass="contentSearch">
+                            <TextField promptText="Pesquisar Post" styleClass="search"/>
+                            <Button text="buscar" styleClass="accent"/>
+                        </HBox>
+
+                                    <VBox fx:id="postList" styleClass="postList">
+
+                                </VBox>
+                    </VBox>
             </VBox>
-    </VBox>
+                    </ScrollPane>
 
     <VBox styleClass="informacoesPerfil">
             <VBox>
