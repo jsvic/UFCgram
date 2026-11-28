@@ -28,7 +28,8 @@ public class ControllerFeed {
         navBarController.setMainFeedController(mainFeedController);
         navBarController.setContaController(usuarioController);
         navBarController.setCreatePostController(createPostController);
-        mainFeedController.setController(modalComentariosController);
+        mainFeedController.setControllerModals(modalExcluirController, modalEditarController, modalComentariosController, navBarController, mensagemController);
+        mainFeedController.setContaSessao(usuarioSessao);
 
         mainFeedController.abrir();
     }

@@ -39,6 +39,7 @@ public class ControllerUsuario {
     @FXML private HBox usuario;
     @FXML private Button btnSeguir;
     @FXML private Button btnDeixarSeguir;
+    @FXML private Button listPostCriados;
     @FXML private Button listPostCurtidos;
     @FXML private Button listPostsComentados;
 
@@ -72,12 +73,12 @@ public class ControllerUsuario {
         feed = new Feed(usuarioSessao);
 
         mostarInfos();
-        listarCriados();
+        listarPublicacoes(usuarioPerfil.recuperarPublicacoes());
     }
 
     @FXML public void seguir(int matr) throws IOException {
         usuarioSessao.seguir(matr);
-        listarUsuarios(usuarioPerfil.recuperarPublicacoes());
+        listarPublicacoes(usuarioPerfil.recuperarPublicacoes());
         controllerNavBar.listarUsuarios(feed.getUsuariosRecomendados());
         mostarInfos();
         btnDeixarSeguir.setVisible(true);
@@ -88,7 +89,7 @@ public class ControllerUsuario {
 
     @FXML public void deixarSeguir(int matr) throws IOException {
         usuarioSessao.deixarSeguir(matr);
-        listarUsuarios(usuarioPerfil.recuperarPublicacoes());
+        listarPublicacoes(usuarioPerfil.recuperarPublicacoes());
         controllerNavBar.listarUsuarios(feed.getUsuariosRecomendados());
         mostarInfos();
         btnDeixarSeguir.setVisible(false);
@@ -97,7 +98,7 @@ public class ControllerUsuario {
         btnSeguir.setManaged(true);
     }
 
-    @FXML public void listarUsuarios(ArrayList<Publicacao> publicacoesList) throws IOException {
+    @FXML public void listarPublicacoes(ArrayList<Publicacao> publicacoesList) throws IOException {
         String itemPublicacao;
         postList.getChildren().clear();
         for(Publicacao publicacao: publicacoesList) {
@@ -220,6 +221,8 @@ public class ControllerUsuario {
 
             FXMLLoader loader = new FXMLLoader();
 
+            System.out.printf("\n======\npublicacao id: %d\n=======\n", publicacao.getIdPublicacao());
+
             Parent item = loader.load(
                     new ByteArrayInputStream(
                             itemPublicacao.getBytes(StandardCharsets.UTF_8)
@@ -288,6 +291,7 @@ public class ControllerUsuario {
                     throw new RuntimeException(e);
                 }
             });
+
             editar.setOnAction(event -> abrirModalEditar(publicacao));
             excluir.setOnAction(event -> abrirModalExcluir(publicacao));
             curtir.setOnAction(event -> curtir(event, publicacao));
@@ -305,7 +309,7 @@ public class ControllerUsuario {
 
     @FXML
     private void seguirCriador(int matr) throws IOException {
-       seguir(matr);
+        seguir(matr);
     }
 
     @FXML
@@ -359,8 +363,7 @@ public class ControllerUsuario {
     @FXML
     public void abrirModalComentarios(Publicacao publicacao) throws IOException {
 
-        modalComentarios.abrirModal(publicacao);
-        modalComentarios.setContaSessao(usuarioSessao);
+        modalComentarios.abrirModal(publicacao, usuarioSessao);
     }
 
 
@@ -397,19 +400,19 @@ public class ControllerUsuario {
     @FXML
     public void listarCurtidos() throws IOException {
         listPost = "CURTIDOS";
-        listarUsuarios(usuarioSessao.recuperarPublicacoesCurtidas());
+        listarPublicacoes(usuarioSessao.recuperarPublicacoesCurtidas());
     }
 
     @FXML
     public void listarComentadas() throws IOException {
         listPost = "COMENTADOS";
-        listarUsuarios(usuarioSessao.recuperarPublicacoesComentadas());
+        listarPublicacoes(usuarioSessao.recuperarPublicacoesComentadas());
     }
 
     @FXML
     public void listarCriados() throws IOException {
         listPost = "CRIADOS";
-        listarUsuarios(usuarioSessao.recuperarPublicacoes());
+        listarPublicacoes(usuarioSessao.recuperarPublicacoes());
     }
 
     @FXML
@@ -424,7 +427,7 @@ public class ControllerUsuario {
             publicacoes = usuarioSessao.recuperarPublicacoesCurtidas();
         }
 
-        listarUsuarios(buscar(publicacoes, inPesquisa.getText()));
+        listarPublicacoes(buscar(publicacoes, inPesquisa.getText()));
     }
 
     public ArrayList<Publicacao>  buscar(ArrayList<Publicacao> publicacoes, String busca) {
@@ -475,11 +478,20 @@ public class ControllerUsuario {
             btnSeguir.setManaged(false);
             btnDeixarSeguir.setVisible(false);
             btnDeixarSeguir.setManaged(false);
+            listPostCriados.setManaged(true);
+            listPostCriados.setVisible(true);
             listPostCurtidos.setManaged(true);
             listPostCurtidos.setVisible(true);
             listPostsComentados.setManaged(true);
             listPostsComentados.setVisible(true);
         } else {
+            listPostCriados.setManaged(false);
+            listPostCriados.setVisible(false);
+            listPostCurtidos.setManaged(false);
+            listPostCurtidos.setVisible(false);
+            listPostsComentados.setManaged(false);
+            listPostsComentados.setVisible(false);
+
             if(usuarioSessao.consultarSeguindo(usuarioPerfil)) {
                 btnDeixarSeguir.setVisible(true);
                 btnDeixarSeguir.setManaged(true);

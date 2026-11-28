@@ -83,7 +83,7 @@ public class Usuario extends Aluno {
 
     public ArrayList<Publicacao> recuperarPublicacoes() {
         Consulta service = new Consulta();
-        postsCriados = service.recuperarPublicacoes(getMatricula());
+        postsCriados = service.recuperarPublicacoes(matricula);
         return postsCriados;
     }
 

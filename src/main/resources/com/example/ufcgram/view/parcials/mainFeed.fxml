@@ -12,6 +12,12 @@
        fx:controller="com.example.ufcgram.controller.ControllerMainFeed"
        fx:id="mainFeed"
 >
-        <Label text="Aqui será os posts" styleClass="title-1"/>
+        <ScrollPane fitToWidth="true"
+                    fitToHeight="true"
+                    hbarPolicy="NEVER"
+                    vbarPolicy="AS_NEEDED">
+                <VBox fx:id="postList" styleClass="postList">
 
+                </VBox>
+        </ScrollPane>
 </VBox>
