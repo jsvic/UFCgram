@@ -9,10 +9,10 @@ import com.example.ufcgram.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.ByteArrayInputStream;
@@ -41,8 +41,9 @@ public class ControllerModalComentarios {
         modalBox.setOnClose((e) -> modalPane.hide());
     }
 
-    public void setContaSessao(Usuario usuarioSessao) {
+    public void setContaSessao(Usuario usuarioSessao) throws IOException {
         this.usuarioSessao = usuarioSessao;
+        listarComentario(publicacao.getComentarios());
     }
 
     @FXML public void abrirModal(Publicacao publicacao) throws IOException {
@@ -50,7 +51,6 @@ public class ControllerModalComentarios {
 
         modalPane.show(modalBox);
         this.publicacao = publicacao;
-        listarComentario(publicacao.getComentarios());
     }
 
     @FXML
@@ -66,17 +66,30 @@ public class ControllerModalComentarios {
                       <?import atlantafx.base.controls.Card?>
                       
                         <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:id="%d" styleClass="contentComentario">
-                            <HBox>
+                            <HBox styleClass= "comentarioHeader">
                                <Label text="%s" styleClass="text-bold"/>
                                <Region HBox.hgrow="ALWAYS" />
                                <Label text="%s" styleClass="text-bold"/>
+                               <MenuButton fx:id="configComentario" managed="false" visible="false" text="⋮">
+                                          <items>
+                                             <MenuItem text="Editar" fx:id="editar"/>
+                                             <MenuItem text="Excluir" fx:id="excluir"/>
+                                          </items>
+                               </MenuButton>
                             </HBox>
-                       <TextArea text="%s"
-                                 editable="false"
-                                 wrapText="true"
-                                 styleClass="textPost"/>
+                        <HBox styleClass="editPost">
+                           <TextArea text="%s"
+                                     editable="false"
+                                     wrapText="true"
+                                     fx:id="textComentario"
+                                     styleClass="textPost"/>
+                           <VBox styleClass="buttonGroup">
+                                <Button text="Editar" fx:id="btnEditar" managed="false" visible="false" styleClass="accent"/>
+                                <Button text="Cancelar" fx:id="btnCancelar" managed="false" visible="false" styleClass="danger"/>
+                          </VBox>
+                       </HBox>
                         </VBox>
-                    """.formatted(comentario.getMatriculaUsuario(),
+                    """.formatted(comentario.getIdComentario(),
                     new Feed().consultarUsuarioPorMatriucula(comentario.getMatriculaUsuario()).getNome(),
                     comentario.getDataHoraInteracao().toString(), comentario.getTexto());
             FXMLLoader loader = new FXMLLoader();
@@ -85,6 +98,31 @@ public class ControllerModalComentarios {
                     new ByteArrayInputStream(itemComentario.getBytes(StandardCharsets.UTF_8))
             );
 
+            System.out.printf("\nPublicacao id: %d\nComentario id: %d\n", publicacao.getIdPublicacao(),comentario.getIdComentario());
+
+            MenuButton configComentario = (MenuButton) loader.getNamespace().get("configComentario");
+            Button btnEditar = (Button) loader.getNamespace().get("btnEditar");
+            Button btnCancelar = (Button) loader.getNamespace().get("btnCancelar");
+            MenuItem editar = (MenuItem) loader.getNamespace().get("editar");
+            MenuItem excluir = (MenuItem) loader.getNamespace().get("excluir");
+            TextArea textComentario = (TextArea) loader.getNamespace().get("textComentario");
+
+            if(usuarioSessao.getMatricula() == comentario.getMatriculaUsuario()) {
+                configComentario.setVisible(true);
+                configComentario.setManaged(true);
+            }
+
+            editar.setOnAction(event -> habilitarEdicao(textComentario, btnEditar, btnCancelar));
+            excluir.setOnAction(event -> {
+                try {
+                    excluirComentario(comentario);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            btnEditar.setOnAction(event -> editarComentario(textComentario, comentario, btnEditar, btnCancelar));
+            btnCancelar.setOnAction(event -> desabilitarEdicao(comentario, textComentario, btnEditar, btnCancelar));
             comentariosList.getChildren().add(item);
         }
     }
@@ -94,6 +132,40 @@ public class ControllerModalComentarios {
         new Comentario(usuarioSessao.getMatricula(), inComentario.getText()).comentarPublicacao(publicacao);
         listarComentario(publicacao.getComentarios());
         limpar();
+    }
+
+    @FXML
+    public void habilitarEdicao(TextArea textComentario, Button editar, Button cancelar) {
+        textComentario.setEditable(true);
+        textComentario.setStyle("-fx-background-color:-color-bg-default;");
+        editar.setVisible(true);
+        editar.setManaged(true);
+        cancelar.setVisible(true);
+        cancelar.setManaged(true);
+    }
+
+    @FXML
+    public void desabilitarEdicao(Comentario comentario, TextArea textComentario, Button editar, Button cancelar) {
+        textComentario.setEditable(false);
+        textComentario.setStyle("-fx-background-color:-color-bg-subtle;");
+        textComentario.setText(comentario.getTexto());
+        editar.setManaged(false);
+        editar.setVisible(false);
+        cancelar.setManaged(false);
+        cancelar.setVisible(false);
+    }
+
+    @FXML
+    public void editarComentario(TextArea textComentario, Comentario comentario, Button editar, Button cancelar) {
+        comentario.setTexto(textComentario.getText());
+        comentario.editarComentario(publicacao);
+
+        desabilitarEdicao(comentario, textComentario, editar, cancelar);
+    }
+
+    @FXML
+    public void excluirComentario(Comentario comentario) throws IOException {
+        listarComentario(comentario.removerComentario(publicacao).getComentarios());
     }
 
     @FXML

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 //Cada usuário pode ter apenas um comentário por publicação
 
 public class Comentario extends InteracaoPublicacao {
+    private int idComentario;
     private String texto;
 
     // Construtor sem parâmetro:
@@ -28,8 +29,9 @@ public class Comentario extends InteracaoPublicacao {
 
     // Construtor para um comentário que veio do banco de dados:
 
-    public Comentario(int matriculaUsuario, int idPublicacao, LocalDate dataHoraInteracao, String texto) {
+    public Comentario(int idComentario,  int matriculaUsuario, int idPublicacao, LocalDate dataHoraInteracao, String texto) {
         super(matriculaUsuario, idPublicacao, dataHoraInteracao);
+        this.idComentario = idComentario;
         this.texto = texto;
     }
 
@@ -62,7 +64,7 @@ public class Comentario extends InteracaoPublicacao {
         CadastroInteracao service = new CadastroInteracao();
         service.removerComentario(this);
         //Se o Service nao lancou erro, retira o comentário da lista e retorna a publicação atualizada
-        publicacao.getComentarios().removeIf(comentario -> comentario.getMatriculaUsuario() == matriculaUsuario);
+        publicacao.getComentarios().removeIf(comentario -> comentario.getIdComentario() == idComentario);
         return publicacao;
     }
 
@@ -74,11 +76,21 @@ public class Comentario extends InteracaoPublicacao {
 
     //Getter
 
+
+    public int getIdComentario() {
+        return idComentario;
+    }
+
     public String getTexto() {
         return texto;
     }
 
     //Setter
+
+
+    public void setIdComentario(int idComentario) {
+        this.idComentario = idComentario;
+    }
 
     public void setTexto(String texto) {
         this.texto = texto;

@@ -1,6 +1,8 @@
 package com.example.ufcgram.model;
 
 import com.example.ufcgram.service.CadastroPublicacao;
+import com.example.ufcgram.service.Consulta;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 

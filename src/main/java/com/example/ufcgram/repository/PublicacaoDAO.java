@@ -213,6 +213,41 @@ public class PublicacaoDAO {
         }
     }
 
+
+    public ArrayList<Publicacao> recuperarPublicacoesCurtidas(int matr) {
+
+        String sql = "select * from publicacao where idPublicacao in (select idPublicacao from curtida where matriculaUsuario = ?  ORDER BY dataHoraInteracao DESC)";
+
+        try (Connection conn = ConnectionBD.getConnnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, matr);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return montarLista(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao recuperar curtidas: falha ao consultar o banco de dados", e);
+        }
+    }
+
+    public ArrayList<Publicacao> recuperarPublicacoesComentadas(int matr) {
+
+        String sql = "select * from publicacao where idPublicacao in (select idPublicacao from Comentario where matriculaUsuario = ?  ORDER BY dataHoraInteracao DESC)";
+
+        try (Connection conn = ConnectionBD.getConnnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, matr);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return montarLista(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao recuperar curtidas: falha ao consultar o banco de dados", e);
+        }
+    }
+
     //Transformar todas as linhas do resultado em uma lista de publicações
 
     private ArrayList<Publicacao> montarLista(ResultSet rs) throws SQLException {

@@ -55,7 +55,7 @@ public class ContaDAO {
         try(Connection conn = ConnectionBD.getConnnection();  // Faz a conexao com o BD
             PreparedStatement stmt = conn.prepareStatement(sql) // Prepara o sql
         ) {
-            stmt.setString(1, "%" + nome.toLowerCase() + "%");  // Substitui o "?" do SQL pela busca do parametro
+            stmt.setString(1, nome.toLowerCase() + "%");  // Substitui o "?" do SQL pela busca do parametro
             try(ResultSet rs = stmt.executeQuery()) {
                 ArrayList<Usuario> seguidores = new ArrayList<>();
                 while(rs.next()) {
@@ -246,7 +246,7 @@ public class ContaDAO {
     // Get Seguidor: recupera, em seguidores, os seguidores de um usuário
     public ArrayList<Usuario> consultarSeguidores(int matriculaSeguido) {
 
-        String sql = "SELECT * FROM conta WHERE matr in (SELECT matr_seguido FROM seguidores WHERE matr_seguido = ?)";
+        String sql = "SELECT * FROM conta WHERE matr in (SELECT matr_seguidor FROM seguidores WHERE matr_seguido = ?)";
 
         try (Connection conn = ConnectionBD.getConnnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

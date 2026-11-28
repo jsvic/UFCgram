@@ -33,8 +33,8 @@
                         <Label fx:id="cursoConta" styleClass="title-2"/>
                     <TextArea fx:id="descricaoConta" styleClass="descricaoConta" disable="true"/>
                     <HBox styleClass="btnGroup" fx:id="btnGroup">
-                        <Button text="Seguir" fx:id="btnSeguir" onAction="#seguir" styleClass="accent"/>
-                        <Button text="Seguindo" fx:id="btnDeixarSeguir" onAction="#deixarSeguir" styleClass="ordinary"/>
+                        <Button text="Seguir" fx:id="btnSeguir" onAction="#seguirPerfil" styleClass="accent"/>
+                        <Button text="Seguindo" fx:id="btnDeixarSeguir" onAction="#deixarSeguirPerfil" styleClass="ordinary"/>
                     </HBox>
                 </VBox>
 
@@ -42,8 +42,13 @@
 
                     <VBox styleClass="contentPost">
                         <HBox styleClass="contentSearch">
-                            <TextField promptText="Pesquisar Post" styleClass="search"/>
-                            <Button text="buscar" styleClass="accent"/>
+                            <TextField promptText="Pesquisar Post" fx:id="inPesquisa" styleClass="search"/>
+                            <Button text="buscar" onAction="#buscarPublicacoes" styleClass="accent"/>
+                        </HBox>
+                        <HBox styleClass="buttonGroup">
+                            <Button text="Publicações Criadas" onAction="#listarCriados" managed="false" visible="false" styleClass="ordinary"/>
+                            <Button text="Publicações Curtidas" fx:id="listPostCurtidos" onAction="#listarCurtidos" managed="false" visible="false" styleClass="ordinary"/>
+                            <Button text="Publicações Comentadas" fx:id="listPostsComentados" onAction="#listarComentadas" managed="false" visible="false" styleClass="ordinary"/>
                         </HBox>
 
                                     <VBox fx:id="postList" styleClass="postList">

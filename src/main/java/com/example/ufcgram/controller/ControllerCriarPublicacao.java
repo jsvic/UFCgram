@@ -25,6 +25,7 @@ public class ControllerCriarPublicacao {
 
 
     private Usuario usuarioSessao;
+    private ControllerNavBar controllerNavBar;
 
     private boolean status = false;
 
@@ -93,6 +94,8 @@ public class ControllerCriarPublicacao {
             } else {
                 criarTexto();
             }
+
+            controllerNavBar.abrirFeed();
         }
     }
 
@@ -148,4 +151,6 @@ public class ControllerCriarPublicacao {
     public void setUsuarioSessao(Usuario usuarioSessao) {
         this.usuarioSessao = usuarioSessao;
     }
+
+    public void setControllerNavbar(ControllerNavBar controller) { this.controllerNavBar = controller; }
 }

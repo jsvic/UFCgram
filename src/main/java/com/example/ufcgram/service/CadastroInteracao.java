@@ -69,6 +69,6 @@ public class CadastroInteracao {
 
         validacao.validarComentario(comentario);
 
-        comentarioDAO.remover(comentario.getIdPublicacao(), comentario.getMatriculaUsuario());
+        comentarioDAO.remover(comentario.getIdComentario());
     }
 }

@@ -30,13 +30,18 @@
                 >
                     <header>
                         <VBox>
-                            <Label text="Deletar a Conta" styleClass="title-1"/>
+                            <Label text="Editar a Publicação" styleClass="title-1"/>
                             <Separator/>
                         </VBox>
                     </header>
                     <body>
                         <VBox styleClass="contentForm">
-                            <VBox fx:id="formEvento" styleClass="formEvento">
+                            <VBox managed="false" visible="false" fx:id="formTexto">
+                                <Label text="Texto" styleClass="text-normal"/>
+                                <TextArea promptText="Texto" fx:id="inTexto" styleClass="inputForm"/>
+                            </VBox>
+
+                            <VBox managed="false" visible="false" fx:id="formEvento" styleClass="formEvento">
                                 <VBox>
                                     <Label text="Título" styleClass="text-normal"/>
                                     <TextField promptText="Título" fx:id="inTitulo" styleClass="inputForm"/>
@@ -67,7 +72,7 @@
                                 alignment="BOTTOM_RIGHT"
 
                         >
-                            <Button text="Editar" styleClass="accent"/>  <Button text="Limpar" styleClass="danger"/>
+                            <Button text="Editar" onAction="#editar" styleClass="accent"/>  <Button text="Restaurar" onAction="#mostrarInfo" styleClass="danger"/>
                         </HBox>
                     </footer>
                 </Card>

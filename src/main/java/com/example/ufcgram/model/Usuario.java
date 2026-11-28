@@ -71,6 +71,14 @@ public class Usuario extends Aluno {
         return false;
     }
 
+    public ArrayList<Publicacao> recuperarPublicacoesCurtidas() {
+        return new Consulta().recuperarPublicacoesCurtidas(matricula);
+    }
+
+    public ArrayList<Publicacao> recuperarPublicacoesComentadas() {
+        return new Consulta().recuperarPublicacoesComentadas(matricula);
+    }
+
     //Recuperar as publicações criadas por este usuário, guarda em postsCriados e retorna a lista
 
     public ArrayList<Publicacao> recuperarPublicacoes() {

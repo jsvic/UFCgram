@@ -1,11 +1,16 @@
 package com.example.ufcgram.repository;
 
 import com.example.ufcgram.model.Curtida;
+import com.example.ufcgram.model.Publicacao;
+import com.example.ufcgram.model.PublicacaoEvento;
+import com.example.ufcgram.model.PublicacaoTexto;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 //Classe para ligar os valores de Curtida que estao no BD
