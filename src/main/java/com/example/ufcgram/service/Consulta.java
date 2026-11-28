@@ -127,7 +127,7 @@ public class Consulta {
 
     //Métodos intermediários
     //Carregar as curtidas e os comentários de uma publicação
-    private void carregarInteracoes(Publicacao publicacao) {
+    public void carregarInteracoes(Publicacao publicacao) {
         publicacao.setCurtidas(curtidaDAO.recuperarPorPublicacao(publicacao.getIdPublicacao()));
         publicacao.setComentarios(comentarioDAO.recuperarPorPublicacao(publicacao.getIdPublicacao()));
     }

@@ -20,73 +20,73 @@
                 fitToHeight="true"
                 hbarPolicy="NEVER"
                 vbarPolicy="AS_NEEDED">
-            <VBox styleClass="mainConta">
-                <VBox styleClass="informacoesPrincipais">
-                    <HBox>
-                        <Label fx:id="nomeConta" styleClass="title-1"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <HBox spacing="20">
-                            <Label fx:id="seguidores" styleClass="text-bold"/>
-                            <Label fx:id="seguindos" styleClass="text-bold"/>
-                        </HBox>
+        <VBox styleClass="mainConta">
+            <VBox styleClass="informacoesPrincipais">
+                <HBox>
+                    <Label fx:id="nomeConta" styleClass="title-1"/>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <HBox spacing="20">
+                        <Label fx:id="seguidores" styleClass="text-bold"/>
+                        <Label fx:id="seguindos" styleClass="text-bold"/>
                     </HBox>
-                        <Label fx:id="cursoConta" styleClass="title-2"/>
-                    <TextArea fx:id="descricaoConta" styleClass="descricaoConta" disable="true"/>
-                    <HBox styleClass="btnGroup" fx:id="btnGroup">
-                        <Button text="Seguir" fx:id="btnSeguir" onAction="#seguirPerfil" styleClass="accent"/>
-                        <Button text="Seguindo" fx:id="btnDeixarSeguir" onAction="#deixarSeguirPerfil" styleClass="ordinary"/>
-                    </HBox>
-                </VBox>
-
-                <Separator/>
-
-                    <VBox styleClass="contentPost">
-                        <HBox styleClass="contentSearch">
-                            <TextField promptText="Pesquisar Post" fx:id="inPesquisa" styleClass="search"/>
-                            <Button text="buscar" onAction="#buscarPublicacoes" styleClass="accent"/>
-                        </HBox>
-                        <HBox styleClass="buttonGroup">
-                            <Button text="Publicações Criadas" onAction="#listarCriados" managed="false" visible="false" styleClass="ordinary"/>
-                            <Button text="Publicações Curtidas" fx:id="listPostCurtidos" onAction="#listarCurtidos" managed="false" visible="false" styleClass="ordinary"/>
-                            <Button text="Publicações Comentadas" fx:id="listPostsComentados" onAction="#listarComentadas" managed="false" visible="false" styleClass="ordinary"/>
-                        </HBox>
-
-                                    <VBox fx:id="postList" styleClass="postList">
-
-                                </VBox>
-                    </VBox>
+                </HBox>
+                <Label fx:id="cursoConta" styleClass="title-2"/>
+                <TextArea fx:id="descricaoConta" styleClass="descricaoConta" disable="true"/>
+                <HBox styleClass="btnGroup" fx:id="btnGroup">
+                    <Button text="Seguir" fx:id="btnSeguir" onAction="#seguirPerfil" styleClass="accent"/>
+                    <Button text="Seguindo" fx:id="btnDeixarSeguir" onAction="#deixarSeguirPerfil" styleClass="ordinary"/>
+                </HBox>
             </VBox>
-                    </ScrollPane>
+
+            <Separator/>
+
+            <VBox styleClass="contentPost">
+                <HBox styleClass="contentSearch">
+                    <TextField promptText="Pesquisar Post" fx:id="inPesquisa" styleClass="search"/>
+                    <Button text="buscar" onAction="#buscarPublicacoes" styleClass="accent"/>
+                </HBox>
+                <HBox styleClass="buttonGroup">
+                    <Button text="Publicações Criadas" fx:id="listPostCriados" onAction="#listarCriados" managed="false" visible="false" styleClass="ordinary"/>
+                    <Button text="Publicações Curtidas" fx:id="listPostCurtidos" onAction="#listarCurtidos" managed="false" visible="false" styleClass="ordinary"/>
+                    <Button text="Publicações Comentadas" fx:id="listPostsComentados" onAction="#listarComentadas" managed="false" visible="false" styleClass="ordinary"/>
+                </HBox>
+
+                <VBox fx:id="postList" styleClass="postList">
+
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
 
     <VBox styleClass="informacoesPerfil">
-            <VBox>
-                <Label text="Email:"/>
-                <Label fx:id="emailConta"/>
-            </VBox>
+        <VBox>
+            <Label text="Email:"/>
+            <Label fx:id="emailConta"/>
+        </VBox>
 
-            <VBox>
-                <Label text="Idade:"/>
-                <Label fx:id="idadeConta"/>
-            </VBox>
+        <VBox>
+            <Label text="Idade:"/>
+            <Label fx:id="idadeConta"/>
+        </VBox>
 
-            <VBox>
-                <Label text="Gênero:"/>
-                <Label fx:id="generoConta"/>
-            </VBox>
+        <VBox>
+            <Label text="Gênero:"/>
+            <Label fx:id="generoConta"/>
+        </VBox>
 
-            <VBox>
-                <Label text="Matrícula:"/>
-                <Label fx:id="matrConta"/>
-            </VBox>
+        <VBox>
+            <Label text="Matrícula:"/>
+            <Label fx:id="matrConta"/>
+        </VBox>
 
-            <VBox>
-                <Label text="Campus:"/>
-                <Label fx:id="campusConta"/>
-            </VBox>
+        <VBox>
+            <Label text="Campus:"/>
+            <Label fx:id="campusConta"/>
+        </VBox>
 
-            <VBox>
-                <Label text="Semestre que entrou:"/>
-                <Label fx:id="semetreConta"/>
-            </VBox>
+        <VBox>
+            <Label text="Semestre que entrou:"/>
+            <Label fx:id="semetreConta"/>
+        </VBox>
     </VBox>
 </HBox>

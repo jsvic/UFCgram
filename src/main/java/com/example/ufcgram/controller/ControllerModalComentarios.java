@@ -41,16 +41,14 @@ public class ControllerModalComentarios {
         modalBox.setOnClose((e) -> modalPane.hide());
     }
 
-    public void setContaSessao(Usuario usuarioSessao) throws IOException {
-        this.usuarioSessao = usuarioSessao;
-        listarComentario(publicacao.getComentarios());
-    }
-
-    @FXML public void abrirModal(Publicacao publicacao) throws IOException {
+    @FXML public void abrirModal(Publicacao publicacao, Usuario usuarioSessao) throws IOException {
         // Metodo chamado pelo botao excluir conta
 
-        modalPane.show(modalBox);
         this.publicacao = publicacao;
+        this.usuarioSessao = usuarioSessao;
+        listarComentario(publicacao.getComentarios());
+        System.out.printf("\n\npublicacao id (abrirModal): %d\nmatr autor: %d\n\n", publicacao.getIdPublicacao(), publicacao.getMatriculaCriador());
+        modalPane.show(modalBox);
     }
 
     @FXML
@@ -98,7 +96,7 @@ public class ControllerModalComentarios {
                     new ByteArrayInputStream(itemComentario.getBytes(StandardCharsets.UTF_8))
             );
 
-            System.out.printf("\nPublicacao id: %d\nComentario id: %d\n", publicacao.getIdPublicacao(),comentario.getIdComentario());
+            System.out.printf("\n\nlista comentarios\nPublicacao id: %d\nComentario id: %d\nTexto comentario: %s\n\n", publicacao.getIdPublicacao(),comentario.getIdComentario(), comentario.getTexto());
 
             MenuButton configComentario = (MenuButton) loader.getNamespace().get("configComentario");
             Button btnEditar = (Button) loader.getNamespace().get("btnEditar");
@@ -129,13 +127,17 @@ public class ControllerModalComentarios {
 
     @FXML
     public void comentar() throws IOException {
-        new Comentario(usuarioSessao.getMatricula(), inComentario.getText()).comentarPublicacao(publicacao);
+        Comentario comentario = new Comentario(usuarioSessao.getMatricula(), inComentario.getText());
+        comentario.comentarPublicacao(publicacao);
+        System.out.printf("\n\ncomentario id novo (comentar): %d\n\n", comentario.getIdComentario());
+
         listarComentario(publicacao.getComentarios());
         limpar();
     }
 
     @FXML
     public void habilitarEdicao(TextArea textComentario, Button editar, Button cancelar) {
+
         textComentario.setEditable(true);
         textComentario.setStyle("-fx-background-color:-color-bg-default;");
         editar.setVisible(true);
@@ -146,6 +148,8 @@ public class ControllerModalComentarios {
 
     @FXML
     public void desabilitarEdicao(Comentario comentario, TextArea textComentario, Button editar, Button cancelar) {
+        System.out.printf("\n\ncomentario id (desabilitar): %d\n\n", comentario.getIdComentario());
+
         textComentario.setEditable(false);
         textComentario.setStyle("-fx-background-color:-color-bg-subtle;");
         textComentario.setText(comentario.getTexto());
@@ -157,6 +161,8 @@ public class ControllerModalComentarios {
 
     @FXML
     public void editarComentario(TextArea textComentario, Comentario comentario, Button editar, Button cancelar) {
+        System.out.printf("\n\ncomentario id (editarcomentario): %d\n\n", comentario.getIdComentario());
+
         comentario.setTexto(textComentario.getText());
         comentario.editarComentario(publicacao);
 
@@ -165,6 +171,7 @@ public class ControllerModalComentarios {
 
     @FXML
     public void excluirComentario(Comentario comentario) throws IOException {
+        System.out.printf("\n\ncomentario id (excluir): %d\n\n", comentario.getIdComentario());
         listarComentario(comentario.removerComentario(publicacao).getComentarios());
     }
 

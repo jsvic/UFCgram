@@ -42,7 +42,7 @@ public class Comentario extends InteracaoPublicacao {
         CadastroInteracao service = new CadastroInteracao();
         service.comentar(this);
         //Se o Service nao lancou erro, atualiza a lista de comentários da publicação
-        publicacao.getComentarios().add(this);
+        new Consulta().carregarInteracoes(publicacao);
     }
 
     public void editarComentario(Publicacao publicacao) {
@@ -52,7 +52,7 @@ public class Comentario extends InteracaoPublicacao {
         service.editarComentario(this);
         //Se o Service nao lancou erro, atualiza o texto do comentário na lista da publicação
         for (Comentario comentario : publicacao.getComentarios()) {
-            if (comentario.getMatriculaUsuario() == matriculaUsuario) {
+            if (comentario.getIdComentario() == idComentario) {
                 comentario.setTexto(texto);
             }
         }
