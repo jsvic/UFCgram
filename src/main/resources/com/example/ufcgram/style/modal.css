@@ -27,6 +27,11 @@
     -fx-background-radius: 1.25em;
 }
 
+.comentarioHeader {
+    -fx-alignment: center;
+    -fx-spacing: 2em;
+}
+
 .textPost {
     -fx-max-height: 1em;
     -fx-predf-width: infinity;
@@ -34,5 +39,11 @@
 }
 
 .comentar {
+    -fx-max-height: 10em;
     -fx-spacing: 1.5em;
+}
+
+.editPost {
+    -fx-spacing: 1em;
+    -fx-alignment: center;
 }

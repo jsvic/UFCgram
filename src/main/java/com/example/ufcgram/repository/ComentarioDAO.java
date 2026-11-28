@@ -17,7 +17,7 @@ public class ComentarioDAO {
 
     public void inserir(Comentario comentario) {
 
-        String sql = "INSERT INTO Comentario (idPublicacao, matriculaUsuario, dataHoraInteracao, texto) " +
+        String sql = "INSERT INTO comentario (idPublicacao, matriculaUsuario, dataHoraInteracao, texto) " +
                 "VALUES (?, ?, ?, ?)";
 
         try (Connection conn = ConnectionBD.getConnnection();
@@ -44,14 +44,13 @@ public class ComentarioDAO {
 
     public void editar(Comentario comentario) {
 
-        String sql = "UPDATE Comentario SET texto = ? WHERE idPublicacao = ? AND matriculaUsuario = ?";
+        String sql = "UPDATE Comentario SET texto = ? WHERE idComentario = ?";
 
         try (Connection conn = ConnectionBD.getConnnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, comentario.getTexto());
-            stmt.setInt(2, comentario.getIdPublicacao());
-            stmt.setInt(3, comentario.getMatriculaUsuario());
+            stmt.setInt(2, comentario.getIdComentario());
 
             int linhas = stmt.executeUpdate(); //Quantidade de tuplas atualizadas
             if (linhas == 0) {
@@ -65,15 +64,14 @@ public class ComentarioDAO {
 
     //DELETE: remove o comentario de um usuario em uma publicacao
 
-    public void remover(int idPublicacao, int matriculaUsuario) {
+    public void remover(int idComentario) {
 
-        String sql = "DELETE FROM Comentario WHERE idPublicacao = ? AND matriculaUsuario = ?";
+        String sql = "DELETE FROM Comentario WHERE idComentario = ?";
 
         try (Connection conn = ConnectionBD.getConnnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, idPublicacao);
-            stmt.setInt(2, matriculaUsuario);
+            stmt.setInt(1, idComentario);
 
             int linhas = stmt.executeUpdate(); //Quantidade de tuplas removidas
             if (linhas == 0) {
@@ -90,7 +88,7 @@ public class ComentarioDAO {
     public ArrayList<Comentario> recuperarPorUsuario(int matriculaUsuario) {
 
         String sql = "SELECT idPublicacao, matriculaUsuario, dataHoraInteracao, texto " +
-                "FROM Comentario " +
+                "FROM comentario " +
                 "WHERE matriculaUsuario = ? " +
                 "ORDER BY dataHoraInteracao DESC, idPublicacao DESC";
 
@@ -112,8 +110,8 @@ public class ComentarioDAO {
 
     public ArrayList<Comentario> recuperarPorPublicacao(int idPublicacao) {
 
-        String sql = "SELECT idPublicacao, matriculaUsuario, dataHoraInteracao, texto " +
-                "FROM Comentario " +
+        String sql = "SELECT * " +
+                "FROM comentario " +
                 "WHERE idPublicacao = ? " +
                 "ORDER BY dataHoraInteracao DESC, matriculaUsuario ASC";
 
@@ -138,6 +136,7 @@ public class ComentarioDAO {
 
         while (rs.next()) {
             comentarios.add(new Comentario(
+                    rs.getInt("idComentario"),
                     rs.getInt("matriculaUsuario"),
                     rs.getInt("idPublicacao"),
                     rs.getDate("dataHoraInteracao").toLocalDate(),

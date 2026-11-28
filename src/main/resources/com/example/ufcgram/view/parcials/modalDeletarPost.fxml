@@ -36,21 +36,13 @@
                     </header>
                     <body>
                         <VBox styleClass="cardBody">
-                            <Label text="Você tem certeza que vai deletar sua publicação?"/>
-                            <CheckBox
-                                    fx:id="inConfirmar"
-                                    text="Eu concordo que ao deletar minha publicação não será possível recupera-la"
-                                    styleClass="text-normal"
+                            <Button
+                                    text="Deletar"
+                                    styleClass="danger"
+                                    onAction="#deletar"
                             />
                         </VBox>
                     </body>
-                    <footer>
-                        <Button
-                                text="Deletar"
-                                styleClass="danger"
-                                onAction="#deletar"
-                        />
-                    </footer>
                 </Card>
             </children>
 

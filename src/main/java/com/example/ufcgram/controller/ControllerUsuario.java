@@ -18,6 +18,7 @@ import java.io.Serial;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ControllerUsuario {
@@ -35,36 +36,65 @@ public class ControllerUsuario {
     @FXML private Label semetreConta;
 
     @FXML private VBox postList;
-
     @FXML private HBox usuario;
     @FXML private Button btnSeguir;
     @FXML private Button btnDeixarSeguir;
+    @FXML private Button listPostCurtidos;
+    @FXML private Button listPostsComentados;
 
     private boolean status = false;
+    private String listPost;
+
+    @FXML TextField inPesquisa;
 
     private Usuario usuarioSessao;
     private Usuario usuarioPerfil;
-    private Feed feed = new Feed();
+    private Feed feed;
 
     @FXML ControllerModalDeletarPost modalExcluir;
     @FXML ControllerModalEditarPost modalEditar;
     @FXML ControllerModalComentarios modalComentarios;
     @FXML ControllerNavBar controllerNavBar;
+    @FXML private ControllerMensagem mensagemController;
 
-    public void setControllerModals(ControllerModalDeletarPost controllerDeletar, ControllerModalEditarPost controllerEditar, ControllerModalComentarios controllerComentarios, ControllerNavBar controllerNavBar) {
+    public void setControllerModals(ControllerModalDeletarPost controllerDeletar, ControllerModalEditarPost controllerEditar, ControllerModalComentarios controllerComentarios, ControllerNavBar controllerNavBar, ControllerMensagem controllerMensagem) {
         modalExcluir = controllerDeletar;
         modalEditar = controllerEditar;
         modalComentarios = controllerComentarios;
         this.controllerNavBar = controllerNavBar;
+        this.mensagemController = controllerMensagem;
     }
 
     public void setContas(Usuario usuarioSessao, Usuario usuarioPerfil) throws IOException {
-        System.out.printf("\nConta Sessao (Conta): %d\n", usuarioSessao.getMatricula());
+        System.out.printf("\nConta Sessao (Conta): %d\nConta perfil: %d\n", usuarioSessao.getMatricula(), usuarioPerfil.getMatricula());
         this.usuarioSessao = usuarioSessao;
         this.usuarioPerfil = usuarioPerfil;
+        feed = new Feed(usuarioSessao);
 
         mostarInfos();
+        listarCriados();
+    }
+
+    @FXML public void seguir(int matr) throws IOException {
+        usuarioSessao.seguir(matr);
         listarUsuarios(usuarioPerfil.recuperarPublicacoes());
+        controllerNavBar.listarUsuarios(feed.getUsuariosRecomendados());
+        mostarInfos();
+        btnDeixarSeguir.setVisible(true);
+        btnDeixarSeguir.setManaged(true);
+        btnSeguir.setVisible(false);
+        btnSeguir.setManaged(false);
+    }
+
+    @FXML public void deixarSeguir(int matr) throws IOException {
+        usuarioSessao.deixarSeguir(matr);
+        listarUsuarios(usuarioPerfil.recuperarPublicacoes());
+        controllerNavBar.listarUsuarios(feed.getUsuariosRecomendados());
+        mostarInfos();
+        btnDeixarSeguir.setVisible(false);
+        btnDeixarSeguir.setManaged(false);
+        btnSeguir.setVisible(true);
+        btnSeguir.setManaged(true);
     }
 
     @FXML public void listarUsuarios(ArrayList<Publicacao> publicacoesList) throws IOException {
@@ -111,6 +141,7 @@ public class ControllerUsuario {
                            <footer>
                                <VBox>
                                    <Separator/>
+                                   <Label text="%d curtidas  %d comentarios"  fx:id="qtdPost" styleClass="text-bold"/>
                                    <HBox fx:id="buttonGroup" styleClass="buttonGroup">
                                           <Button text="Curtir" fx:id="curtir" styleClass="accent"/>
                                           <Button text="Curtido" fx:id="removerCurtir" managed="false" visible="false" styleClass="ordinary"/>
@@ -119,7 +150,10 @@ public class ControllerUsuario {
                                </VBox>
                            </footer>
                         </Card>
-                    """.formatted(texto.getIdPublicacao(), feed.consultarUsuarioPorMatriucula(texto.getMatriculaCriador()).getNome(), texto.getDataHoraCriacao().toString() ,texto.getTexto());
+                    """.formatted(texto.getIdPublicacao(),
+                        feed.consultarUsuarioPorMatriucula(texto.getMatriculaCriador()).getNome(),
+                        texto.getDataHoraCriacao().toString() ,texto.getTexto(), texto.totalCurtidas(),
+                        texto.totalComentarios());
             } else {
                 PublicacaoEvento evento = (PublicacaoEvento) publicacao;
                 itemPublicacao = """
@@ -168,6 +202,7 @@ public class ControllerUsuario {
                               <footer>
                                   <VBox>
                                       <Separator/>
+                                      <Label text="%d curtidas  %d comentarios"  fx:id="qtdPost" styleClass="text-bold"/>
                                       <HBox fx:id="buttonGroup" styleClass="buttonGroup">
                                           <Button text="Curtir" fx:id="curtir" managed="false" visible="false" styleClass="accent"/>
                                           <Button text="Curtido" fx:id="removerCurtir" managed="false" visible="false" styleClass="ordinary"/>
@@ -176,7 +211,11 @@ public class ControllerUsuario {
                                   </VBox>
                               </footer>
                             </Card>
-                    """.formatted(evento.getIdPublicacao(),  evento.getTitulo(), feed.consultarUsuarioPorMatriucula(evento.getMatriculaCriador()).getNome() , evento.getDataHoraCriacao().toString(), evento.getDescricao(), evento.getLocal(), evento.getDataEvento().toString());
+                    """.formatted(evento.getIdPublicacao(),  evento.getTitulo(),
+                        feed.consultarUsuarioPorMatriucula(evento.getMatriculaCriador()).getNome(),
+                        evento.getDataHoraCriacao().toString(),
+                        evento.getDescricao(), evento.getLocal(), evento.getDataEvento().toString(),
+                        evento.totalCurtidas(), evento.totalCurtidas());
             }
 
             FXMLLoader loader = new FXMLLoader();
@@ -192,8 +231,6 @@ public class ControllerUsuario {
             Button curtir = (Button) loader.getNamespace().get("curtir");
             Button removerCurtir = (Button) loader.getNamespace().get("removerCurtir");
             Button comentar = (Button) loader.getNamespace().get("comentar");
-            Button seguir = (Button) loader.getNamespace().get("btnSeguir");
-            Button deixarSeguir = (Button) loader.getNamespace().get("btnDeixarSeguir");
             MenuButton configPost = (MenuButton) loader.getNamespace().get("configPost");
             MenuItem editar = (MenuItem) loader.getNamespace().get("editar");
             MenuItem excluir = (MenuItem) loader.getNamespace().get("excluir");
@@ -205,10 +242,6 @@ public class ControllerUsuario {
                 btnSeguir.setVisible(false);
                 btnDeixarSeguir.setManaged(false);
                 btnDeixarSeguir.setVisible(false);
-                curtir.setManaged(false);
-                curtir.setVisible(false);
-                removerCurtir.setManaged(false);
-                removerCurtir.setVisible(false);
                 configPost.setManaged(true);
                 configPost.setVisible(true);
             } else {
@@ -226,24 +259,37 @@ public class ControllerUsuario {
                     btnDeixarSeguir.setVisible(false);
                 }
 
-                if(publicacao.verificarCurtida(usuarioSessao)) {
-                    curtir.setManaged(false);
-                    curtir.setVisible(false);
-                    removerCurtir.setManaged(true);
-                    removerCurtir.setVisible(true);
-                } else {
-                    curtir.setManaged(true);
-                    curtir.setVisible(true);
-                    removerCurtir.setManaged(false);
-                    removerCurtir.setVisible(false);
-                }
+            }
+
+            if(publicacao.verificarCurtida(usuarioSessao)) {
+                curtir.setManaged(false);
+                curtir.setVisible(false);
+                removerCurtir.setManaged(true);
+                removerCurtir.setVisible(true);
+            } else {
+                curtir.setManaged(true);
+                curtir.setVisible(true);
+                removerCurtir.setManaged(false);
+                removerCurtir.setVisible(false);
             }
 
 
-            btnSeguir.setOnAction(event -> seguirCriador(event, publicacao.getMatriculaCriador()));
-            btnDeixarSeguir.setOnAction(event -> deixarSeguircriador(event, publicacao.getMatriculaCriador()));
-            editar.setOnAction(event -> abrirModalEditar());
-            excluir.setOnAction(event -> abrirModalExcluir());
+            btnSeguir.setOnAction(event -> {
+                try {
+                    seguirCriador(publicacao.getMatriculaCriador());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            btnDeixarSeguir.setOnAction(event -> {
+                try {
+                    deixarSeguircriador(publicacao.getMatriculaCriador());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            editar.setOnAction(event -> abrirModalEditar(publicacao));
+            excluir.setOnAction(event -> abrirModalExcluir(publicacao));
             curtir.setOnAction(event -> curtir(event, publicacao));
             removerCurtir.setOnAction(event -> removerCurtir(event, publicacao));
             comentar.setOnAction(event -> {
@@ -258,37 +304,18 @@ public class ControllerUsuario {
     }
 
     @FXML
-    private void seguirCriador(ActionEvent event, int matr) {
-        Node elemento = (Node) event.getSource();
-
-        Button btnSeguir = (Button) elemento.getParent().lookup("#btnSeguir");
-        Button btnDeixarSeguir = (Button) elemento.getParent().lookup("#btnDeixarSeguir");
-
-        btnSeguir.setVisible(false);
-        btnSeguir.setManaged(false);
-        btnDeixarSeguir.setVisible(true);
-        btnDeixarSeguir.setManaged(true);
-
-        usuarioSessao.seguir(matr);
+    private void seguirCriador(int matr) throws IOException {
+       seguir(matr);
     }
 
     @FXML
-    private void deixarSeguircriador(ActionEvent event, int matr) {
-        Node elemento = (Node) event.getSource();
-
-        Button btnSeguir = (Button) elemento.getParent().lookup("#btnSeguir");
-        Button btnDeixarSeguir = (Button) elemento.getParent().lookup("#btnDeixarSeguir");
-
-        btnSeguir.setVisible(true);
-        btnSeguir.setManaged(true);
-        btnDeixarSeguir.setVisible(false);
-        btnDeixarSeguir.setManaged(false);
-
-        usuarioSessao.deixarSeguir(matr);
+    private void deixarSeguircriador(int matr) throws IOException {
+        deixarSeguir(matr);
     }
 
     @FXML
     public void curtir(ActionEvent event, Publicacao publicacao) {
+
         new Curtida(usuarioSessao.getMatricula()).curtirPublicacao(publicacao);
 
         Node elemento = (Node) event.getSource();
@@ -315,11 +342,18 @@ public class ControllerUsuario {
         removerCurtir.setVisible(false);
     }
 
-    @FXML public void abrirModalExcluir() {
+    @FXML public void abrirModalExcluir(Publicacao publicacao) {
         modalExcluir.abrirModal();
+        modalExcluir.setPublicacao(publicacao);
+        modalExcluir.setContaSessao(usuarioSessao);
+        modalExcluir.setControllers(mensagemController);
     }
-    @FXML public void abrirModalEditar() {
+    @FXML public void abrirModalEditar(Publicacao publicacao) {
+
         modalEditar.abrirModal();
+        modalEditar.setPublicacao(publicacao);
+        modalEditar.setContaSessao(usuarioSessao);
+        modalEditar.setControllers(mensagemController);
     }
 
     @FXML
@@ -351,24 +385,78 @@ public class ControllerUsuario {
         usuario.setVisible(status);
     }
 
-    @FXML public void seguir() {
-        usuarioSessao.seguir(usuarioPerfil.getMatricula());
-        btnDeixarSeguir.setVisible(true);
-        btnDeixarSeguir.setManaged(true);
-        btnSeguir.setVisible(false);
-        btnSeguir.setManaged(false);
+    @FXML public void seguirPerfil() throws IOException {
+        seguir(usuarioPerfil.getMatricula());
     }
 
-    @FXML public void deixarSeguir() {
-        usuarioSessao.deixarSeguir(usuarioPerfil.getMatricula());
-        btnDeixarSeguir.setVisible(false);
-        btnDeixarSeguir.setManaged(false);
-        btnSeguir.setVisible(true);
-        btnSeguir.setManaged(true);
+    @FXML public void deixarSeguirPerfil() throws IOException {
+        deixarSeguir(usuarioPerfil.getMatricula());
+
     }
+
+    @FXML
+    public void listarCurtidos() throws IOException {
+        listPost = "CURTIDOS";
+        listarUsuarios(usuarioSessao.recuperarPublicacoesCurtidas());
+    }
+
+    @FXML
+    public void listarComentadas() throws IOException {
+        listPost = "COMENTADOS";
+        listarUsuarios(usuarioSessao.recuperarPublicacoesComentadas());
+    }
+
+    @FXML
+    public void listarCriados() throws IOException {
+        listPost = "CRIADOS";
+        listarUsuarios(usuarioSessao.recuperarPublicacoes());
+    }
+
+    @FXML
+    public void buscarPublicacoes() throws IOException {
+        ArrayList<Publicacao> publicacoes = new ArrayList<>();
+
+        if(Objects.equals(listPost, "CRIADOS")) {
+            publicacoes = usuarioSessao.recuperarPublicacoes();
+        } else if(Objects.equals(listPost, "COMENTADOS")){
+            publicacoes = usuarioSessao.recuperarPublicacoesComentadas();
+        } else {
+            publicacoes = usuarioSessao.recuperarPublicacoesCurtidas();
+        }
+
+        listarUsuarios(buscar(publicacoes, inPesquisa.getText()));
+    }
+
+    public ArrayList<Publicacao>  buscar(ArrayList<Publicacao> publicacoes, String busca) {
+        ArrayList<Publicacao> publicacoesBuscadas = new ArrayList<>();
+        PublicacaoEvento evento;
+        PublicacaoTexto texto;
+        for(Publicacao publicacao : publicacoes) {
+            if(Objects.equals(publicacao.getTipo(), "TEXTO")) {
+                texto = (PublicacaoTexto) publicacao;
+
+                if(texto.getTexto().toLowerCase().startsWith(busca.toLowerCase())) {
+                    publicacoesBuscadas.add(publicacao);
+                }
+            } else {
+                evento = (PublicacaoEvento) publicacao;
+
+                if(evento.getTitulo().toLowerCase().startsWith(busca.toLowerCase())) {
+                    publicacoesBuscadas.add(publicacao);
+                }
+            }
+        }
+
+        return publicacoesBuscadas;
+    }
+
 
     private void mostarInfos() {
+        System.out.printf("\nQtd seguidores 1: %d\nQtd seguindos 1: %d\n", usuarioPerfil.getSeguidores().size(), usuarioPerfil.getSeguindos().size());
+
         usuarioPerfil.atualizarDados();
+
+        System.out.printf("\nQtd seguidores 2: %d\nQtd seguindos 2: %d\n", usuarioPerfil.getSeguidores().size(), usuarioPerfil.getSeguindos().size());
 
         nomeConta.setText(usuarioPerfil.getNome());
         cursoConta.setText(usuarioPerfil.getCurso());
@@ -387,6 +475,10 @@ public class ControllerUsuario {
             btnSeguir.setManaged(false);
             btnDeixarSeguir.setVisible(false);
             btnDeixarSeguir.setManaged(false);
+            listPostCurtidos.setManaged(true);
+            listPostCurtidos.setVisible(true);
+            listPostsComentados.setManaged(true);
+            listPostsComentados.setVisible(true);
         } else {
             if(usuarioSessao.consultarSeguindo(usuarioPerfil)) {
                 btnDeixarSeguir.setVisible(true);

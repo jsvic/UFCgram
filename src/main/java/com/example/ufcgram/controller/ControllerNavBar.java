@@ -28,6 +28,7 @@ public class ControllerNavBar {
     @FXML private Button btnCriarPublicacao;
 
     private Usuario usuarioSessao;
+    private Usuario usuarioPefil;
     private Feed feed;
 
     @FXML TextField inNome;
@@ -52,7 +53,27 @@ public class ControllerNavBar {
     }
 
     @FXML
+    public void abrirFeed() {
+        navButton.setText("Feed");
+        btnCriarPublicacao.setText("Criar Publicação");
+        usuarioController.fechar();
+        createPostController.fechar();
+        mainFeedController.abrir();
+    }
+
+    public void abrirConta() throws IOException {
+        navButton.setText("Feed");
+        btnCriarPublicacao.setText("Criar Publicação");
+        mainFeedController.fechar();
+        createPostController.fechar();
+        usuarioController.abrir();
+        usuarioController.setContas(usuarioSessao, usuarioPefil);
+    }
+
+    @FXML
     public void abrirContaSessao() throws IOException {
+        usuarioPefil = usuarioSessao;
+
         if(usuarioController.getStatus()) {
             // Se tiver Aberto
             navButton.setText("Ver Conta");
@@ -60,32 +81,20 @@ public class ControllerNavBar {
             usuarioController.fechar();
         } else {
             // Se tiver Fechado
-            navButton.setText("Feed");
-            btnCriarPublicacao.setText("Criar Publicação");
-            mainFeedController.fechar();
-            createPostController.fechar();
-            usuarioController.abrir();
-            usuarioController.setContas(usuarioSessao, usuarioSessao);
+            abrirConta();
         }
 
     }
 
     @FXML
-    public void abrirConta(MouseEvent event) throws IOException {
-        Usuario usuario;
-
-        Node elemento = (Node) event.getSource();
+    public void abrirContaPerfil(MouseEvent event) throws IOException {
+          Node elemento = (Node) event.getSource();
 
         int id = Integer.parseInt(elemento.getId());
 
-        usuario = feed.consultarUsuarioPorMatriucula(id);
+        usuarioPefil = feed.consultarUsuarioPorMatriucula(id);
 
-        navButton.setText("Feed");
-        btnCriarPublicacao.setText("Criar Publicação");
-        mainFeedController.fechar();
-        createPostController.fechar();
-        usuarioController.abrir();
-        usuarioController.setContas(usuarioSessao, usuario);
+        abrirConta();
     }
 
     @FXML
@@ -95,7 +104,6 @@ public class ControllerNavBar {
             btnCriarPublicacao.setText("Criar Publicação");
             mainFeedController.abrir();
             createPostController.fechar();
-            createPostController.setUsuarioSessao(usuarioSessao);
         } else {
             // se tiver Fechado
             btnCriarPublicacao.setText("Feed");
@@ -103,6 +111,8 @@ public class ControllerNavBar {
             mainFeedController.fechar();
             usuarioController.fechar();
             createPostController.abrir();
+            createPostController.setUsuarioSessao(usuarioSessao);
+            createPostController.setControllerNavbar(this);
         }
     }
 
@@ -141,20 +151,26 @@ public class ControllerNavBar {
 
             item.setOnMouseClicked(event -> {
                 try {
-                    abrirConta(event);
+                    abrirContaPerfil(event);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
 
-            btnSeguir.setOnMouseClicked(event -> seguir(event));
+            btnSeguir.setOnMouseClicked(event -> {
+                try {
+                    seguir(event);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             btnDeixarSeguir.setOnMouseClicked(event -> deixarSeguir(event));
             usuarioList.getChildren().add(item);
         }
     }
 
     @FXML
-    private void seguir(MouseEvent event) {
+    private void seguir(MouseEvent event) throws IOException {
         Node elemento = (Node) event.getSource();
 
         Button btnSeguir = (Button) elemento.getParent().lookup("#btnSeguir");
@@ -168,6 +184,10 @@ public class ControllerNavBar {
         int id = Integer.parseInt(elemento.getParent().getId());
 
         usuarioSessao.seguir(id);
+
+        if(usuarioController.getStatus()) {
+            abrirConta();
+        }
     }
 
     @FXML

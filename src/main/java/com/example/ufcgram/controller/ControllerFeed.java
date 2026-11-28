@@ -24,7 +24,7 @@ public class ControllerFeed {
         headerFeedController.setContaSessao(usuarioSessao);
 
         navBarController.setContaSessao(usuarioSessao);
-        usuarioController.setControllerModals(modalExcluirController, modalEditarController, modalComentariosController, navBarController);
+        usuarioController.setControllerModals(modalExcluirController, modalEditarController, modalComentariosController, navBarController, mensagemController);
         navBarController.setMainFeedController(mainFeedController);
         navBarController.setContaController(usuarioController);
         navBarController.setCreatePostController(createPostController);

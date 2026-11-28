@@ -105,6 +105,26 @@ public class Consulta {
         return comentarioDAO.recuperarPorUsuario(matricula);
     }
 
+    public ArrayList<Publicacao> recuperarPublicacoesCurtidas(int matr) {
+        contaCadastro.validarMatricula(matr);
+
+        ArrayList<Publicacao> publicacoes = publicacaoDAO.recuperarPublicacoesCurtidas(matr);
+
+        carregarInteracoes(publicacoes);
+
+        return publicacoes;
+    }
+
+    public ArrayList<Publicacao> recuperarPublicacoesComentadas(int matr) {
+        contaCadastro.validarMatricula(matr);
+
+        ArrayList<Publicacao> publicacoes = publicacaoDAO.recuperarPublicacoesComentadas(matr);
+
+        carregarInteracoes(publicacoes);
+
+        return publicacoes;
+    }
+
     //Métodos intermediários
     //Carregar as curtidas e os comentários de uma publicação
     private void carregarInteracoes(Publicacao publicacao) {
